@@ -1,5 +1,5 @@
 
-#include "Notes.h"
+#include "notes.h"
 #include <fstream>
 #include <QFile>
 
