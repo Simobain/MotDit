@@ -14,9 +14,25 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Notes.cpp
+    notesmanager.cpp \
+    article.cpp \
+    notesexception.cpp \
+    image.cpp \
+    binary.cpp \
+    video.cpp \
+    audio.cpp \
+    document.cpp \
+    note.cpp
 
 HEADERS  += mainwindow.h \
-    notes.h
+    notesmanager.h \
+    article.h \
+    notesexception.h \
+    image.h \
+    binary.h \
+    video.h \
+    audio.h \
+    document.h \
+    note.h
 
 FORMS    += mainwindow.ui
