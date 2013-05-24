@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Notes.cpp
+    Notes.cpp \
+    exportstrategy.cpp
 
 HEADERS  += mainwindow.h \
-    notes.h
+    notes.h \
+    exportstrategy.h
 
 FORMS    += mainwindow.ui
