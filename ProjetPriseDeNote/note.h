@@ -3,19 +3,28 @@
 
 #include <QString>
 #include <QTextStream>
+#include"exportstrategy.h"
 
 class Note { //classe abstraite
-    QString titre;
     QString id;
-  //  bool modifier;
+protected :
+    QString titre;            
+    bool modified;
+    bool loaded;
 
 public :
-    Note();
+    Note(QString id,const string& titre);
     QString getTitre() const {return titre;} //accesseur titre
     virtual QString getId() const {return id;} //accesseur id (nom du fichier)
-   // bool modif() const {return modifier;} // savoir si la note a été modifié
+    bool modif() const {return modifier;} // savoir si la note a été modifié
     void setTitre(const QString& t); // permet de modifier le titre d'une note
-    virtual QString genererId() const=0;
+    QString ExportNote(ExportStrategy* es);
+    QString ExportAsPart(ExportStrategy* es, unsigned int titlelevel);
+    void addSubNote(Note* n);
+    void removeSubNote(QString i);
+    Note* getSubNote(QString id);
+    load(const QString& path);
+
 
 
 

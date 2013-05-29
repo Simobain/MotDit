@@ -4,12 +4,23 @@
 #include <QSet>
 
 
-class document : public Note
+class Document : public Note
 {
     QSet<Note*> ensNotes;
+    Document(const Document&);
+    Document& operator=(const Document&);
+    void load();
 
 public:
-    document();
+    Document();
+    QString ExportAsPart(ExportStrategy *es, unsigned int titlelevel);
+    void addSubNote(Note *n);
+    void addSubNote(Note *n, QString id);
+    void removeSubNote(QString id);
+    Note* getSubNote(QString id);
+
+
+
 };
 
 #endif // DOCUMENT_H
