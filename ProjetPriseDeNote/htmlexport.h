@@ -1,6 +1,8 @@
 #ifndef HTMLEXPORT_H
 #define HTMLEXPORT_H
 
+#include "exportstrategy.h"
+
 class HTMLexport : public ExportStrategy
 {
 public:

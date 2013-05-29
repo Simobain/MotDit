@@ -1,5 +1,6 @@
 #ifndef TEXTEXPORT_H
 #define TEXTEXPORT_H
+#include "exportstrategy.h"
 
 class TextExport : public ExportStrategy
 {

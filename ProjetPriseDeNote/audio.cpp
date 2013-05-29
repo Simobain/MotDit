@@ -1,5 +1,5 @@
 #include "audio.h"
 
-audio::audio()
+Audio::Audio() : Binary()
 {
 }

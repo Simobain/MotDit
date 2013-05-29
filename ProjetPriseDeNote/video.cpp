@@ -1,5 +1,5 @@
 #include "video.h"
 
-video::video()
+Video::Video() : Binary()
 {
 }

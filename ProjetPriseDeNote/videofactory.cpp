@@ -3,3 +3,8 @@
 VideoFactory::VideoFactory()
 {
 }
+QString getNewId()
+{
+    QString ajout="video";
+    return s=ajout+NoteFactory::getNewId();
+}

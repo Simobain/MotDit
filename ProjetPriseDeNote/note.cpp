@@ -2,7 +2,7 @@
 #include <fstream>
 #include <QFile>
 
-Note::Note():titre(""), id(genererId()){}
+Note::Note():id(getNewId()),titre(""),modified(false),loaded(false){}
 
 void Note::setTitre(const QString& t){
     titre=t;

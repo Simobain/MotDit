@@ -1,5 +1,5 @@
 #include "image.h"
 
-image::image()
+Image::Image() : Binary()
 {
 }

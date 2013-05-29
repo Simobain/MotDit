@@ -8,10 +8,10 @@ class ExportStrategy
 {
 public:
     ExportStrategy();
-    QString header(Note*);
-    QString footer(Note*);
-    QString exportNote(Note* n , unsigned int titreLvl);
-    static map<QString, ExportStrategy*> getExportStrategy();
+    virtual QString header(Note *n);
+    virtual QString footer(Note *n);
+    virtual QString exportNote(Note *n , unsigned int titreLvl);
+    //static map<QString, ExportStrategy*> getExportStrategy();
 
 };
 

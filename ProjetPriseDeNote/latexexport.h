@@ -1,7 +1,9 @@
 #ifndef TEXEXPORT_H
 #define TEXEXPORT_H
 
-class LaTexExport
+#include "exportstrategy.h"
+
+class LaTexExport : public ExportStrategy
 {
 public:
     LaTexExport();

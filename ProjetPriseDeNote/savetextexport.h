@@ -1,6 +1,8 @@
 #ifndef SAVETEXTEXPORT_H
 #define SAVETEXTEXPORT_H
 
+#include "exportstrategy.h"
+
 class SaveTextExport : public ExportStrategy
 {
 public:

@@ -1,5 +1,5 @@
 #include "document.h"
 
-document::document()
+Document::Document() : Note()
 {
 }

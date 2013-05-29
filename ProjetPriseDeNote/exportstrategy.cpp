@@ -3,3 +3,7 @@
 ExportStrategy::ExportStrategy()
 {
 }
+
+QString ExportStrategy::header(Note *n)
+{
+}

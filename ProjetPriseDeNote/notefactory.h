@@ -3,6 +3,7 @@
 #include "note.h"
 #include<QString>
 #include <QMap>
+#include<sstream>
 
 class NoteFactory
 {
@@ -11,10 +12,10 @@ public:
     virtual Note* buildNote(QString& id,QString& title);
     virtual Note* buildNewNote(QString& title);
     virtual Note* buildNotecopy();
-    //static map<Qstring, NoteFactory*> getFactories();
+    //static QMap<Qstring, NoteFactory*> getFactories();
 
 protected :
-    virtual QString getNewId();
+    virtual QString getNewId();//Renvoie un ID unique
 
 };
 
