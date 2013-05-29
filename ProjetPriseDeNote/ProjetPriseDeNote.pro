@@ -29,7 +29,11 @@ SOURCES += main.cpp\
     articlefactory.cpp \
     audiofactory.cpp \
     videofactory.cpp \
-    imagefactory.cpp
+    imagefactory.cpp\
+    htmlexport.cpp \
+    savetextexport.cpp \
+    textexport.cpp \
+    latexexport.cpp
 
 HEADERS  += mainwindow.h \
     notesmanager.h \
@@ -47,6 +51,10 @@ HEADERS  += mainwindow.h \
     articlefactory.h \
     audiofactory.h \
     videofactory.h \
-    imagefactory.h
+    imagefactory.h \
+    htmlexport.h \
+    savetextexport.h \
+    textexport.h \
+    latexexport.h
 
 FORMS    += mainwindow.ui
