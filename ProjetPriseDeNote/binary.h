@@ -7,11 +7,12 @@ class Binary : public Note
 {
     QString description;
     QString chemin; //chemin d'accès au fichier binaire
+    void load();
 
 public:
     Binary();
     QString getDescription() const {return description;}
-    QString getchemin() const {return chemin;}
+    QString getChemin() const {return chemin;}
     void setDescription(const QString& d);
     void setChemin(const QString& c);
 };

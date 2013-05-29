@@ -5,7 +5,9 @@
 
 class Image : public Binary
 {
-    QString genererId();
+    Image(const Image& i);
+    Image& operator=(const Image& i);
+
 public:
     Image();
 

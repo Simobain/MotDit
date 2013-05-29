@@ -5,7 +5,8 @@
 
 class Audio : public Binary
 {
-    QString genererId();
+    Audio(const Audio& a);
+    Audio& operator=(const Audio& a);
 public:
     Audio();
 };

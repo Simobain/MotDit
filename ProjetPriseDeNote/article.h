@@ -6,7 +6,9 @@
 
 class Article : public Note {
     QString texte;
-    QString genererId();
+    Article(const Article& a);
+    Article& operator=(const Article& a);
+    void load();
 
 public:
     Article();

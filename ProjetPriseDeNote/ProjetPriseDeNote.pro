@@ -23,7 +23,13 @@ SOURCES += main.cpp\
     audio.cpp \
     document.cpp \
     note.cpp \
-    exportstrategy.cpp
+    exportstrategy.cpp \
+    notefactory.cpp \
+    documentfactory.cpp \
+    articlefactory.cpp \
+    audiofactory.cpp \
+    videofactory.cpp \
+    imagefactory.cpp
 
 HEADERS  += mainwindow.h \
     notesmanager.h \
@@ -35,6 +41,12 @@ HEADERS  += mainwindow.h \
     audio.h \
     document.h \
     note.h \
-    exportstrategy.h
+    exportstrategy.h \
+    notefactory.h \
+    documentfactory.h \
+    articlefactory.h \
+    audiofactory.h \
+    videofactory.h \
+    imagefactory.h
 
 FORMS    += mainwindow.ui

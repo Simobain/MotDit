@@ -4,7 +4,8 @@
 
 class Video : public Binary
 {
-    QString genererId();
+    Video(const Video& v);
+    Video& operator=(const Video& v);
 public:
     Video();
 };
