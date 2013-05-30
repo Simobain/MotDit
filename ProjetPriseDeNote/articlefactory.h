@@ -1,14 +1,15 @@
 #ifndef ARTICLEFACTORY_H
 #define ARTICLEFACTORY_H
 #include "notefactory.h"
+#include "article.h"
 
 class ArticleFactory : public NoteFactory
 {
 public:
     ArticleFactory();
     QString getNewId();//Renvoie un id unique précédé du type de Note ici Article
-    Note* buildNote(QString& id,QString& title);
-    Note* buildNewNote(QString& title);
+    Note* buildNote(const QString& id,const QString& titre);
+    Note* buildNewNote(const QString &titre);
     Note* buildNotecopy(const Note* n);
 };
 

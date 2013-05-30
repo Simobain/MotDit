@@ -18,8 +18,9 @@ protected :
 public :
 
     Note();
+    Note(const QString& i, const QString& t);
     QString getTitre() const {return titre;} //accesseur titre
-    virtual QString getId() const {return id;} //accesseur id (nom du fichier)
+    QString getId() const {return id;} //accesseur id (nom du fichier)
     bool modif() const {return modified;} // savoir si la note a été modifié
     void setTitre(const QString& t); // permet de modifier le titre d'une note
     //virtual QString ExportNote(ExportStrategy* es);

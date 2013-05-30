@@ -12,6 +12,7 @@ class Article : public Note {
 
 public:
     Article();
+    Article(const QString& id, const QString& titre);
     QString getTexte() const {return texte;}
     void setTexte(const QString& t);
     void load(const QString& chemin);

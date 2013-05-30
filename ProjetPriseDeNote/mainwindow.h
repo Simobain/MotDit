@@ -14,12 +14,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void creerNote(const QString& type);
     
 private:
     Ui::MainWindow *ui;
 
 public slots :
     void ouvrirArticle();
+    void creerArticle();
 };
 
 #endif // MAINWINDOW_H
