@@ -3,8 +3,8 @@
 DocumentFactory::DocumentFactory()
 {
 }
-QString getNewId()
+QString DocumentFactory::getNewId()
 {
     QString ajout="document";
-    return s=ajout+NoteFactory::getNewId();
+    return ajout+NoteFactory::getNewId();
 }

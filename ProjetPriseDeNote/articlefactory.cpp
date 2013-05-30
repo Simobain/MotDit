@@ -5,8 +5,8 @@ ArticleFactory::ArticleFactory()
 {
 }
 
-QString getNewId()
+QString ArticleFactory::getNewId()
 {
     QString ajout="article";
-    return s=ajout+NoteFactory::getNewId();
+    return ajout+NoteFactory::getNewId();
 }

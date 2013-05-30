@@ -13,7 +13,7 @@ class Document : public Note
 
 public:
     Document();
-    QString ExportAsPart(ExportStrategy *es, unsigned int titlelevel);
+    //QString ExportAsPart(ExportStrategy *es, unsigned int titlelevel);
     void addSubNote(Note *n);
     void addSubNote(Note *n, QString id);
     void removeSubNote(QString id);

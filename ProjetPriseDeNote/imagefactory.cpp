@@ -3,8 +3,8 @@
 ImageFactory::ImageFactory()
 {
 }
-QString getNewId()
+QString ImageFactory::getNewId()
 {
     QString ajout="image";
-    return s=ajout+NoteFactory::getNewId();
+    return ajout+NoteFactory::getNewId();
 }

@@ -1,10 +1,10 @@
 #include "audiofactory.h"
 
-AudioFactory::audioFactory()
+AudioFactory::AudioFactory()
 {
 }
-QString getNewId()
+QString AudioFactory::getNewId()
 {
     QString ajout="audio";
-    return s=ajout+NoteFactory::getNewId();
+    return ajout+NoteFactory::getNewId();
 }

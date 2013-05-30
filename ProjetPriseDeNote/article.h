@@ -8,13 +8,14 @@ class Article : public Note {
     QString texte;
     Article(const Article& a);
     Article& operator=(const Article& a);
-    void load();
+
 
 public:
     Article();
     QString getTexte() const {return texte;}
     void setTexte(const QString& t);
-
+    void load(const QString& chemin);
+    void save(const QString& nomFichier);
 
 };
 

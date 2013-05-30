@@ -1,5 +1,5 @@
 #include "latexexport.h"
 
-TexExport::TexExport()
+LaTexExport::LaTexExport()
 {
 }

@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>603</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -45,9 +45,19 @@
      <addaction name="actionLaTeX"/>
      <addaction name="actionTxt"/>
     </widget>
+    <widget class="QMenu" name="menuOuvrir">
+     <property name="title">
+      <string>Ouvrir</string>
+     </property>
+     <addaction name="actionArticle_2"/>
+     <addaction name="actionImage_2"/>
+     <addaction name="actionAudio_2"/>
+     <addaction name="actionVideo"/>
+     <addaction name="actionDocument_2"/>
+    </widget>
     <addaction name="menuNouveau"/>
     <addaction name="menuExporter"/>
-    <addaction name="actionOuvrir"/>
+    <addaction name="menuOuvrir"/>
     <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menuEdition">
@@ -79,11 +89,6 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionOuvrir">
-   <property name="text">
-    <string>Ouvrir</string>
-   </property>
-  </action>
   <action name="actionQuitter">
    <property name="text">
     <string>Quitter</string>
@@ -127,6 +132,31 @@
   <action name="actionTxt">
    <property name="text">
     <string>txt</string>
+   </property>
+  </action>
+  <action name="actionArticle_2">
+   <property name="text">
+    <string>Article</string>
+   </property>
+  </action>
+  <action name="actionImage_2">
+   <property name="text">
+    <string>Image</string>
+   </property>
+  </action>
+  <action name="actionAudio_2">
+   <property name="text">
+    <string>Audio</string>
+   </property>
+  </action>
+  <action name="actionVideo">
+   <property name="text">
+    <string>Video</string>
+   </property>
+  </action>
+  <action name="actionDocument_2">
+   <property name="text">
+    <string>Document</string>
    </property>
   </action>
  </widget>

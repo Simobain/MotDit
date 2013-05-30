@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTextStream>
 //#include"exportstrategy.h"
+#include <QFile>
 
 class Note { //classe abstraite
     QString id;
@@ -24,7 +25,7 @@ public :
     void addSubNote(Note* n);
     void removeSubNote(QString i);
     Note* getSubNote(QString id);
-    void load(const QString& path);
+    virtual void load(const QString& path)=0;
 
 
 
