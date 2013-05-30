@@ -1,4 +1,5 @@
 #include "binary.h"
+#include "exportstrategy.h"
 
 Binary::Binary():Note(), description(""), chemin(""){}
 

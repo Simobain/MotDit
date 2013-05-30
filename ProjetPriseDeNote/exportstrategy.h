@@ -2,12 +2,13 @@
 #define EXPORTSTRATEGY_H
 
 #include <QString>
-#include "note.h"
 #include "document.h"
 #include "image.h"
 #include "video.h"
 #include "audio.h"
 #include "article.h"
+#include "note.h"
+
 
 class ExportStrategy
 {

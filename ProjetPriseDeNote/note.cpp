@@ -1,6 +1,7 @@
 #include "note.h"
 #include <fstream>
 #include <QFile>
+#include "exportstrategy.h"
 
 //Note::Note():id(getNewId()),titre(""),modified(false),loaded(false){}
 Note::Note():id(001), titre(""), modified(false), loaded(false){}

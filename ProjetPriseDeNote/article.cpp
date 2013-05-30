@@ -1,6 +1,7 @@
 #include "article.h"
 #include "notefactory.h"
 #include <iostream>
+#include "exportstrategy.h"
 
 
 Article::Article():Note(), texte(""){}
