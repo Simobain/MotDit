@@ -2,7 +2,8 @@
 #define EXPORTSTRATEGY_H
 
 #include <QString>
-#include "note.h"
+
+class Note;
 
 class ExportStrategy
 {
