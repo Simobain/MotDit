@@ -8,6 +8,9 @@
 #include "audio.h"
 #include "article.h"
 #include "note.h"
+#include "latexexport.h"
+#include "textexport.h"
+#include "htmlexport.h"
 
 
 class ExportStrategy
@@ -16,9 +19,10 @@ public:
     ExportStrategy();
     /*virtual QString header(Note *n)=0;
     virtual QString footer(Note *n)=0;
-    virtual QString exportNote(Note *n , unsigned int titreLvl)=0;
-    //static map<QString, ExportStrategy*> getExportStrategy();
-    */
+    virtual QString exportNote(Note *n , unsigned int titreLvl)=0;*/
+
+    static map<QString, ExportStrategy*> getExportStrategy();
+
 };
 
 #endif // EXPORTSTRATEGY_H
