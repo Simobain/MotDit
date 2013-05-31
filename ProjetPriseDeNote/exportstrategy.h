@@ -8,9 +8,10 @@
 #include "audio.h"
 #include "article.h"
 #include "note.h"
-#include "latexexport.h"
+/*#include "latexexport.h"
 #include "textexport.h"
-#include "htmlexport.h"
+#include "htmlexport.h"*/
+#include "QMap"
 
 
 class ExportStrategy
@@ -21,8 +22,7 @@ public:
     virtual QString footer(Note *n)=0;
     virtual QString exportNote(Note *n , unsigned int titreLvl)=0;*/
 
-    static map<QString, ExportStrategy*> getExportStrategy();
-
+    static QMap<QString, ExportStrategy*> getExportStrategy();
 };
 
 #endif // EXPORTSTRATEGY_H

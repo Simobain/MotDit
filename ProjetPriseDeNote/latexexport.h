@@ -3,6 +3,7 @@
 
 #include "exportstrategy.h"
 
+
 class LaTexExport : public ExportStrategy
 {
 public:

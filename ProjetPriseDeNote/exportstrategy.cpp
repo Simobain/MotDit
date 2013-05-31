@@ -4,7 +4,7 @@ ExportStrategy::ExportStrategy()
 {
 }
 
-
+/*
 QMap<QString, ExportStrategy*>* ExportStrategy:: getExportStrategy()//A comprendre bien comment cela fonctionne
 {
    QMap<QString, ExportStrategy*>* strategies=new QMap<QString, ExportStrategy*>;
@@ -15,3 +15,4 @@ QMap<QString, ExportStrategy*>* ExportStrategy:: getExportStrategy()//A comprend
    return strategies;
 
 }
+*/
