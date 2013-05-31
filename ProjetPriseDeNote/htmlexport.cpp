@@ -7,11 +7,13 @@ HTMLexport::HTMLexport()
 }
 
 QString HTMLexport::header(Note* n)
+
 {/*
     return "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><title>"+ n->getTitre()+"</title></head><body>";
     */
     return"";
 }
+
 QString HTMLexport::footer(Note* n)
 {
 
