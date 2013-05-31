@@ -30,8 +30,9 @@ void Article::load(const QString &chemin){
 
 }
 
-void Article::save(const QString &nomFichier){
-    QFile fichier (nomFichier);
+void Article::save(const QString &nomFichier){//je pense qu'il faut le sauver selon son id
+
+    QFile fichier (nomFichier);//getId().txt
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
     {
         QTextStream flux(&fichier);

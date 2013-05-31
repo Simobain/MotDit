@@ -3,7 +3,7 @@
 
 NotesManager* NotesManager::instance=0;
 
-NotesManager::NotesManager()
+NotesManager::NotesManager() : EspaceDeTravail("")//Trouver un chemin relatif vers un dossier
 {
     factories["article"]=new ArticleFactory;
    /* factories["document"]= new DocumentFactory;
@@ -34,7 +34,8 @@ void NotesManager::libereInstance(){
 void NotesManager::creerNote(const QString& type_note, const QString& titre){
     NoteFactory* factory;
     factory=factories[type_note];
-    Note* newNote=factory->buildNewNote(titre);
+    Note* newNote=factory->buildNewNote(titre);//Question : Pourquoi ne pas mettre directement
+                                              //Note* newNote=factories[type_note]->buildNewNote(titre); ?
     ensnotes<<newNote;
 
 }

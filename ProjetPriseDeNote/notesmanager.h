@@ -17,6 +17,7 @@ class NotesManager {
 
     std::map < QString,NoteFactory* > factories;
     QSet<Note*> ensnotes;
+    QString EspaceDeTravail;
     static NotesManager* instance;
 
     NotesManager();
@@ -25,11 +26,13 @@ class NotesManager {
     NotesManager& operator=(const NotesManager&);
 
 
+
 public:
 
     static NotesManager* getInstance();
     void libereInstance();
     void creerNote(const QString& type_note, const QString& titre);
+
 
 };
 

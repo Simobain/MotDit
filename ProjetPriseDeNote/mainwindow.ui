@@ -14,38 +14,15 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QScrollArea" name="scrollArea">
+   <widget class="QListView" name="listView">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>100</y>
-      <width>161</width>
-      <height>261</height>
+      <x>40</x>
+      <y>130</y>
+      <width>131</width>
+      <height>191</height>
      </rect>
     </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>159</width>
-       <height>259</height>
-      </rect>
-     </property>
-     <widget class="QListView" name="listView">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>131</width>
-        <height>191</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -115,8 +92,17 @@
     </property>
     <addaction name="actionAdd"/>
    </widget>
+   <widget class="QMenu" name="menuExport">
+    <property name="title">
+     <string>Export</string>
+    </property>
+    <addaction name="actionTexte"/>
+    <addaction name="actionHTML_2"/>
+    <addaction name="actionLaTex"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEdition"/>
+   <addaction name="menuExport"/>
    <addaction name="menuA_propos"/>
    <addaction name="menuAide"/>
    <addaction name="menuAjoutListe"/>
@@ -203,6 +189,21 @@
   <action name="actionAdd">
    <property name="text">
     <string>add</string>
+   </property>
+  </action>
+  <action name="actionTexte">
+   <property name="text">
+    <string>Texte</string>
+   </property>
+  </action>
+  <action name="actionHTML_2">
+   <property name="text">
+    <string>HTML</string>
+   </property>
+  </action>
+  <action name="actionLaTex">
+   <property name="text">
+    <string>LaTex</string>
    </property>
   </action>
  </widget>
