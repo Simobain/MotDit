@@ -11,7 +11,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    std::cout<<"coucou"<<"\n"<<"\n";
+
+
     //Test fonction load et save
     /*Article* art=new Article();
     art->setTitre("article1");
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
 
 
     w.show();
+
     
     return a.exec();
 

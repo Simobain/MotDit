@@ -18,10 +18,12 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    //QStringList liste;
 
 public slots :
     void ouvrirArticle();
     void creerArticle();
+    void ajoutListe();
 };
 
 #endif // MAINWINDOW_H
