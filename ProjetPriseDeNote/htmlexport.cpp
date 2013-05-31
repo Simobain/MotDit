@@ -8,7 +8,7 @@ HTMLexport::HTMLexport()
 
 QString HTMLexport::header(Note* n)
 {
-    return "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><link rel=\"stylesheet\" href=\"Test.css\"/><title>"+ n->getTitre()+"</title></head><body>";
+    return "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><title>"+ n->getTitre()+"</title></head><body>";
 }
 QString HTMLexport::footer(Note* n)
 {
