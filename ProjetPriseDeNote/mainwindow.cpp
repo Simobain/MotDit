@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setViewMode(QListView::ListMode);
 
 
+    QObject :: connect(ui->actionAdd,SIGNAL(triggered()), this, SLOT(ajoutListe()));
+
 
 
 
@@ -56,6 +58,12 @@ MainWindow::MainWindow(QWidget *parent) :
             liste.append(titre);
             ui->listView->setModel(new QStringListModel(liste));
         }
+
+    }
+
+    void MainWindow::ajoutListe()
+    {
+
 
     }
 

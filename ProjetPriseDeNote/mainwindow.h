@@ -18,7 +18,7 @@ public:
     
 private:
     Ui::MainWindow *ui;
-    //QStringList liste;
+    QStringList liste;
 
 public slots :
     void ouvrirArticle();
