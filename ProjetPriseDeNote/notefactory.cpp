@@ -17,3 +17,4 @@ QString  NoteFactory::getNewId()
         return QString::fromStdString(s.str()) ;
 
 }
+

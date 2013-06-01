@@ -1,9 +1,11 @@
 #include "notesmanager.h"
 #include <QMessageBox>
+#include <QApplication>
+#include <QSettings>
 
 NotesManager* NotesManager::instance=0;
 
-NotesManager::NotesManager() : EspaceDeTravail("")//Trouver un chemin relatif vers un dossier
+NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A modifier plus tard mais suffit pour le moment
 {
     factories["article"]=new ArticleFactory;
    /* factories["document"]= new DocumentFactory;
@@ -34,9 +36,7 @@ void NotesManager::libereInstance(){
 void NotesManager::creerNote(const QString& type_note, const QString& titre){
     NoteFactory* factory;
     factory=factories[type_note];
-    Note* newNote=factory->buildNewNote(titre);//Question : Pourquoi ne pas mettre directement
-                                              //Note* newNote=factories[type_note]->buildNewNote(titre); ?
-                                                // C'est pareil, qd je code j'ai pas tendance a écrire les choses sur plusierur lignes
+    Note* newNote=factory->buildNewNote(titre);
     ensnotes<<newNote;
 
 }
@@ -50,4 +50,8 @@ Note* NotesManager::getNoteFromTitre(const QString& titre){
     return (*it);
     else return 0;// TODO : traiter le cas ou il y a un pb
 
+}
+void NotesManager::setEspaceDeTravail(const QString& e)
+{
+    EspaceDeTravail=e;
 }

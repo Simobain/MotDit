@@ -11,6 +11,7 @@
 #include <map>
 #include <QSet>
 
+
 #include "note.h"
 
 class NotesManager {
@@ -19,6 +20,7 @@ class NotesManager {
     QSet<Note*> ensnotes;
     QString EspaceDeTravail;
     static NotesManager* instance;
+
 
     NotesManager();
     ~NotesManager();
@@ -33,6 +35,8 @@ public:
     void libereInstance();
     void creerNote(const QString& type_note, const QString& titre);
     Note* getNoteFromTitre(const QString& titre);
+    void setEspaceDeTravail(const QString& e);
+    QString getEspaceDeTravail()const {return EspaceDeTravail;}
 
 
 };

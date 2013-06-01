@@ -43,6 +43,9 @@ void Article::save(const QString &nomFichier){//je pense qu'il faut le sauver se
         QTextStream flux(&fichier);
         flux<<getTitre()<<"\n"<<getTexte();
         fichier.close();
+        QSettings descrip("BinomeLO21","ProjetPriseDeNotes");// création d'un fichier de description
+        QString chem="Notes/Articles/";
+        descrip.setValue(chem+getTitre(),getId());
 
 
     }

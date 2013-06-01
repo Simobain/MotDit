@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QStringListModel>
 #include <QStringList>
+#include <QSettings>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -31,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //QObject :: connect(ui->actionAdd,SIGNAL(triggered()), this, SLOT(ajoutListe()));
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
+
+
 
 }
 

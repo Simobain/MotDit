@@ -4,6 +4,7 @@
 #include<QString>
 #include <QMap>
 #include<sstream>
+#include<QSettings>
 
 
 class NoteFactory
