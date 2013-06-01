@@ -36,6 +36,18 @@ void NotesManager::creerNote(const QString& type_note, const QString& titre){
     factory=factories[type_note];
     Note* newNote=factory->buildNewNote(titre);//Question : Pourquoi ne pas mettre directement
                                               //Note* newNote=factories[type_note]->buildNewNote(titre); ?
+                                                // C'est pareil, qd je code j'ai pas tendance a écrire les choses sur plusierur lignes
     ensnotes<<newNote;
+
+}
+
+Note* NotesManager::getNoteFromTitre(const QString& titre){
+    QSet<Note*>::iterator it= ensnotes.begin();
+    while ((*it)->getTitre()!=titre && it!=ensnotes.end()){
+        it++;
+    }
+    if ((*it)->getTitre()==titre)
+    return (*it);
+    else return 0;// TODO : traiter le cas ou il y a un pb
 
 }

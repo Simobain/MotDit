@@ -16,6 +16,7 @@ protected :
     bool loaded;
 
 public :
+    enum NoteType{ARTICLE, DOCUMENT, AUDIO, IMAGE, VIDEO};
 
     Note();
     Note(const QString& i, const QString& t);
@@ -25,6 +26,7 @@ public :
     void setTitre(const QString& t); // permet de modifier le titre d'une note
     //virtual QString ExportNote(ExportStrategy* es)=0;
     //virtual QString ExportAsPart(ExportStrategy* es, unsigned int titlelevel)=0;
+    virtual NoteType getType()const=0;
     void addSubNote(Note* n);
     void removeSubNote(QString i);
     Note* getSubNote(QString id);

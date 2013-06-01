@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "article.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,15 +16,18 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void creerNote(const QString& type);
+    void afficherArticle(Article* article);
     
 private:
+    QWidget* last_widget;
     Ui::MainWindow *ui;
     QStringList liste;
 
 public slots :
-    void ouvrirArticle();
+
     void creerArticle();
-    void ajoutListe();
+    //void ajoutListe();
+    void itemClicked(const QModelIndex & index);
 };
 
 #endif // MAINWINDOW_H

@@ -10,6 +10,7 @@ class Image : public Binary
 
 public:
     Image();
+    NoteType getType() const;
 
 };
 

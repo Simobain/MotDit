@@ -8,6 +8,11 @@ Article::Article():Note(), texte(""){}
 
 Article::Article(const QString& id, const QString& titre) : Note(id, titre),texte(""){}
 
+Note::NoteType Article::getType() const{
+    return ARTICLE;
+}
+
+
 void Article::setTexte(const QString& t){
     texte=t;
 }

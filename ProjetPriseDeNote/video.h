@@ -8,6 +8,7 @@ class Video : public Binary
     Video& operator=(const Video& v);
 public:
     Video();
+    NoteType getType() const;
 };
 
 #endif // VIDEO_H

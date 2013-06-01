@@ -9,6 +9,7 @@ class Audio : public Binary
     Audio& operator=(const Audio& a);
 public:
     Audio();
+    NoteType getType() const;
 };
 
 #endif // AUDIO_H

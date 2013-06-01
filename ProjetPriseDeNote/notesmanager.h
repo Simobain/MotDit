@@ -32,6 +32,7 @@ public:
     static NotesManager* getInstance();
     void libereInstance();
     void creerNote(const QString& type_note, const QString& titre);
+    Note* getNoteFromTitre(const QString& titre);
 
 
 };

@@ -17,12 +17,42 @@
    <widget class="QListView" name="listView">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>130</y>
-      <width>131</width>
-      <height>191</height>
+      <x>9</x>
+      <y>9</y>
+      <width>111</width>
+      <height>361</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QTabWidget" name="onglets">
+    <property name="geometry">
+     <rect>
+      <x>144</x>
+      <y>9</y>
+      <width>441</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="onglet_edit">
+     <attribute name="title">
+      <string>Tab 1</string>
+     </attribute>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
+    </widget>
+    <widget class="QWidget" name="onglet_html">
+     <attribute name="title">
+      <string>Tab 2</string>
+     </attribute>
+     <layout class="QVBoxLayout" name="verticalLayout_2"/>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -31,7 +61,7 @@
      <x>0</x>
      <y>0</y>
      <width>603</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">

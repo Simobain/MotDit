@@ -18,6 +18,7 @@ public:
     void addSubNote(Note *n, QString id);
     void removeSubNote(QString id);
     Note* getSubNote(QString id);
+    NoteType getType() const;
 
 
 

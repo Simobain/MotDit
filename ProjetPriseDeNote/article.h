@@ -17,6 +17,7 @@ public:
     void setTexte(const QString& t);
     void load(const QString& chemin);
     void save(const QString& nomFichier);
+    NoteType getType() const;
 
 };
 
