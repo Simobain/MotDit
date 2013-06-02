@@ -5,7 +5,7 @@
 
 NotesManager* NotesManager::instance=0;
 
-NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A modifier plus tard mais suffit pour le moment
+NotesManager::NotesManager() : EspaceDeTravail("/Users/simonrobain/Desktop/")//A modifier plus tard mais suffit pour le moment
 {
     factories["article"]=new ArticleFactory;
    /* factories["document"]= new DocumentFactory;

@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setMovement(QListView::Static);
     ui->listView->setFlow(QListView::TopToBottom);
     ui->listView->setViewMode(QListView::ListMode);
+    ui->listView->setSelectionMode(QListView::ExtendedSelection);
 
 
     //QObject :: connect(ui->actionAdd,SIGNAL(triggered()), this, SLOT(ajoutListe()));
@@ -123,7 +124,15 @@ void MainWindow::itemClicked(const QModelIndex & index){
 
  void MainWindow::sauverClicked()
  {
+    qDebug()<<"avant tout";
+    QModelIndexList indexListe= ui->listView->selectionModel()->selectedIndexes();
+    bool i =indexListe.isEmpty();
+    if (i) qDebug()<<true;
+    //QModelIndex index =
+
     QModelIndex index= ui->listView->currentIndex();
+    //qDebug()<<index.data().toString();
+
     NotesManager* gestnote=NotesManager::getInstance();
     QString titre=index.data().toString();
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
