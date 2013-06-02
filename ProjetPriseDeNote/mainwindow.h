@@ -29,6 +29,7 @@ public slots :
     //void ajoutListe();
     void itemClicked(const QModelIndex & index);
     void noteChanged(const QString &titre);
+    void sauverClicked();
 };
 
 #endif // MAINWINDOW_H

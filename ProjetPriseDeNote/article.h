@@ -16,7 +16,7 @@ public:
     QString getTexte() const {return texte;}
     void setTexte(const QString& t);
     void load(const QString& chemin);
-    void save(const QString& nomFichier);
+    void save(const QString& directory);
     NoteType getType() const;
 
 };

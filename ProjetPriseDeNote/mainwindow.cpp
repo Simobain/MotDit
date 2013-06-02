@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //QObject :: connect(ui->actionAdd,SIGNAL(triggered()), this, SLOT(ajoutListe()));
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
-
+    QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
 
 
 
@@ -120,4 +120,24 @@ void MainWindow::itemClicked(const QModelIndex & index){
     }
 
 }
+
+ void MainWindow::sauverClicked()
+ {
+    QModelIndex index= ui->listView->currentIndex();
+    NotesManager* gestnote=NotesManager::getInstance();
+    QString titre=index.data().toString();
+    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
+    Note* note=gestnote->getNoteFromTitre(titre);
+    switch(note->getType()){
+
+    case Note::ARTICLE :
+        Article* notA=(Article*) note;
+        notA->save(gestnote->getEspaceDeTravail());
+        break;
+
+    /*default :
+        QMessageBox::information(this,"Erreur","pb :)");*/
+    }
+
+ }
 

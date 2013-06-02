@@ -40,10 +40,13 @@ void ArticleWidget::actuTexte(){
 }
 
 void ArticleWidget::actuTitre(){
+
     actu_article->setTitre(ui->lineEdit->text());
+
     if (actu_article->isSaved()){
     actu_article->setSaved(false);
     emit articleChanged(actu_article->getTitre());
+    qDebug()<<"test emit"; // Plante sans raisons apparentes To be continued
         }
 
 }

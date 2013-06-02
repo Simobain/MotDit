@@ -35,17 +35,14 @@ void Article::load(const QString &chemin){
 
 }
 
-void Article::save(const QString &nomFichier){//je pense qu'il faut le sauver selon son id
-
-    QFile fichier (nomFichier);//getId().txt
+void Article::save(const QString &directory){//je pense qu'il faut le sauver selon son id
+    QString cheminEntier=directory+getId()+".txt";
+    QFile fichier (cheminEntier);
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
     {
         QTextStream flux(&fichier);
         flux<<getTitre()<<"\n"<<getTexte();
         fichier.close();
-        QSettings descrip("BinomeLO21","ProjetPriseDeNote");// création d'un fichier de description
-        QString chem="Notes/Articles/";
-        descrip.setValue(chem+getTitre(),getId());
 
 
     }
