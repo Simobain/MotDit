@@ -1,6 +1,7 @@
 #ifndef IMAGEFACTORY_H
 #define IMAGEFACTORY_H
 #include "notefactory.h"
+class NotesManager;
 
 class ImageFactory : public NoteFactory
 {

@@ -5,6 +5,6 @@ VideoFactory::VideoFactory()
 }
 QString VideoFactory::getNewId()
 {
-    QString ajout="video";
+    QString ajout="video@";
     return ajout+NoteFactory::getNewId();
 }

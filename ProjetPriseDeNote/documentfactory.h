@@ -2,6 +2,8 @@
 #define DOCUMENTFACTORY_H
 #include "notefactory.h"
 
+class NotesManager;
+
 class DocumentFactory : public NoteFactory
 {
 public:

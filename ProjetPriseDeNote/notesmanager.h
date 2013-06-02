@@ -2,7 +2,6 @@
 #define NOTESMANAGER_H
 #include <iostream>
 #include <QString>
-#include "notefactory.h"
 #include "articlefactory.h"
 #include "videofactory.h"
 #include "documentfactory.h"
@@ -10,12 +9,11 @@
 #include "audiofactory.h"
 #include <map>
 #include <QSet>
-#include "exportstrategy.h"
 #include "htmlexport.h"
 #include "latexexport.h"
 #include "textexport.h"
-
 #include "note.h"
+
 
 class NotesManager {
 
@@ -41,6 +39,7 @@ public:
     Note* getNoteFromTitre(const QString& titre);
     void setEspaceDeTravail(const QString& e);
     QString getEspaceDeTravail()const {return EspaceDeTravail;}
+    void chargerNotes();
 
 
 };

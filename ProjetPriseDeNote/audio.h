@@ -3,6 +3,8 @@
 #include "binary.h"
 #include <QString>
 
+class NotesManager;
+
 class Audio : public Binary
 {
     Audio(const Audio& a);

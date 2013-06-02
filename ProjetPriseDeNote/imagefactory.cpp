@@ -5,6 +5,6 @@ ImageFactory::ImageFactory()
 }
 QString ImageFactory::getNewId()
 {
-    QString ajout="image";
+    QString ajout="image@";
     return ajout+NoteFactory::getNewId();
 }

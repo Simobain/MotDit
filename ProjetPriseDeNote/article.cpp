@@ -6,7 +6,8 @@
 
 Article::Article():Note(), texte(""){}
 
-Article::Article(const QString& id, const QString& titre) : Note(id, titre),texte(""){}
+Article::Article(const QString& id, const QString& titre, const QString& text) : Note(id, titre),texte(text){}
+
 
 Note::NoteType Article::getType() const{
     return ARTICLE;
@@ -36,7 +37,7 @@ void Article::load(const QString &chemin){
 }
 
 void Article::save(const QString &directory){//je pense qu'il faut le sauver selon son id
-    QString cheminEntier=directory+getId()+".txt";
+    QString cheminEntier=directory+"/"+getId()+".txt";
     QFile fichier (cheminEntier);
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
     {

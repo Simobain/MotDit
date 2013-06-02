@@ -5,6 +5,6 @@ AudioFactory::AudioFactory()
 }
 QString AudioFactory::getNewId()
 {
-    QString ajout="audio";
+    QString ajout="audio@";
     return ajout+NoteFactory::getNewId();
 }

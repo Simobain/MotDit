@@ -2,6 +2,8 @@
 #define VIDEOFACTORY_H
 #include "notefactory.h"
 
+class NotesManager;
+
 class VideoFactory : public NoteFactory
 {
 public:
