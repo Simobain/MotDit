@@ -25,6 +25,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
 
+    ui->onglets->setTabText(0, "Edit");
+    ui->onglets->setTabText(1, "HTML");
+    ui->onglets->setTabText(2, "TeX");
+    ui->onglets->setTabText(3, "Text");
+
     ui->listView->setMovement(QListView::Static);
     ui->listView->setFlow(QListView::TopToBottom);
     ui->listView->setViewMode(QListView::ListMode);
@@ -63,7 +68,7 @@ void MainWindow::creerNote(const QString& type){
 
 void MainWindow::afficherArticle(Article* article){
 
-    ArticleWidget* artWidget= new ArticleWidget;
+    ArticleWidget* artWidget= new ArticleWidget(article);
 
     if (last_widget!=0) ui->onglet_edit->layout()->removeWidget(last_widget);
 
