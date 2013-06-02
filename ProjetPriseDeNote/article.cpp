@@ -49,10 +49,7 @@ void Article::save(const QString &directory){
 
     }
     else std::cout<<"Impossible d'ecrire' !"<<"\n";
-    if(!isInTheFile()){
-        qDebug()<<"pas dans le fichier";
-        saveInTheFile(getId(), directory);}
-    else qDebug()<<"dans le fichier";
+    if(!isInTheFile())saveInTheFile(getId(), directory);
 }
 
 

@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setViewMode(QListView::ListMode);
     ui->listView->setSelectionMode(QListView::ExtendedSelection);
 
+    ui->sauver->setEnabled(false);
+
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
     QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
 
@@ -101,6 +103,7 @@ void MainWindow::noteChanged(const QString& titre){
     }
 
     ui->listView->setModel(new QStringListModel(liste));
+    ui->sauver->setEnabled(true);
 
 }
 
@@ -129,7 +132,6 @@ void MainWindow::itemClicked(const QModelIndex & index){
  {
     NotesManager* gestnote=NotesManager::getInstance();
     QString titre=last_clicked.data().toString();
-    qDebug()<<"titre : "<<titre;
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
     Note* note=gestnote->getNoteFromTitre(titre);
     switch(note->getType()){
@@ -154,6 +156,7 @@ void MainWindow::itemClicked(const QModelIndex & index){
         liste[i]=titre;
         ui->listView->setModel(new QStringListModel(liste));
     }
+    ui->sauver->setEnabled(false);
 
  }
 
