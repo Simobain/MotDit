@@ -12,6 +12,7 @@
 #include <QStringListModel>
 #include <QStringList>
 #include <QSettings>
+#include <QDebug>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -37,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //QObject :: connect(ui->actionAdd,SIGNAL(triggered()), this, SLOT(ajoutListe()));
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
+
 
 
 
@@ -76,18 +78,42 @@ void MainWindow::afficherArticle(Article* article){
     artWidget->setTexte(article->getTexte());
     last_widget=artWidget;
     ui->onglet_edit->layout()->addWidget(artWidget);
+    QObject::connect(artWidget, SIGNAL(articleChanged(QString&)), this, SLOT(noteChanged(QString&))) ;
+    article->setSaved(true);
 
 
+}
+
+
+void MainWindow::noteChanged(QString& titre){
+    QStringList::Iterator it=liste.begin();
+    unsigned int index=0;
+    while((*it)!= titre && it!=liste.end()){
+        index++;
+        it++;
+    }
+    if ((*it)==titre){
+        //liste.replace(index, titre+"*");
+        std::cout<<"changed\n";
+        liste[index]=titre+"*";
+    }
+
+    ui->listView->setModel(new QStringListModel(liste));
 
 }
 
 void MainWindow::itemClicked(const QModelIndex & index){
     //QMessageBox::information(this,"Hello!","You Clicked: \n"+index.data().toString());
     NotesManager* gestnote=NotesManager::getInstance();
-    Note* note=gestnote->getNoteFromTitre(index.data().toString());
+    QString titre=index.data().toString();
+    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
+    Note* note=gestnote->getNoteFromTitre(titre);
+
     switch(note->getType()){
     case Note::ARTICLE :
+
         afficherArticle((Article*) note);
+
         break;
     default :
         QMessageBox::information(this,"Erreur","pb :)");

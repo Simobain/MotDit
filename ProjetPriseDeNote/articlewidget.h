@@ -21,9 +21,14 @@ public:
 private:
     Ui::ArticleWidget *ui;
 
+signals :
+    void articleChanged(QString& titre);
+
 public slots :
     void actuTitre();
     void actuTexte();
+
+
 
 };
 

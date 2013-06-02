@@ -1,6 +1,7 @@
 #include "articlewidget.h"
 #include <QFont>
 #include "ui_articlewidget.h"
+#include <QDebug>
 
 ArticleWidget::ArticleWidget(Article *a, QWidget *parent) :
     actu_article(a), QWidget(parent),
@@ -31,8 +32,18 @@ void ArticleWidget::setTexte(const QString& texte){
 
 void ArticleWidget::actuTexte(){
     actu_article->setTexte(ui->textEdit->toPlainText());
+    if (actu_article->isSaved()){
+    actu_article->setSaved(false);
+    emit articleChanged(actu_article->getTitre());
+        }
+
 }
 
 void ArticleWidget::actuTitre(){
     actu_article->setTitre(ui->lineEdit->text());
+    if (actu_article->isSaved()){
+    actu_article->setSaved(false);
+    emit articleChanged(actu_article->getTitre());
+        }
+
 }

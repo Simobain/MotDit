@@ -14,6 +14,7 @@ protected :
     QString titre;            
     bool modified;
     bool loaded;
+    bool saved;
 
 public :
     enum NoteType{ARTICLE, DOCUMENT, AUDIO, IMAGE, VIDEO};
@@ -27,6 +28,8 @@ public :
     //virtual QString ExportNote(ExportStrategy* es)=0;
     //virtual QString ExportAsPart(ExportStrategy* es, unsigned int titlelevel)=0;
     virtual NoteType getType()const=0;
+    bool isSaved(){return saved;}
+    void setSaved(bool ok){saved=ok;}
     void addSubNote(Note* n);
     void removeSubNote(QString i);
     Note* getSubNote(QString id);
