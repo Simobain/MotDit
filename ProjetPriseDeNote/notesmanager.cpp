@@ -62,7 +62,7 @@ void NotesManager::setEspaceDeTravail(const QString& e)
 }
 
 void NotesManager::chargerNotes(){
-    QString cheminEntier=EspaceDeTravail+"/"+"fileDescript"+".txt";
+    QString cheminEntier=EspaceDeTravail+"/"+"fileDescript.txt";
     QFile fichier (cheminEntier);
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
     {

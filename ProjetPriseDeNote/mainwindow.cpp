@@ -147,6 +147,7 @@ void MainWindow::itemClicked(const QModelIndex & index){
     case Note::ARTICLE :
         Article* notA=(Article*) note;
         notA->save(gestnote->getEspaceDeTravail());
+
         break;
 /*
     default :
@@ -164,7 +165,6 @@ void MainWindow::itemClicked(const QModelIndex & index){
         liste[i]=titre;
         ui->listView->setModel(new QStringListModel(liste));
     }
-
 
  }
 

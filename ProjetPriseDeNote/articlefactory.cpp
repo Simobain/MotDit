@@ -35,7 +35,9 @@ Note* ArticleFactory::chargerNote(const QString& id, const QString& chemin){
         QString titre(flux.readLine());
         while(!flux.atEnd()) contenu += flux.readLine();
         fichier.close();
-        return buildNote(id, titre, contenu);
+        Note* n= buildNote(id, titre, contenu);
+        n->setInTheFile(true);
+        return n;
     }
 
     else {qDebug()<<"note pas charger";

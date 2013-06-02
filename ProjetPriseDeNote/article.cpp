@@ -36,7 +36,7 @@ void Article::load(const QString &chemin){
 
 }
 
-void Article::save(const QString &directory){//je pense qu'il faut le sauver selon son id
+void Article::save(const QString &directory){
     QString cheminEntier=directory+"/"+getId()+".txt";
     QFile fichier (cheminEntier);
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
@@ -48,5 +48,6 @@ void Article::save(const QString &directory){//je pense qu'il faut le sauver sel
 
     }
     else std::cout<<"Impossible d'ecrire' !"<<"\n";
+    saveInTheFile(getId(), directory);
 }
 
