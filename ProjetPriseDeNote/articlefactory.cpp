@@ -32,7 +32,7 @@ Note* ArticleFactory::chargerNote(const QString& id, const QString& chemin){
 
         QTextStream flux(&fichier);
         QString titre(flux.readLine());
-        while(!flux.atEnd()) contenu += flux.readLine();
+        while(!flux.atEnd()) contenu += flux.readLine()+"\n";
         Note* n= buildNote(id, titre, contenu);
         n->setInTheFile(true);
         return n;
