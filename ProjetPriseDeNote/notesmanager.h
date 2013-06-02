@@ -10,13 +10,17 @@
 #include "audiofactory.h"
 #include <map>
 #include <QSet>
-
+#include "exportstrategy.h"
+#include "htmlexport.h"
+#include "latexexport.h"
+#include "textexport.h"
 
 #include "note.h"
 
 class NotesManager {
 
     std::map < QString,NoteFactory* > factories;
+    //std::map < QString,ExportStrategy* > strategies;
     QSet<Note*> ensnotes;
     QString EspaceDeTravail;
     static NotesManager* instance;

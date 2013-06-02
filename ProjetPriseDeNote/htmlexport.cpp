@@ -2,7 +2,7 @@
 #include<QSet>
 #include"notesexception.h"
 
-HTMLexport::HTMLexport()
+HTMLexport::HTMLexport() : ExportStrategy()
 {
 }
 
@@ -20,11 +20,11 @@ QString HTMLexport::footer(Note* n)
     return "</body></html>";
 }
 QString HTMLexport::exportNote(Document* d , unsigned int titreLvl)
-{/*
-    if (titreLvl<=6){
-    QString s="<h"+titreLvl+">"+d->getTitre()+"</h"+titreLvl+">\n";
-    typedef const_iterator it=d->ensNotes.constBegin();
-    for(it;it!=d->ensNotes.constEnd();it++)
+{
+   /* if (titreLvl<=6){
+    QString s="<h"+QString::number(titreLvl)+">"+d->getTitre()+"</h"+QString::number(titreLvl)+">\n";
+
+    for(QSet<Note*>::iterator it=d->begin();it!=d->constEnd();it++)
     {
         s+=exportNote(*it,titreLvl-1);
     }
