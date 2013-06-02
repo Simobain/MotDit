@@ -78,14 +78,14 @@ void MainWindow::afficherArticle(Article* article){
     artWidget->setTexte(article->getTexte());
     last_widget=artWidget;
     ui->onglet_edit->layout()->addWidget(artWidget);
-    QObject::connect(artWidget, SIGNAL(articleChanged(QString&)), this, SLOT(noteChanged(QString&))) ;
+    QObject::connect(artWidget, SIGNAL(articleChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
     article->setSaved(true);
 
 
 }
 
 
-void MainWindow::noteChanged(QString& titre){
+void MainWindow::noteChanged(const QString& titre){
     QStringList::Iterator it=liste.begin();
     unsigned int index=0;
     while((*it)!= titre && it!=liste.end()){

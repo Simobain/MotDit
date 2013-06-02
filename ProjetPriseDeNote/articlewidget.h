@@ -22,7 +22,7 @@ private:
     Ui::ArticleWidget *ui;
 
 signals :
-    void articleChanged(QString& titre);
+    void articleChanged(const QString& titre);
 
 public slots :
     void actuTitre();

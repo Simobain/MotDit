@@ -28,7 +28,7 @@ public slots :
     void creerArticle();
     //void ajoutListe();
     void itemClicked(const QModelIndex & index);
-    void noteChanged(QString& titre);
+    void noteChanged(const QString &titre);
 };
 
 #endif // MAINWINDOW_H
