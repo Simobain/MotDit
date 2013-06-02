@@ -19,10 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), last_widget(0)
 {
-
-
     ui->setupUi(this);
-    //QObject :: connect(ui->actionArticle_2,SIGNAL(triggered()), this, SLOT(ouvrirArticle()));
+
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
 
@@ -36,13 +34,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setViewMode(QListView::ListMode);
     ui->listView->setSelectionMode(QListView::ExtendedSelection);
 
-
-    //QObject :: connect(ui->actionAdd,SIGNAL(triggered()), this, SLOT(ajoutListe()));
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
     QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
 
+    NotesManager* nm=NotesManager::getInstance();
+    const QSet<Note*>& listeNotes = nm->getEnsnote();
+    QSet<Note*>::const_iterator it=listeNotes.begin();
+    while(it!=listeNotes.end()){
 
-
+        liste.append((*it)->getTitre());
+        it++;
+    }
+    ui->listView->setModel(new QStringListModel(liste));
 }
 
 
@@ -93,9 +96,7 @@ void MainWindow::noteChanged(const QString& titre){
         index++;
         it++;
     }
-    if ((*it)==titre){
-        //liste.replace(index, titre+"*");
-        std::cout<<"changed\n";
+    if ((*it)==titre){        
         liste[index]=titre+"*";
     }
 
@@ -105,7 +106,7 @@ void MainWindow::noteChanged(const QString& titre){
 
 void MainWindow::itemClicked(const QModelIndex & index){
     //QMessageBox::information(this,"Hello!","You Clicked: \n"+index.data().toString());
-
+    last_clicked=index;
     NotesManager* gestnote=NotesManager::getInstance();
     QString titre=index.data().toString();
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
@@ -126,33 +127,21 @@ void MainWindow::itemClicked(const QModelIndex & index){
 
  void MainWindow::sauverClicked()
  {
-    qDebug()<<"avant tout";
-    /*QModelIndexList indexListe= ui->listView->selectionModel()->selectedIndexes();
-    bool i =indexListe.isEmpty();
-    if (i) qDebug()<<true;
-    else qDebug()<<false;
-    //QModelIndex index =
-*/
-    QModelIndex index= ui->listView->currentIndex();
-    qDebug()<<index.data().toString();
-
     NotesManager* gestnote=NotesManager::getInstance();
-    QString titre=index.data().toString();
+    QString titre=last_clicked.data().toString();
+    qDebug()<<"titre : "<<titre;
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
-
-
     Note* note=gestnote->getNoteFromTitre(titre);
     switch(note->getType()){
+        case Note::ARTICLE :
+            Article* notA=(Article*) note;
+            notA->save(gestnote->getEspaceDeTravail());
 
-    case Note::ARTICLE :
-        Article* notA=(Article*) note;
-        notA->save(gestnote->getEspaceDeTravail());
-
-        break;
-/*
-    default :
-        QMessageBox::information(this,"Erreur","pb :)");TODO: Rechercher le pb*/
-    }
+            break;
+    /*
+        default :
+            QMessageBox::information(this,"Erreur","pb :)");TODO: Rechercher le pb*/
+        }
 
     QStringList::Iterator it=liste.begin();
     unsigned int i=0;

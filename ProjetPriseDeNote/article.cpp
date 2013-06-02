@@ -2,6 +2,7 @@
 #include "notefactory.h"
 #include <iostream>
 #include "exportstrategy.h"
+#include <QDebug>
 
 
 Article::Article():Note(), texte(""){}
@@ -48,6 +49,10 @@ void Article::save(const QString &directory){
 
     }
     else std::cout<<"Impossible d'ecrire' !"<<"\n";
-    saveInTheFile(getId(), directory);
+    if(!isInTheFile()){
+        qDebug()<<"pas dans le fichier";
+        saveInTheFile(getId(), directory);}
+    else qDebug()<<"dans le fichier";
 }
+
 

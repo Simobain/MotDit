@@ -20,6 +20,7 @@ NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A mo
 
 }
 
+
 NotesManager::~NotesManager(){
     std::map<QString, NoteFactory*> ::iterator it=factories.begin();
     for (;it!=factories.end();++it){
@@ -27,6 +28,8 @@ NotesManager::~NotesManager(){
     }
     // todo supprimer le set de note
 }
+
+
 
 NotesManager* NotesManager::getInstance(){
     if (!instance) instance=new NotesManager;
@@ -36,6 +39,10 @@ NotesManager* NotesManager::getInstance(){
 void NotesManager::libereInstance(){
     if(instance) delete instance;
     instance=0;
+}
+
+const QSet<Note*>& NotesManager::getEnsnote()const{
+    return ensnotes;
 }
 
 void NotesManager::creerNote(const QString& type_note, const QString& titre){
@@ -76,12 +83,8 @@ void NotesManager::chargerNotes(){
             factory=factories[typID[0]];
             Note* newNote=factory->chargerNote(texte, EspaceDeTravail);
             ensnotes<<newNote;
-
         }
-
         fichier.close();
-
-
     }
     else std::cout<<"Impossible d'ecrire' !"<<"\n";
 }

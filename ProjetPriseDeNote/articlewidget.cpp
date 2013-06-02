@@ -46,7 +46,6 @@ void ArticleWidget::actuTitre(){
     if (actu_article->isSaved()){
     actu_article->setSaved(false);
     emit articleChanged(actu_article->getTitre());
-    qDebug()<<"test emit"; // Plante sans raisons apparentes To be continued
         }
 
 }

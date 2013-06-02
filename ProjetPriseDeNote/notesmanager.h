@@ -40,6 +40,7 @@ public:
     void setEspaceDeTravail(const QString& e);
     QString getEspaceDeTravail()const {return EspaceDeTravail;}
     void chargerNotes();
+    const QSet<Note *>& getEnsnote()const;
 
 
 };

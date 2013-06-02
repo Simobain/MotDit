@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QModelIndex>
 #include "article.h"
 
 namespace Ui {
@@ -20,6 +21,7 @@ public:
     
 private:
     QWidget* last_widget;
+    QModelIndex last_clicked;
     Ui::MainWindow *ui;
     QStringList liste;
 

@@ -25,22 +25,20 @@ Note* ArticleFactory::buildNewNote(const QString& titre){
 
 Note* ArticleFactory::chargerNote(const QString& id, const QString& chemin){
 
-    QFile fichier(chemin+"/"+id);
+    QFile fichier(chemin+"/"+id+".txt");
     QString contenu;
-
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
         QTextStream flux(&fichier);
         QString titre(flux.readLine());
         while(!flux.atEnd()) contenu += flux.readLine();
-        fichier.close();
         Note* n= buildNote(id, titre, contenu);
         n->setInTheFile(true);
         return n;
     }
-
-    else {qDebug()<<"note pas charger";
+    else {
+        qDebug()<<"note pas charger";
         return 0;}
 
 }
