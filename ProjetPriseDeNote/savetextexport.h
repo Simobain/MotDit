@@ -1,4 +1,4 @@
-#ifndef SAVETEXTEXPORT_H
+/*#ifndef SAVETEXTEXPORT_H
 #define SAVETEXTEXPORT_H
 
 #include "exportstrategy.h"
@@ -17,3 +17,4 @@ public:
 };
 
 #endif // SAVETEXTEXPORT_H
+*/
