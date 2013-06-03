@@ -84,25 +84,40 @@ void MainWindow::afficherArticle(Article* article){
     artWidget->setTexte(article->getTexte());
     last_widget=artWidget;
     ui->onglet_edit->layout()->addWidget(artWidget);
-    QObject::connect(artWidget, SIGNAL(articleChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
+    QObject::connect(artWidget, SIGNAL(articleTexteChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
+    QObject::connect(artWidget, SIGNAL(articleTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
     article->setSaved(true);
 
 
 }
 
-
-void MainWindow::noteChanged(const QString& titre){
+void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
     QStringList::Iterator it=liste.begin();
+
     unsigned int index=0;
-    while((*it)!= titre && it!=liste.end()){
+    while((*it)!= oldName && it!=liste.end()){
         index++;
         it++;
     }
-    if ((*it)==titre){        
-        liste[index]=titre+"*";
-    }
 
+    if ((*it)==oldName){
+        liste[index]=newName;
+    }
     ui->listView->setModel(new QStringListModel(liste));
+}
+
+
+void MainWindow::noteChanged(const QString& titre){
+
+    replaceInListe(titre, titre+"*");
+    ui->sauver->setEnabled(true);
+
+}
+
+void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved){
+
+    if (saved)replaceInListe(oldTitre, newTitre+"*");
+    else replaceInListe(oldTitre+"*", newTitre+"*" );
     ui->sauver->setEnabled(true);
 
 }

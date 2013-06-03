@@ -18,19 +18,21 @@ public:
     ~MainWindow();
     void creerNote(const QString& type);
     void afficherArticle(Article* article);
-    
+
 private:
     QWidget* last_widget;
     QModelIndex last_clicked;
     Ui::MainWindow *ui;
     QStringList liste;
+    void replaceInListe(const QString& oldName,const QString& newName);
 
 public slots :
 
     void creerArticle();
     //void ajoutListe();
     void itemClicked(const QModelIndex & index);
-    void noteChanged(const QString &titre);
+    void noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved);
+    void noteChanged(const QString &titre);    
     void sauverClicked();
 };
 

@@ -34,18 +34,18 @@ void ArticleWidget::actuTexte(){
     actu_article->setTexte(ui->textEdit->toPlainText());
     if (actu_article->isSaved()){
     actu_article->setSaved(false);
-    emit articleChanged(actu_article->getTitre());
+    emit articleTexteChanged(actu_article->getTitre());
         }
 
 }
 
 void ArticleWidget::actuTitre(){
-
+    QString ancienTitre = actu_article->getTitre();
     actu_article->setTitre(ui->lineEdit->text());
-
     if (actu_article->isSaved()){
-    actu_article->setSaved(false);
-    emit articleChanged(actu_article->getTitre());
-        }
+        actu_article->setSaved(false);
+        emit articleTitreChanged(actu_article->getTitre(), ancienTitre, true );
+    }
+    else emit articleTitreChanged(actu_article->getTitre(), ancienTitre, false );
 
 }
