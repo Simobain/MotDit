@@ -17,8 +17,10 @@ public:
     void addSubNote(Note *n);
     void addSubNote(Note *n, QString id);
     void removeSubNote(QString id);
+
     Note* getSubNote(QString id);
     NoteType getType() const;
+    QSet<Note*> getSousNotes()const {return sousNotes;}
 
 
 
