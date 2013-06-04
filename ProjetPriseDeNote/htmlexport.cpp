@@ -1,6 +1,6 @@
 #include "htmlexport.h"
 #include<QSet>
-#include"notesexception.h"
+
 
 HTMLexport::HTMLexport() : ExportStrategy()
 {
@@ -8,30 +8,27 @@ HTMLexport::HTMLexport() : ExportStrategy()
 
 QString HTMLexport::header(Note* n)
 
-{/*
+{
     return "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><title>"+ n->getTitre()+"</title></head><body>";
-    */
-    return"";
 }
 
 QString HTMLexport::footer(Note* n)
 {
-
     return "</body></html>";
 }
 QString HTMLexport::exportNote(Document* d , unsigned int titreLvl)
 {
-   /* if (titreLvl<=6){
+    if (titreLvl>6) titreLvl;
     QString s="<h"+QString::number(titreLvl)+">"+d->getTitre()+"</h"+QString::number(titreLvl)+">\n";
 
-    for(QSet<Note*>::iterator it=d->begin();it!=d->constEnd();it++)
+    /*for(QSet<Note*>::iterator it=d->begin();it!=d->constEnd();it++)
     {
         s+=exportNote(*it,titreLvl-1);
-    }
+    }*/
     return s;
-    }
-    else throw NotesException("Taille du titre trop élevée");*/
-    return"";
+
+    //else throw NotesException("Taille du titre trop élevée");*/
+    //return"";
 }
 QString HTMLexport::exportNote(Article* a , unsigned int titreLvl)
 {

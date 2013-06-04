@@ -1,7 +1,7 @@
 #ifndef BINARY_H
 #define BINARY_H
 #include"note.h"
-#include <QString>
+
 
 class Binary : public Note
 {

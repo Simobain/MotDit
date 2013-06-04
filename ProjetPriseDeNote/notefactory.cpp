@@ -1,6 +1,5 @@
 #include "notefactory.h"
-#include "time.h"
-#include <iostream>
+
 
 NoteFactory::NoteFactory()
 {

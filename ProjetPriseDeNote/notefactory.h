@@ -1,12 +1,16 @@
 #ifndef NOTEFACTORY_H
 #define NOTEFACTORY_H
 
-#include<QString>
-#include <QMap>
-#include<sstream>
-#include<QSettings>
-#include "note.h"
 
+#include<sstream>
+#include <iostream>
+
+#include <QDebug>
+#include<QSettings>
+#include <QMap>
+
+#include "time.h"
+#include "note.h"
 
 
 

@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QFile>
+#include <QDebug>
 
 class ExportStrategy;
 

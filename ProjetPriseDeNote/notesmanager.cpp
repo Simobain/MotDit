@@ -1,8 +1,5 @@
 #include "notesmanager.h"
-#include <QMessageBox>
-#include <QApplication>
-#include <QSettings>
-#include <QDebug>
+
 
 NotesManager* NotesManager::instance=0;
 
@@ -13,7 +10,7 @@ NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A mo
     factories["image"]= new ImageFactory;
     factories["video"]=new VideoFactory;
     factories["audio"]=new AudioFactory;*/
-   // strategies["HTML"]=new HTMLexport;
+    strategies["html"]=new HTMLexport;
     /*strategies["LaTex"]=new LaTexExport;
     strategies["Texte"]=new TextExport;*/
     chargerNotes();

@@ -1,8 +1,7 @@
 #include "note.h"
 #include <fstream>
-#include <QFile>
-#include <QDebug>
-#include "exportstrategy.h"
+
+
 
 Note::Note():id(001), titre(""), modified(false), loaded(false), saved(true), inTheFile(false){}//constructeur par defaut de Note
 

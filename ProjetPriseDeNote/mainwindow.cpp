@@ -1,18 +1,20 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "articlewidget.h"
-#include <QObject>
+
 #include <iostream>
+#include <QObject>
 #include <QFileDialog>
 #include <QFile>
-#include "notesmanager.h"
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QStringListModel>
 #include <QStringList>
 #include <QSettings>
-#include <QDebug>
+
+
+
+
 
 
 MainWindow::MainWindow(QWidget *parent) :

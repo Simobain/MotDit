@@ -6,7 +6,7 @@
 
 class Document : public Note
 {
-    QSet<Note*> ensNotes;
+    QSet<Note*> sousNotes;
     Document(const Document&);
     Document& operator=(const Document&);
     void load();

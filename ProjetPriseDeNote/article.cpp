@@ -1,8 +1,6 @@
 #include "article.h"
-#include "notefactory.h"
 #include <iostream>
-#include "exportstrategy.h"
-#include <QDebug>
+
 
 
 Article::Article():Note(), texte(""){}

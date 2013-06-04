@@ -1,7 +1,7 @@
 #include "articlewidget.h"
 #include <QFont>
 #include "ui_articlewidget.h"
-#include <QDebug>
+
 
 ArticleWidget::ArticleWidget(Article *a, QWidget *parent) :
     actu_article(a), QWidget(parent),

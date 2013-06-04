@@ -1,7 +1,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 #include "binary.h"
-#include <QString>
+
 
 class NotesManager;
 

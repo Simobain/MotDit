@@ -1,5 +1,4 @@
 #include "articlefactory.h"
-#include <QDebug>
 
 
 ArticleFactory::ArticleFactory()

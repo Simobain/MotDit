@@ -1,14 +1,13 @@
 #ifndef EXPORTSTRATEGY_H
 #define EXPORTSTRATEGY_H
 
-#include <QString>
 #include "document.h"
 #include "image.h"
 #include "video.h"
 #include "audio.h"
 #include "article.h"
-#include "note.h"
-#include "QMap"
+
+#include <QMap>
 
 
 class ExportStrategy

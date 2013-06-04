@@ -4,10 +4,9 @@
 #include "article.h"
 #include <iostream>
 #include <time.h>
-#include<sstream>
+#include <sstream>
 #include "notesmanager.h"
 #include <QSettings>
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {

@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 #include <QModelIndex>
-#include "article.h"
+#include "notesmanager.h"
+#include "articlewidget.h"
+
+
 
 namespace Ui {
 class MainWindow;

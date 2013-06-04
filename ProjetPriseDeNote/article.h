@@ -1,6 +1,5 @@
 #ifndef ARTICLE_H
 #define ARTICLE_H
-#include <QString>
 #include "note.h"
 class NotesManager;
 

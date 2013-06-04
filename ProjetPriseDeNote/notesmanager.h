@@ -1,24 +1,27 @@
 #ifndef NOTESMANAGER_H
 #define NOTESMANAGER_H
 #include <iostream>
-#include <QString>
+#include <map> //Bug si on remplace toutes les map par des QMap (au niveau de l'iterateur qui doit pas être exactement le même
+
+#include <QMessageBox>
+#include <QApplication>
+#include <QSettings>
+#include <QDebug>
+
 #include "articlefactory.h"
 #include "videofactory.h"
 #include "documentfactory.h"
 #include "imagefactory.h"
 #include "audiofactory.h"
-#include <map>
-#include <QSet>
+
 #include "htmlexport.h"
 #include "latexexport.h"
 #include "textexport.h"
-#include "note.h"
-
 
 class NotesManager {
 
     std::map < QString,NoteFactory* > factories;
-    //std::map < QString,ExportStrategy* > strategies;
+    std::map < QString,ExportStrategy* > strategies;
     QSet<Note*> ensnotes;
     QString EspaceDeTravail;
     static NotesManager* instance;
