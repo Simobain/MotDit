@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QSettings>
+#include <QDebug>
 
 NotesManager* NotesManager::instance=0;
 
@@ -55,12 +56,16 @@ void NotesManager::creerNote(const QString& type_note, const QString& titre){
 
 Note* NotesManager::getNoteFromTitre(const QString& titre){
     QSet<Note*>::iterator it= ensnotes.begin();
+    qDebug()<<"entrée dans le while a la recherche de la note ayant pour titre :"+titre;
+
     while ((*it)->getTitre()!=titre && it!=ensnotes.end()){
+        qDebug()<<"avt incrémentation "+(*it)->getTitre();
         it++;
+        qDebug()<<"ap "+(*it)->getTitre();
     }
     if ((*it)->getTitre()==titre)
     return (*it);
-    else return 0;// TODO : traiter le cas ou il y a un pb
+    else {return 0;};// TODO : traiter le cas ou il y a un pb
 
 }
 void NotesManager::setEspaceDeTravail(const QString& e)

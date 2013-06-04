@@ -146,9 +146,11 @@ void MainWindow::itemClicked(const QModelIndex & index){
  void MainWindow::sauverClicked()
  {
     NotesManager* gestnote=NotesManager::getInstance();
-    QString titre=last_clicked.data().toString();
-    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
-    Note* note=gestnote->getNoteFromTitre(titre);
+    QString titre=last_clicked.data().toString();//Pas bon si on change le titre
+    qDebug()<<titre;// SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
+    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistrée elle possède une étoile dans la liste
+    Note* note=gestnote->getNoteFromTitre(titre);// SOUCI lorque l'on sauve un nouveau titre, on appelle avec l'ancien et du coup on le trouve pas
+    qDebug()<<note->getTitre();
     switch(note->getType()){
         case Note::ARTICLE :
             Article* notA=(Article*) note;
@@ -171,7 +173,7 @@ void MainWindow::itemClicked(const QModelIndex & index){
         liste[i]=titre;
         ui->listView->setModel(new QStringListModel(liste));
     }
-    ui->sauver->setEnabled(false);
+    ui->sauver->setEnabled(false);//Si on rechange ne se remet pas enable :s
 
  }
 
