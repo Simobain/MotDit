@@ -10,6 +10,7 @@ Note::Note(const QString& i, const QString& t): id(i), titre(t),modified(false),
 
 void Note::setTitre(const QString& t){
     titre=t;
+    //saved=false;
 }
 
 void Note::saveInTheFile(const QString& id, const QString& chemin){

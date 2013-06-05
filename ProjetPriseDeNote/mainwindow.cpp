@@ -11,6 +11,7 @@
 #include <QStringListModel>
 #include <QStringList>
 #include <QSettings>
+#include <QMessageBox>
 
 
 
@@ -26,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
     QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
+    QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
+    //To Do trouver solution pour que quand on clique sur bouton et pas de changement.
+    //NB : je pense qu'il vaut mieux que le bouton soit toujours activé et qu'on lance un QmessageBox si il n'y a rien"Rien à sauver"
+
+
     ui->onglets->setTabText(0, "Edit");
     ui->onglets->setTabText(1, "HTML");
     ui->onglets->setTabText(2, "TeX");
@@ -148,34 +154,42 @@ void MainWindow::itemClicked(const QModelIndex & index){
  void MainWindow::sauverClicked()
  {
     NotesManager* gestnote=NotesManager::getInstance();
-    QString titre=last_clicked.data().toString();//Pas bon si on change le titre
-    qDebug()<<titre;// SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
-    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistrée elle possède une étoile dans la liste
-    Note* note=gestnote->getNoteFromTitre(titre);// SOUCI lorque l'on sauve un nouveau titre, on appelle avec l'ancien et du coup on le trouve pas
-    qDebug()<<note->getTitre();
-    switch(note->getType()){
-        case Note::ARTICLE :
-            Article* notA=(Article*) note;
-            notA->save(gestnote->getEspaceDeTravail());
+    QMessageBox msgBox;
 
-            break;
-    /*
-        default :
-            QMessageBox::information(this,"Erreur","pb :)");TODO: Rechercher le pb*/
+    if (last_clicked.data().toString()!=""){
+        QString titre=last_clicked.data().toString();//Pas bon si on change le titre
+        qDebug()<<titre;// SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
+        if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistrée elle possède une étoile dans la liste
+        Note* note=gestnote->getNoteFromTitre(titre);// SOUCI lorque l'on sauve un nouveau titre, on appelle avec l'ancien et du coup on le trouve pas
+        qDebug()<<note->getTitre();
+        switch(note->getType()){
+            case Note::ARTICLE :
+                Article* notA=(Article*) note;
+                notA->save(gestnote->getEspaceDeTravail());
+
+                break;
+        /*
+            default :
+                QMessageBox::information(this,"Erreur","pb :)");TODO: Rechercher le pb*/
+            }
+
+        QStringList::Iterator it=liste.begin();
+        unsigned int i=0;
+        while((*it)!= titre+"*" && it!=liste.end()){
+            i++;
+            it++;
         }
 
-    QStringList::Iterator it=liste.begin();
-    unsigned int i=0;
-    while((*it)!= titre+"*" && it!=liste.end()){
-        i++;
-        it++;
-    }
+        if ((*it)==titre+"*"){
+            liste[i]=titre;
+            ui->listView->setModel(new QStringListModel(liste));
+        }
+        //ui->sauver->setEnabled(false);//Si on rechange ne se remet pas enable :s
+        msgBox.setText("Sauvegarde effectuée");
 
-    if ((*it)==titre+"*"){
-        liste[i]=titre;
-        ui->listView->setModel(new QStringListModel(liste));
     }
-    ui->sauver->setEnabled(false);//Si on rechange ne se remet pas enable :s
+    else msgBox.setText("Rien à sauvegarder !!");
+    msgBox.exec();
 
  }
 

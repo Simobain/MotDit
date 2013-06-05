@@ -117,6 +117,7 @@
     <addaction name="menuNouveau"/>
     <addaction name="menuExporter"/>
     <addaction name="menuOuvrir"/>
+    <addaction name="actionSauvegarder"/>
     <addaction name="actionFermer"/>
    </widget>
    <widget class="QMenu" name="menuEdition">
@@ -241,6 +242,11 @@
   <action name="actionFermer">
    <property name="text">
     <string>Fermer</string>
+   </property>
+  </action>
+  <action name="actionSauvegarder">
+   <property name="text">
+    <string>Sauvegarder</string>
    </property>
   </action>
  </widget>

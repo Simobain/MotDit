@@ -15,6 +15,7 @@ Note::NoteType Article::getType() const{
 
 void Article::setTexte(const QString& t){
     texte=t;
+    //saved=false;
 }
 void Article::load(const QString &chemin){
 
@@ -48,6 +49,7 @@ void Article::save(const QString &directory){
     }
     else std::cout<<"Impossible d'ecrire' !"<<"\n";
     if(!isInTheFile())saveInTheFile(getId(), directory);
+    //saved=true;
 }
 
 
