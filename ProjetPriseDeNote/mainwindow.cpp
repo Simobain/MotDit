@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
-
+    QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
     ui->onglets->setTabText(0, "Edit");
     ui->onglets->setTabText(1, "HTML");
     ui->onglets->setTabText(2, "TeX");

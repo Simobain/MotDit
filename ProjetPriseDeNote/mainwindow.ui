@@ -117,7 +117,7 @@
     <addaction name="menuNouveau"/>
     <addaction name="menuExporter"/>
     <addaction name="menuOuvrir"/>
-    <addaction name="actionQuitter"/>
+    <addaction name="actionFermer"/>
    </widget>
    <widget class="QMenu" name="menuEdition">
     <property name="title">
@@ -134,26 +134,10 @@
      <string>Aide</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuAjoutListe">
-    <property name="title">
-     <string>AjoutListe</string>
-    </property>
-    <addaction name="actionAdd"/>
-   </widget>
-   <widget class="QMenu" name="menuExport">
-    <property name="title">
-     <string>Export</string>
-    </property>
-    <addaction name="actionTexte"/>
-    <addaction name="actionHTML_2"/>
-    <addaction name="actionLaTex"/>
-   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEdition"/>
-   <addaction name="menuExport"/>
    <addaction name="menuA_propos"/>
    <addaction name="menuAide"/>
-   <addaction name="menuAjoutListe"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -166,7 +150,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuitter">
    <property name="text">
-    <string>Quitter</string>
+    <string>Quit</string>
    </property>
   </action>
   <action name="actionArticle">
@@ -252,6 +236,11 @@
   <action name="actionLaTex">
    <property name="text">
     <string>LaTex</string>
+   </property>
+  </action>
+  <action name="actionFermer">
+   <property name="text">
+    <string>Fermer</string>
    </property>
   </action>
  </widget>
