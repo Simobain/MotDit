@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow), last_widget(0)
 {
     ui->setupUi(this);
-    model=new QStringListModel();
 
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
@@ -30,6 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
     //To Do trouver solution pour que quand on clique sur bouton et pas de changement.
     //NB : je pense qu'il vaut mieux que le bouton soit toujours activé et qu'on lance un QmessageBox si il n'y a rien"Rien à sauver"
+
+    QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
+    QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
+    QObject :: connect(ui->suppr, SIGNAL(clicked()), this, SLOT(supprClicked()));
 
 
     ui->onglets->setTabText(0, "Edit");
@@ -41,12 +44,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setFlow(QListView::TopToBottom);
     ui->listView->setViewMode(QListView::ListMode);
     ui->listView->setSelectionMode(QListView::ExtendedSelection);
+    model=new QStringListModel();
 
     ui->sauver->setEnabled(false);
 
-    QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
-    QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
-
+    // On ajoute les notes a la liste pour pouvoir les afficher dans la listview
     NotesManager* nm=NotesManager::getInstance();
     const QSet<Note*>& listeNotes = nm->getEnsnote();
     QSet<Note*>::const_iterator it=listeNotes.begin();
@@ -85,9 +87,7 @@ void MainWindow::creerNote(const QString& type){
 void MainWindow::afficherArticle(Article* article){
 
     ArticleWidget* artWidget= new ArticleWidget(article);
-
-    if (last_widget!=0) ui->onglet_edit->layout()->removeWidget(last_widget);
-
+    if (last_widget!=0) {ui->onglet_edit->layout()->removeWidget(last_widget) ;}
     artWidget->setTitre(article->getTitre());
     artWidget->setTexte(article->getTexte());
     last_widget=artWidget;
@@ -131,12 +131,14 @@ void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTit
 }
 
 void MainWindow::itemClicked(const QModelIndex & index){
-    //QMessageBox::information(this,"Hello!","You Clicked: \n"+index.data().toString());
+
     last_clicked=index;
     NotesManager* gestnote=NotesManager::getInstance();
     QString titre=index.data().toString();
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
     Note* note=gestnote->getNoteFromTitre(titre);
+    if (note->isSaved()) ui->sauver->setEnabled(false);
+    else ui->sauver->setEnabled(true);
 
 
     switch(note->getType()){
@@ -156,22 +158,12 @@ void MainWindow::sauverClicked(){
     NotesManager* gestnote=NotesManager::getInstance();
 
     if (last_clicked.data().toString()!="") { //test a changer completement faux
-        QString titre=last_clicked.data().toString();//Pas bon si on change le titre
+        QString titre=last_clicked.data().toString();
         // SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
-        if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistrée elle possède une étoile dans la liste
+        if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
         Note* note=gestnote->getNoteFromTitre(titre);
         //qDebug()<<"titre note trouvée"<<note->getTitre();
-        switch(note->getType()){
-            case Note::ARTICLE :
-                Article* notA=(Article*) note;
-                notA->save(gestnote->getEspaceDeTravail());
-
-                break;
-/*
-            default :
-                QMessageBox::information(this,"Erreur","pb :)");//TODO: Rechercher le pb*/
-            }
-
+        note->save(gestnote->getEspaceDeTravail()); // ah ah je viens de comprendre le polymorphisme ^^
         replaceInListe(titre+"*", titre); // On enlève l'étoile pour indiquer que la note est sauvée
         ui->sauver->setEnabled(false);
         QMessageBox::information(this,"Sauvegarde","Sauvegarde effectuée");
@@ -181,3 +173,14 @@ void MainWindow::sauverClicked(){
 
  }
 
+void MainWindow::supprClicked(){
+
+    NotesManager* gestnote=NotesManager::getInstance();
+    QString titre=last_clicked.data().toString();
+    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
+    Note* note=gestnote->getNoteFromTitre(titre);
+    //gestnote->supprNote(note); TO supprNote dans notesManager
+    //enlever le titre de la liste
+
+    //model->setStringList(liste);
+}

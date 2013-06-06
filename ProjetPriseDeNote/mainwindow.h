@@ -39,6 +39,7 @@ public slots :
     void noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved);
     void noteChanged(const QString &titre);    
     void sauverClicked();
+    void supprClicked();
 };
 
 #endif // MAINWINDOW_H
