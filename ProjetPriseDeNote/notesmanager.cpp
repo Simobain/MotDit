@@ -61,6 +61,7 @@ Note* NotesManager::getNoteFromTitre(const QString& titre){
     else {qDebug()<<"l'article n'est pas dans la liste !"; return 0;};// TODO : traiter le cas ou il y a un pb
 
 }
+
 void NotesManager::setEspaceDeTravail(const QString& e)
 {
     EspaceDeTravail=e;

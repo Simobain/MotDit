@@ -126,7 +126,6 @@ void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTit
     if (saved)replaceInListe(oldTitre, newTitre+"*");
     else replaceInListe(oldTitre+"*", newTitre+"*" );    
     last_clicked.data().toString()=newTitre+"*";
-    qDebug()<<"last_clicked"<<last_clicked.data().toString();
     ui->sauver->setEnabled(true);
 
 }
@@ -158,10 +157,10 @@ void MainWindow::sauverClicked(){
 
     if (last_clicked.data().toString()!="") { //test a changer completement faux
         QString titre=last_clicked.data().toString();//Pas bon si on change le titre
-        qDebug()<<"titre ::::::"<<titre;// SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
+        // SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
         if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistrée elle possède une étoile dans la liste
-        Note* note=gestnote->getNoteFromTitre(titre);// SOUCI lorque l'on sauve un nouveau titre, on appelle avec l'ancien et du coup on le trouve pas
-        qDebug()<<"titre note trouvée"<<note->getTitre();
+        Note* note=gestnote->getNoteFromTitre(titre);
+        //qDebug()<<"titre note trouvée"<<note->getTitre();
         switch(note->getType()){
             case Note::ARTICLE :
                 Article* notA=(Article*) note;
@@ -174,7 +173,7 @@ void MainWindow::sauverClicked(){
             }
 
         replaceInListe(titre+"*", titre); // On enlève l'étoile pour indiquer que la note est sauvée
-        ui->sauver->setEnabled(false);//Si on rechange ne se remet pas enable :s
+        ui->sauver->setEnabled(false);
         QMessageBox::information(this,"Sauvegarde","Sauvegarde effectuée");
 
     }
