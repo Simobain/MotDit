@@ -17,12 +17,12 @@
 
 
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), last_widget(0)
 {
     ui->setupUi(this);
+    model=new QStringListModel();
 
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
@@ -55,7 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
         liste.append((*it)->getTitre());
         it++;
     }
-    ui->listView->setModel(new QStringListModel(liste));
+    model->setStringList(liste);
+    ui->listView->setModel(model);
 }
 
 
@@ -64,9 +65,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-  void MainWindow::creerArticle(){
+void MainWindow::creerArticle(){
     creerNote("article");
 }
 
@@ -77,7 +76,8 @@ void MainWindow::creerNote(const QString& type){
         NotesManager* n = NotesManager::getInstance();
         n->creerNote(type, titre);
         liste.append(titre);
-        ui->listView->setModel(new QStringListModel(liste));
+
+        model->setStringList(liste);
     }
 
 }
@@ -111,9 +111,8 @@ void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
     if ((*it)==oldName){
         liste[index]=newName;
     }
-    ui->listView->setModel(new QStringListModel(liste));
+    model->setStringList(liste);
 }
-
 
 void MainWindow::noteChanged(const QString& titre){
 
@@ -125,7 +124,9 @@ void MainWindow::noteChanged(const QString& titre){
 void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved){
 
     if (saved)replaceInListe(oldTitre, newTitre+"*");
-    else replaceInListe(oldTitre+"*", newTitre+"*" );
+    else replaceInListe(oldTitre+"*", newTitre+"*" );    
+    last_clicked.data().toString()=newTitre+"*";
+    qDebug()<<"last_clicked"<<last_clicked.data().toString();
     ui->sauver->setEnabled(true);
 
 }
@@ -151,45 +152,33 @@ void MainWindow::itemClicked(const QModelIndex & index){
 
 }
 
- void MainWindow::sauverClicked()
- {
-    NotesManager* gestnote=NotesManager::getInstance();
-    QMessageBox msgBox;
+void MainWindow::sauverClicked(){
 
-    if (last_clicked.data().toString()!=""){
+    NotesManager* gestnote=NotesManager::getInstance();
+
+    if (last_clicked.data().toString()!="") { //test a changer completement faux
         QString titre=last_clicked.data().toString();//Pas bon si on change le titre
-        qDebug()<<titre;// SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
+        qDebug()<<"titre ::::::"<<titre;// SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
         if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistrée elle possède une étoile dans la liste
         Note* note=gestnote->getNoteFromTitre(titre);// SOUCI lorque l'on sauve un nouveau titre, on appelle avec l'ancien et du coup on le trouve pas
-        qDebug()<<note->getTitre();
+        qDebug()<<"titre note trouvée"<<note->getTitre();
         switch(note->getType()){
             case Note::ARTICLE :
                 Article* notA=(Article*) note;
                 notA->save(gestnote->getEspaceDeTravail());
 
                 break;
-        /*
+/*
             default :
-                QMessageBox::information(this,"Erreur","pb :)");TODO: Rechercher le pb*/
+                QMessageBox::information(this,"Erreur","pb :)");//TODO: Rechercher le pb*/
             }
 
-        QStringList::Iterator it=liste.begin();
-        unsigned int i=0;
-        while((*it)!= titre+"*" && it!=liste.end()){
-            i++;
-            it++;
-        }
-
-        if ((*it)==titre+"*"){
-            liste[i]=titre;
-            ui->listView->setModel(new QStringListModel(liste));
-        }
-        //ui->sauver->setEnabled(false);//Si on rechange ne se remet pas enable :s
-        msgBox.setText("Sauvegarde effectuée");
+        replaceInListe(titre+"*", titre); // On enlève l'étoile pour indiquer que la note est sauvée
+        ui->sauver->setEnabled(false);//Si on rechange ne se remet pas enable :s
+        QMessageBox::information(this,"Sauvegarde","Sauvegarde effectuée");
 
     }
-    else msgBox.setText("Rien à sauvegarder !!");
-    msgBox.exec();
+    else  QMessageBox::information(this,"Sauvegarde","Rien à sauvegarder");
 
  }
 

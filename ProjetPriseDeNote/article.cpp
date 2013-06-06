@@ -37,6 +37,7 @@ void Article::load(const QString &chemin){
 }
 
 void Article::save(const QString &directory){
+    setSaved(true);
     QString cheminEntier=directory+"/"+getId()+".txt";
     QFile fichier (cheminEntier);
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))

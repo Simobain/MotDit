@@ -5,6 +5,7 @@
 #include <QModelIndex>
 #include "notesmanager.h"
 #include "articlewidget.h"
+#include <QStringListModel>
 
 
 
@@ -27,6 +28,7 @@ private:
     QModelIndex last_clicked;
     Ui::MainWindow *ui;
     QStringList liste;
+    QStringListModel* model;
     void replaceInListe(const QString& oldName,const QString& newName);
 
 public slots :
