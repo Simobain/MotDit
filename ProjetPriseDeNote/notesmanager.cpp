@@ -87,3 +87,33 @@ void NotesManager::chargerNotes(){
     }
     else std::cout<<"Impossible d'ecrire' !"<<"\n";
 }
+
+void NotesManager::supprNote (Note* n){
+    QString cheminEntier=EspaceDeTravail+"/"+"fileDescript.txt";
+    QString buffer = ""; //Variable contenant le texte à réécrire dans le fichier
+    QFile fichier (cheminEntier);
+    if(fichier.open(QIODevice::ReadOnly |QIODevice::Text))
+    {
+        QString texte;
+        QTextStream flux(&fichier);
+
+        while(!flux.atEnd()){
+            texte = flux.readLine();
+            if (n->getId()!=texte) buffer+=texte+"\n"; //si ce n'est pas l'id a supprimer on le met dans le buffer
+        }
+        fichier.close();
+    }
+    else std::cout<<"Impossible de lire le fichier !"<<"\n";
+
+    //on ouvre le fichier et on réecrit le buffer à la place
+    if (fichier.open(QIODevice::WriteOnly | QIODevice::Truncate|QIODevice::Text)){
+        QTextStream flux(&fichier);
+        flux<<buffer;
+        fichier.close();
+    }
+    else std::cout<<"impossible d'ecrire ds le fichier"<<"\n";
+
+    ensnotes.remove(n);
+
+    //to do mettre n dans la corbeille
+}

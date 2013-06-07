@@ -85,7 +85,7 @@ void MainWindow::creerNote(const QString& type){
 }
 
 void MainWindow::afficherArticle(Article* article){
-
+    bool sauver=article->isSaved();
     ArticleWidget* artWidget= new ArticleWidget(article);
     if (last_widget!=0) {ui->onglet_edit->layout()->removeWidget(last_widget) ;}
     artWidget->setTitre(article->getTitre());
@@ -94,7 +94,7 @@ void MainWindow::afficherArticle(Article* article){
     ui->onglet_edit->layout()->addWidget(artWidget);
     QObject::connect(artWidget, SIGNAL(articleTexteChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
     QObject::connect(artWidget, SIGNAL(articleTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
-    article->setSaved(true);
+    article->setSaved(sauver);
 
 
 }
@@ -140,7 +140,6 @@ void MainWindow::itemClicked(const QModelIndex & index){
     if (note->isSaved()) ui->sauver->setEnabled(false);
     else ui->sauver->setEnabled(true);
 
-
     switch(note->getType()){
     case Note::ARTICLE :
 
@@ -162,7 +161,6 @@ void MainWindow::sauverClicked(){
         // SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
         if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
         Note* note=gestnote->getNoteFromTitre(titre);
-        //qDebug()<<"titre note trouvée"<<note->getTitre();
         note->save(gestnote->getEspaceDeTravail()); // ah ah je viens de comprendre le polymorphisme ^^
         replaceInListe(titre+"*", titre); // On enlève l'étoile pour indiquer que la note est sauvée
         ui->sauver->setEnabled(false);
@@ -177,9 +175,27 @@ void MainWindow::supprClicked(){
 
     NotesManager* gestnote=NotesManager::getInstance();
     QString titre=last_clicked.data().toString();
-    if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
-    Note* note=gestnote->getNoteFromTitre(titre);
-    //gestnote->supprNote(note); TO supprNote dans notesManager
+    QString titre2=titre;
+    if (titre2.endsWith("*")) titre2.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
+    Note* note=gestnote->getNoteFromTitre(titre2);
+    gestnote->supprNote(note); //TO supprNote dans notesManager
+
+    QStringList::Iterator it=liste.begin();
+
+    unsigned int index=0;
+    while((*it)!= titre && it!=liste.end()){
+        index++;
+        it++;
+    }
+
+    if ((*it)==titre){
+        liste.removeAt(index);
+    }
+    model->setStringList(liste);
+    ui->onglet_edit->layout()->removeWidget(last_widget); //je comprend pas pourquoi ça ne marche pas
+    last_widget=0;
+
+
     //enlever le titre de la liste
 
     //model->setStringList(liste);
