@@ -136,3 +136,19 @@ QString NotesManager::exportNote(Note* n, QString typeExport){
     texte+=strategy->footer(n);
     return texte;
 }
+
+QString NotesManager::exportNoteAsPart(Note* n, QString typeExport){
+    ExportStrategy* strategy;
+    strategy=strategies[typeExport];
+    QString texte="";
+    switch(n->getType()){
+    case Note::ARTICLE :
+        texte+=strategy->exportNote((Article*) n,1);
+
+        break;
+    default :
+        qDebug()<<"pb fonction NoteManager::exportNoteAsPart je suis le default du switch \n ";
+    }
+
+    return texte;
+}
