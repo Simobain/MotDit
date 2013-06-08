@@ -11,8 +11,8 @@ NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A mo
     factories["video"]=new VideoFactory;
     factories["audio"]=new AudioFactory;*/
     strategies["html"]=new HTMLexport;
-    /*strategies["LaTex"]=new LaTexExport;
-    strategies["Texte"]=new TextExport;*/
+    //strategies["latex"]=new LaTexExport;
+    strategies["texte"]=new TextExport;
     chargerNotes();
 
 
@@ -116,4 +116,23 @@ void NotesManager::supprNote (Note* n){
     ensnotes.remove(n);
 
     //to do mettre n dans la corbeille
+}
+
+
+QString NotesManager::exportNote(Note* n, QString typeExport){
+
+    ExportStrategy* strategy;
+    strategy=strategies[typeExport];
+    QString texte=strategy->header(n);
+    switch(n->getType()){
+    case Note::ARTICLE :
+        texte+=strategy->exportNote((Article*) n,1);
+
+        break;
+    default :
+        qDebug()<<"pb fonction NoteManager::exportNote je suis le default du switch \n ";
+    }
+
+    texte+=strategy->footer(n);
+    return texte;
 }

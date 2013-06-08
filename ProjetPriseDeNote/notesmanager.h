@@ -45,7 +45,7 @@ public:
     QString getEspaceDeTravail()const {return EspaceDeTravail;}
     void chargerNotes();
     const QSet<Note *>& getEnsnote()const;
-
+    QString exportNote(Note* n, QString typeExport);
 
 };
 

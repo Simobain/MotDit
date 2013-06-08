@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
     QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
     QObject :: connect(ui->suppr, SIGNAL(clicked()), this, SLOT(supprClicked()));
+    QObject :: connect(ui->onglets, SIGNAL(currentChanged(int)), this, SLOT(ongletChange(int)));
 
 
     ui->onglets->setTabText(0, "Edit");
@@ -69,6 +70,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::creerArticle(){
     creerNote("article");
+}
+
+NotesManager* MainWindow::getNoteManager(){
+    NotesManager* gestnote=NotesManager::getInstance();
+    return gestnote;
+
 }
 
 void MainWindow::creerNote(const QString& type){
@@ -133,7 +140,8 @@ void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTit
 void MainWindow::itemClicked(const QModelIndex & index){
 
     last_clicked=index;
-    NotesManager* gestnote=NotesManager::getInstance();
+    NotesManager* gestnote=getNoteManager();
+    //NotesManager* gestnote=NotesManager::getInstance();
     QString titre=index.data().toString();
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
     Note* note=gestnote->getNoteFromTitre(titre);
@@ -154,9 +162,10 @@ void MainWindow::itemClicked(const QModelIndex & index){
 
 void MainWindow::sauverClicked(){
 
-    NotesManager* gestnote=NotesManager::getInstance();
+    NotesManager* gestnote=getNoteManager();
+    //NotesManager* gestnote=NotesManager::getInstance();
 
-    if (last_clicked.data().toString()!="") { //test a changer completement faux
+    if (last_clicked.data().toString()!="") {
         QString titre=last_clicked.data().toString();
         // SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
         if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
@@ -167,13 +176,15 @@ void MainWindow::sauverClicked(){
         QMessageBox::information(this,"Sauvegarde","Sauvegarde effectuée");
 
     }
-    else  QMessageBox::information(this,"Sauvegarde","Rien à sauvegarder");
+    else  QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 
  }
 
 void MainWindow::supprClicked(){
 
-    NotesManager* gestnote=NotesManager::getInstance();
+    NotesManager* gestnote=getNoteManager();
+    //NotesManager* gestnote=NotesManager::getInstance();
+    if (last_clicked.data().toString()!=""){
     QString titre=last_clicked.data().toString();
     QString titre2=titre;
     if (titre2.endsWith("*")) titre2.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
@@ -194,9 +205,34 @@ void MainWindow::supprClicked(){
     model->setStringList(liste);
     ui->onglet_edit->layout()->removeWidget(last_widget); //je comprend pas pourquoi ça ne marche pas
     last_widget=0;
+    }
+    else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 
 
-    //enlever le titre de la liste
+}
 
-    //model->setStringList(liste);
+void MainWindow::ongletChange(int index){
+    switch (index) {
+    case 0:
+
+        break;
+    case 3:
+        ongletTexteClicked();
+        break;
+    default:
+        qDebug()<<"pb !!!";
+        break;
+    }
+}
+
+void MainWindow::ongletTexteClicked(){
+
+    NotesManager* gestnote=NotesManager::getInstance();
+    if (last_clicked.data().toString()!=""){
+    QString titre=last_clicked.data().toString();
+    if (titre.endsWith("*")) titre.remove("*");
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note, "texte");
+    ui->textEdit->setText(texte);}
+    else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 }

@@ -38,21 +38,27 @@
      </attribute>
      <layout class="QVBoxLayout" name="verticalLayout_2"/>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="onglet_tex">
      <attribute name="title">
       <string>Page</string>
      </attribute>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="onglet_text">
      <attribute name="title">
       <string>Page</string>
      </attribute>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QTextEdit" name="textEdit"/>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QPushButton" name="sauver">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>480</x>
       <y>310</y>
       <width>75</width>
       <height>23</height>

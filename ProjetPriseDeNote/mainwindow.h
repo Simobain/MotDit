@@ -30,16 +30,19 @@ private:
     QStringList liste;
     QStringListModel* model;
     void replaceInListe(const QString& oldName,const QString& newName);
+    NotesManager* MainWindow::getNoteManager();
+    void ongletTexteClicked();
 
 public slots :
 
     void creerArticle();
-    //void ajoutListe();
     void itemClicked(const QModelIndex & index);
     void noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved);
     void noteChanged(const QString &titre);    
     void sauverClicked();
     void supprClicked();
+    void ongletChange(int index);
+
 };
 
 #endif // MAINWINDOW_H
