@@ -36,13 +36,21 @@
      <attribute name="title">
       <string>Tab 2</string>
      </attribute>
-     <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QTextEdit" name="textEdit_2"/>
+      </item>
+     </layout>
     </widget>
     <widget class="QWidget" name="onglet_tex">
      <attribute name="title">
       <string>Page</string>
      </attribute>
-     <layout class="QVBoxLayout" name="verticalLayout"/>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTextEdit" name="textEdit_3"/>
+      </item>
+     </layout>
     </widget>
     <widget class="QWidget" name="onglet_text">
      <attribute name="title">

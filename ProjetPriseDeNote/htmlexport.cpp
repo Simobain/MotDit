@@ -27,6 +27,7 @@ QString HTMLexport::exportNote(Document* d , unsigned int titreLvl)
         //Note* n=(typeid(*it).name) *it;
         //s+=exportNote((*it),titreLvl-1); TODO : probleme exportNote n'existe pas pour une note*
     }
+
     return s;
 
     //else throw NotesException("Taille du titre trop élevée");*/
@@ -34,8 +35,8 @@ QString HTMLexport::exportNote(Document* d , unsigned int titreLvl)
 }
 QString HTMLexport::exportNote(Article* a , unsigned int titreLvl)
 {
-
-    return "<h"+QString::number(titreLvl)+">"+a->getTitre()+"</h"+QString::number(titreLvl)+">\n"+"<p>"+a->getTexte()+"</p>";
+    QString texte="<h"+QString::number(titreLvl)+">"+a->getTitre()+"</h"+QString::number(titreLvl)+">\n"+"<p>"+a->getTexte()+"</p>";
+    return texte;
 
 }
 QString HTMLexport::exportNote(Video* v , unsigned int titreLvl){return"";}

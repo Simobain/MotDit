@@ -32,6 +32,8 @@ private:
     void replaceInListe(const QString& oldName,const QString& newName);
     NotesManager* MainWindow::getNoteManager();
     void ongletTexteClicked();
+    void ongletHtmlClicked();
+    void ongletTexClicked();
 
 public slots :
 

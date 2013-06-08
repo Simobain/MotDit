@@ -216,6 +216,12 @@ void MainWindow::ongletChange(int index){
     case 0:
 
         break;
+    case 1:
+        ongletHtmlClicked();
+        break;
+    case 2:
+        ongletTexClicked();
+        break;
     case 3:
         ongletTexteClicked();
         break;
@@ -234,5 +240,28 @@ void MainWindow::ongletTexteClicked(){
     Note* note=gestnote->getNoteFromTitre(titre);
     QString texte=gestnote->exportNote(note, "texte");
     ui->textEdit->setText(texte);}
+    else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
+}
+
+void MainWindow::ongletHtmlClicked(){
+
+    NotesManager* gestnote=NotesManager::getInstance();
+    if (last_clicked.data().toString()!=""){
+    QString titre=last_clicked.data().toString();
+    if (titre.endsWith("*")) titre.remove("*");
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note, "html");
+    ui->textEdit_2->setText(texte);}
+    else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
+}
+
+void MainWindow::ongletTexClicked(){
+    NotesManager* gestnote=NotesManager::getInstance();
+    if (last_clicked.data().toString()!=""){
+    QString titre=last_clicked.data().toString();
+    if (titre.endsWith("*")) titre.remove("*");
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note, "latex");
+    ui->textEdit_3->setText(texte);}
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 }

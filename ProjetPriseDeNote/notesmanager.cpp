@@ -11,7 +11,7 @@ NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A mo
     factories["video"]=new VideoFactory;
     factories["audio"]=new AudioFactory;*/
     strategies["html"]=new HTMLexport;
-    //strategies["latex"]=new LaTexExport;
+    strategies["latex"]=new LaTexExport;
     strategies["texte"]=new TextExport;
     chargerNotes();
 
