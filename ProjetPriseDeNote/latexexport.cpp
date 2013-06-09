@@ -6,11 +6,11 @@ LaTexExport::LaTexExport()
 QString LaTexExport::header(Note* n)
 {
     QString head="\documentclass[a4paper,11pt]{report}\n";
-            head+="\usepackage{graphicx} \n";
-            head+="\usepackage[french]{babel} \n";
-            head+="\usepackage[latin1]{inputenc}\n";
-            head+="\usepackage[T1]{fontenc}\n";
-            head+="\begin{document}\n";
+            head+="\\usepackage{graphicx} \n";
+            head+="\\usepackage[french]{babel} \n";
+            head+="\\usepackage[latin1]{inputenc}\n";
+            head+="\\usepackage[T1]{fontenc}\n";
+            head+="\\begin{document}\n";
 
     return head;
 }
