@@ -144,6 +144,7 @@
     <addaction name="menuNouveau"/>
     <addaction name="menuExporter"/>
     <addaction name="menuOuvrir"/>
+    <addaction name="actionDefinir_un_nouvel_espace_de_travail"/>
     <addaction name="actionSauvegarder"/>
     <addaction name="actionFermer"/>
    </widget>
@@ -274,6 +275,11 @@
   <action name="actionSauvegarder">
    <property name="text">
     <string>Sauvegarder</string>
+   </property>
+  </action>
+  <action name="actionDefinir_un_nouvel_espace_de_travail">
+   <property name="text">
+    <string>Definir un nouvel espace de travail</string>
    </property>
   </action>
  </widget>

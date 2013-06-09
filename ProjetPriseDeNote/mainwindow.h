@@ -30,7 +30,6 @@ private:
     QStringList liste;
     QStringListModel* model;
     void replaceInListe(const QString& oldName,const QString& newName);
-    NotesManager* MainWindow::getNoteManager();
     void ongletTexteClicked();
     void ongletHtmlClicked();
     void ongletTexClicked();
@@ -44,6 +43,7 @@ public slots :
     void sauverClicked();
     void supprClicked();
     void ongletChange(int index);
+    void changerEspaceTravail();
 
 };
 

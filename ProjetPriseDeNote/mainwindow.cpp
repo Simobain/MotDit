@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
     QObject :: connect(ui->suppr, SIGNAL(clicked()), this, SLOT(supprClicked()));
     QObject :: connect(ui->onglets, SIGNAL(currentChanged(int)), this, SLOT(ongletChange(int)));
+    QObject :: connect(ui->actionDefinir_un_nouvel_espace_de_travail, SIGNAL(triggered()), this, SLOT(changerEspaceTravail()));
 
 
     ui->onglets->setTabText(0, "Edit");
@@ -72,11 +73,6 @@ void MainWindow::creerArticle(){
     creerNote("article");
 }
 
-NotesManager* MainWindow::getNoteManager(){
-    NotesManager* gestnote=NotesManager::getInstance();
-    return gestnote;
-
-}
 
 void MainWindow::creerNote(const QString& type){
     bool ok;
@@ -140,8 +136,7 @@ void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTit
 void MainWindow::itemClicked(const QModelIndex & index){
 
     last_clicked=index;
-    NotesManager* gestnote=getNoteManager();
-    //NotesManager* gestnote=NotesManager::getInstance();
+    NotesManager* gestnote=NotesManager::getInstance();
     QString titre=index.data().toString();
     if (titre.endsWith("*")) titre.remove("*");// si la note est modifié est non enregistré elle possède une étoile dans la liste
     Note* note=gestnote->getNoteFromTitre(titre);
@@ -161,9 +156,7 @@ void MainWindow::itemClicked(const QModelIndex & index){
 }
 
 void MainWindow::sauverClicked(){
-
-    NotesManager* gestnote=getNoteManager();
-    //NotesManager* gestnote=NotesManager::getInstance();
+    NotesManager* gestnote=NotesManager::getInstance();
 
     if (last_clicked.data().toString()!="") {
         QString titre=last_clicked.data().toString();
@@ -182,8 +175,8 @@ void MainWindow::sauverClicked(){
 
 void MainWindow::supprClicked(){
 
-    NotesManager* gestnote=getNoteManager();
-    //NotesManager* gestnote=NotesManager::getInstance();
+
+    NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
     QString titre=last_clicked.data().toString();
     QString titre2=titre;
@@ -251,7 +244,9 @@ void MainWindow::ongletHtmlClicked(){
     if (titre.endsWith("*")) titre.remove("*");
     Note* note=gestnote->getNoteFromTitre(titre);
     QString texte=gestnote->exportNote(note, "html");
-    ui->textEdit_2->setText(texte);}
+    ui->textEdit_2->setText(texte);
+    qDebug()<<ui->textEdit_2->toPlainText(); // il faut empecher le text edit d'intrepreter l'html
+    }
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 }
 
@@ -262,6 +257,14 @@ void MainWindow::ongletTexClicked(){
     if (titre.endsWith("*")) titre.remove("*");
     Note* note=gestnote->getNoteFromTitre(titre);
     QString texte=gestnote->exportNote(note, "latex");
-    ui->textEdit_3->setText(texte);}
+    ui->textEdit_3->setText(texte);
+    }
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
+}
+
+void MainWindow::changerEspaceTravail(){
+    QString espace  = QFileDialog::getExistingDirectory(this, tr("Open Directory"),qApp->applicationDirPath(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks); // Renvoie une erreur mais espace possède la bonne valeur
+    //qDebug()<<espace;
+    NotesManager* gestnote=NotesManager::getInstance();
+     gestnote->setEspaceDeTravail(espace);
 }

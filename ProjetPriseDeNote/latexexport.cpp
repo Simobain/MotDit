@@ -1,23 +1,23 @@
 #include "latexexport.h"
 
-LaTexExport::LaTexExport()
+LaTexExport::LaTexExport() : ExportStrategy()
 {
 }
 QString LaTexExport::header(Note* n)
 {
-    QString head="\documentclass[a4paper,11pt]{report}\n";
-            head+="\usepackage{graphicx} \n";
-            head+="\usepackage[french]{babel} \n";
-            head+="\usepackage[latin1]{inputenc}\n";
-            head+="\usepackage[T1]{fontenc}\n";
-            head+="\begin{document}\n";
+    QString head="\\documentclass[a4paper,11pt]{report}\n";
+            head+="\\usepackage{graphicx} \n";
+            head+="\\usepackage[french]{babel} \n";
+            head+="\\usepackage[latin1]{inputenc}\n";
+            head+="\\usepackage[T1]{fontenc}\n";
+            head+="\\begin{document}\n";
 
     return head;
 }
 
 QString LaTexExport::footer(Note* n)
 {
-    return "\end{document}";
+    return "\\end{document}";
 }
 QString LaTexExport::exportNote(Document* d , unsigned int titreLvl)
 {
@@ -25,7 +25,7 @@ QString LaTexExport::exportNote(Document* d , unsigned int titreLvl)
 }
 QString LaTexExport::exportNote(Article* a , unsigned int titreLvl)
 {
-    QString texte="\chapter{"+a->getTitre()+"}\n";
+    QString texte="\\chapter{"+a->getTitre()+"}\n";
     texte=texte+a->getTexte()+"\n";
 
     return texte;
