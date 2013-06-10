@@ -76,6 +76,7 @@ void NotesManager::chargerNotes(){
         QTextStream flux(&fichier);
         QString delimiter="@";
         NoteFactory* factory;
+        ensnotes.clear();
         while(!flux.atEnd()){
             texte = flux.readLine();
             QStringList typID= texte.split(delimiter);
@@ -85,7 +86,7 @@ void NotesManager::chargerNotes(){
         }
         fichier.close();
     }
-    else std::cout<<"Impossible d'ecrire' !"<<"\n";
+    else ensnotes.clear();//on ouvre un espace de travail nouveau donc on supprime les ancienne notes
 }
 
 void NotesManager::supprNote (Note* n){

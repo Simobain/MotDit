@@ -90,7 +90,10 @@ void MainWindow::creerNote(const QString& type){
 void MainWindow::afficherArticle(Article* article){
     bool sauver=article->isSaved();
     ArticleWidget* artWidget= new ArticleWidget(article);
-    if (last_widget!=0) {ui->onglet_edit->layout()->removeWidget(last_widget) ;}
+    if (last_widget!=0) {
+        ui->onglet_edit->layout()->removeWidget(last_widget) ;
+        delete last_widget;
+        last_widget=0;}
     artWidget->setTitre(article->getTitre());
     artWidget->setTexte(article->getTexte());
     last_widget=artWidget;
@@ -178,26 +181,27 @@ void MainWindow::supprClicked(){
 
     NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
-    QString titre=last_clicked.data().toString();
-    QString titre2=titre;
-    if (titre2.endsWith("*")) titre2.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
-    Note* note=gestnote->getNoteFromTitre(titre2);
-    gestnote->supprNote(note); //TO supprNote dans notesManager
+        QString titre=last_clicked.data().toString();
+        QString titre2=titre;
+        if (titre2.endsWith("*")) titre2.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
+        Note* note=gestnote->getNoteFromTitre(titre2);
+        gestnote->supprNote(note); //TO supprNote dans notesManager
 
-    QStringList::Iterator it=liste.begin();
+        QStringList::Iterator it=liste.begin();
 
-    unsigned int index=0;
-    while((*it)!= titre && it!=liste.end()){
-        index++;
-        it++;
-    }
+        unsigned int index=0;
+        while((*it)!= titre && it!=liste.end()){
+            index++;
+            it++;
+        }
 
-    if ((*it)==titre){
-        liste.removeAt(index);
-    }
-    model->setStringList(liste);
-    ui->onglet_edit->layout()->removeWidget(last_widget); //je comprend pas pourquoi ça ne marche pas
-    last_widget=0;
+        if ((*it)==titre){
+            liste.removeAt(index);
+        }
+        model->setStringList(liste);
+        ui->onglet_edit->layout()->removeWidget(last_widget); //je comprend pas pourquoi ça ne marche pas
+        delete last_widget;
+        last_widget=0;
     }
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 
@@ -267,4 +271,19 @@ void MainWindow::changerEspaceTravail(){
     //qDebug()<<espace;
     NotesManager* gestnote=NotesManager::getInstance();
      gestnote->setEspaceDeTravail(espace);
+
+     liste.clear();
+     gestnote->chargerNotes();
+     const QSet<Note*>& listeNotes = gestnote->getEnsnote();
+     if (!listeNotes.isEmpty()){
+     QSet<Note*>::const_iterator it=listeNotes.begin();
+     while(it!=listeNotes.end()){
+         liste.append((*it)->getTitre());
+         it++;
+     }}
+     model->setStringList(liste);
+     ui->listView->setModel(model);
+     ui->onglet_edit->layout()->removeWidget(last_widget);
+     delete last_widget;
+     last_widget=0;
 }
