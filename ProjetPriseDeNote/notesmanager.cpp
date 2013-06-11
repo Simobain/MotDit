@@ -44,11 +44,10 @@ const QSet<Note*>& NotesManager::getEnsnote()const{
     return ensnotes;
 }
 
-void NotesManager::creerNote(const QString& type_note, const QString& titre){
+void NotesManager::creerNote(const QString& type_note, const QString& titre,const QString& path){
     NoteFactory* factory;
     factory=factories[type_note];
-    Note* newNote=factory->buildNewNote(titre);
-    qDebug()<<"la note est crée";
+    Note* newNote=factory->buildNewNote(titre, path);
     ensnotes<<newNote;
 
 }

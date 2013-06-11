@@ -4,7 +4,8 @@
 
 
 ArticleWidget::ArticleWidget(Article *a, QWidget *parent) :
-    actu_article(a), QWidget(parent),
+    actu_article(a),
+    QWidget(parent),
     ui(new Ui::ArticleWidget)
 {
     QFont titreFont("Times", 14, QFont::Bold);

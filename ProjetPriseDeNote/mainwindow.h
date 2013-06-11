@@ -5,6 +5,7 @@
 #include <QModelIndex>
 #include "notesmanager.h"
 #include "articlewidget.h"
+#include "imagewidget.h"
 #include <QStringListModel>
 
 
@@ -20,8 +21,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void creerNote(const QString& type);
+    void creerNote(const QString& type, const QString &path="");
     void afficherArticle(Article* article);
+    void afficherImage(Image* im);
 
 private:
     QWidget* last_widget;

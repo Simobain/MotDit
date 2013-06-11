@@ -11,7 +11,7 @@ public:
     ImageFactory();
     QString getNewId();
     Note* buildNote(const QString& id,const QString& title, const QString& path="");
-    Note* buildNewNote(const QString& title);
+    Note* buildNewNote(const QString& title, const QString &path);
     Note* buildNotecopy(const Note* n);
     Note* chargerNote(const QString& id, const QString& chemin);
 };

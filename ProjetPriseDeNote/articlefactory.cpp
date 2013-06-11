@@ -11,12 +11,12 @@ QString ArticleFactory::getNewId()
     return ajout+NoteFactory::getNewId();
 }
 
-Note* ArticleFactory::buildNote(const QString& id, const QString& titre, const QString& texte=""){
+Note* ArticleFactory::buildNote(const QString& id, const QString& titre, const QString& texte){
     Article* art=new Article(id, titre, texte);
     return art;
 }
 
-Note* ArticleFactory::buildNewNote(const QString& titre){
+Note* ArticleFactory::buildNewNote(const QString& titre, const QString &path){
     QString id;
     id=getNewId();
     return buildNote(id, titre);

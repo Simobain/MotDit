@@ -14,13 +14,14 @@ QString ImageFactory::getNewId()
 
 Note* ImageFactory::buildNote(const QString& id, const QString& titre, const QString &path){
     Image* im=new Image(id, titre, path);
+    qDebug()<<im->getChemin();
     return im;
 }
 
-Note* ImageFactory::buildNewNote(const QString& titre){
+Note* ImageFactory::buildNewNote(const QString& titre, const QString& path){
     QString id;
     id=getNewId();
-    return buildNote(id, titre);
+    return buildNote(id, titre, path);
 }
 
 

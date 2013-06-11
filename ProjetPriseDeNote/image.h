@@ -12,6 +12,8 @@ public:
     Image(const QString& id, const QString& titre, const QString &path="");
     NoteType getType() const;
 
+
+
 };
 
 #endif // IMAGE_H

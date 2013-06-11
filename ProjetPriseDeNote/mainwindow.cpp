@@ -75,19 +75,19 @@ void MainWindow::creerArticle(){
 }
 
 void MainWindow::creerImage(){
-    creerNote("image");
+
     QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("Images (*.jpg, *.png)"));
-    qDebug()<<path;
-    //comment mettre dans image le path récupérer
+    qDebug()<<"le chemin de départ"<<path;
+    creerNote("image", path);
 
 }
 
-void MainWindow::creerNote(const QString& type){
+void MainWindow::creerNote(const QString& type, const QString& path){
     bool ok;
     QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
     if (ok){
         NotesManager* n = NotesManager::getInstance();
-        n->creerNote(type, titre);
+        n->creerNote(type, titre, path);
         liste.append(titre);
         model->setStringList(liste);
     }
@@ -111,6 +111,27 @@ void MainWindow::afficherArticle(Article* article){
 
 
 }
+
+void MainWindow::afficherImage(Image* im){
+    bool sauver=im->isSaved();
+    qDebug()<<"1";
+    ImageWidget* imWidget= new ImageWidget(im);
+    qDebug()<<"2";
+    if (last_widget!=0) {
+        ui->onglet_edit->layout()->removeWidget(last_widget) ;
+        delete last_widget;
+        last_widget=0;}
+    imWidget->setTitre(im->getTitre());
+    imWidget->setDesc(im->getDescription());
+    imWidget->setChemin(im->getChemin());
+    last_widget=imWidget;
+    ui->onglet_edit->layout()->addWidget(imWidget);
+    QObject::connect(imWidget, SIGNAL(imageDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
+    QObject::connect(imWidget, SIGNAL(imageTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
+    im->setSaved(sauver);
+
+}
+
 
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
     QStringList::Iterator it=liste.begin();
@@ -155,12 +176,13 @@ void MainWindow::itemClicked(const QModelIndex & index){
 
     switch(note->getType()){
     case Note::ARTICLE :
-
         afficherArticle((Article*) note);
-
+        break;
+    case Note::IMAGE :
+        afficherImage((Image*) note);
         break;
     default :
-        QMessageBox::information(this,"Erreur","pb :)");
+        QMessageBox::critical(this,"Erreur","ERREUR !!");
     }
 
 }
@@ -173,7 +195,7 @@ void MainWindow::sauverClicked(){
         // SOUCI si on met une * en fin de titre... on ne peut plus la retrouver...
         if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
         Note* note=gestnote->getNoteFromTitre(titre);
-        note->save(gestnote->getEspaceDeTravail()); // ah ah je viens de comprendre le polymorphisme ^^
+        note->save(gestnote->getEspaceDeTravail());
         replaceInListe(titre+"*", titre); // On enlève l'étoile pour indiquer que la note est sauvée
         ui->sauver->setEnabled(false);
         QMessageBox::information(this,"Sauvegarde","Sauvegarde effectuée");
@@ -206,7 +228,7 @@ void MainWindow::supprClicked(){
             liste.removeAt(index);
         }
         model->setStringList(liste);
-        ui->onglet_edit->layout()->removeWidget(last_widget); //je comprend pas pourquoi ça ne marche pas
+        ui->onglet_edit->layout()->removeWidget(last_widget);
         delete last_widget;
         last_widget=0;
     }

@@ -38,7 +38,7 @@ public:
 
     static NotesManager* getInstance();
     void libereInstance();
-    void creerNote(const QString& type_note, const QString& titre);
+    void creerNote(const QString& type_note, const QString& titre,const QString& path="");
     void supprNote (Note* n);
     Note* getNoteFromTitre(const QString& titre);
     void setEspaceDeTravail(const QString& e);

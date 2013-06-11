@@ -7,29 +7,21 @@
 #include <sstream>
 #include "notesmanager.h"
 #include <QSettings>
-#include <QFileDialog>
+#include <QLabel>
+#include <QPixmap>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
 
-    NotesManager* n=NotesManager::getInstance();
-    QString cheminAcces=n->getEspaceDeTravail();
-    //Test fonction load et save
-    //n->creerNote(Article,"testcheval");
-
-    //art->setTexte("Ceci est mon premier article");
-    //art->save(n->getEspaceDeTravail());
-    //qDebug()<<art->getId();
-    //art->load("article001.txt");
-    //std::cout<<art->getTitre().toStdString()<<"\n"<<art->getTexte().toStdString()<<"\n";
-    //QSettings descrip("BinomeLO21","ProjetPriseDeNote");
-
-    //std::cout<<cheminAcces.toStdString()<<descrip.value("ok","non").toString().toStdString();
-
-
-
+    //NotesManager* n=NotesManager::getInstance();
+    //QString cheminAcces=n->getEspaceDeTravail();
+    /*QWidget* fen=new QWidget();
+    fen->resize(200,200);
+    QLabel *label = new QLabel(fen);
+    label->setPixmap(QPixmap(QApplication::applicationDirPath() +"chat.png"));
+    fen->show();*/
 
 
 
