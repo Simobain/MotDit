@@ -41,14 +41,7 @@ public :
     virtual void save(const QString& directory)=0;
     //virtual void load(const QString& path)=0;
 
-
-
-
-
 };
-
-
-
 
 #endif
 

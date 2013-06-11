@@ -22,7 +22,7 @@ public:
 private:
     Ui::ImageWidget *ui;
     Image* actu_image;
-    //QPixmap* pixmap;
+    QPixmap* pixmap;
 
 signals:
     void imageDescChanged(const QString&);

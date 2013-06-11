@@ -9,20 +9,15 @@
 #include <QSettings>
 #include <QLabel>
 #include <QPixmap>
+#include <QImage>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsPixmapItem>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-
-    //NotesManager* n=NotesManager::getInstance();
-    //QString cheminAcces=n->getEspaceDeTravail();
-    //QWidget* fen=new QWidget();
-    /*fen->resize(200,200);
-    QLabel *label = new QLabel(fen);
-    label->setGeometry(QRect(20, 10, 371, 311));
-    label->setPixmap(QPixmap("chat.png"));
-    fen->show();*/
 
 
 

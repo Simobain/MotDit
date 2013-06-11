@@ -12,7 +12,7 @@ ImageWidget::ImageWidget(Image *im,QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit->setFont(titreFont);
     ui->textEdit->setFont(texteFont);
-    //pixmap=0;
+    pixmap=0;
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
@@ -32,8 +32,11 @@ void ImageWidget::setDesc(const QString& desc){
 }
 
 void ImageWidget::setChemin(const QString& chemin){
-    //delete pixmap;
-    ui->label->setPixmap(QPixmap(chemin));
+    delete pixmap;
+    pixmap=new QPixmap(chemin);
+    *pixmap=pixmap->scaled(QSize(100,100), Qt::KeepAspectRatio);
+    ui->label->setPixmap(*pixmap);
+
 }
 
 
