@@ -76,20 +76,18 @@ void MainWindow::creerArticle(){
 
 void MainWindow::creerImage(){
     creerNote("image");
-    qDebug()<<"coucou";
     QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("Images (*.jpg, *.png)"));
     qDebug()<<path;
-
+    //comment mettre dans image le path récupérer
 
 }
+
 void MainWindow::creerNote(const QString& type){
     bool ok;
     QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
     if (ok){
-        qDebug()<<"type : "<<type;
         NotesManager* n = NotesManager::getInstance();
         n->creerNote(type, titre);
-        qDebug()<<"on est sorti";
         liste.append(titre);
         model->setStringList(liste);
     }

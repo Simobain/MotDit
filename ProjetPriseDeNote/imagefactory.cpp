@@ -13,7 +13,7 @@ QString ImageFactory::getNewId()
 
 
 Note* ImageFactory::buildNote(const QString& id, const QString& titre, const QString &path){
-    Image* im=new Image(id, titre);
+    Image* im=new Image(id, titre, path);
     return im;
 }
 
