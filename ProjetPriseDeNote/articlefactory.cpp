@@ -11,7 +11,7 @@ QString ArticleFactory::getNewId()
     return ajout+NoteFactory::getNewId();
 }
 
-Note* ArticleFactory::buildNote(const QString& id, const QString& titre, const QString& texte){
+Note* ArticleFactory::buildNote(const QString& id, const QString& titre, const QString& texte, const QString &desc){
     Article* art=new Article(id, titre, texte);
     return art;
 }

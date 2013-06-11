@@ -17,7 +17,7 @@ public:
     QString getChemin() const {return chemin;}
     void setDescription(const QString& d);
     void setChemin(const QString& c);
-    void load(const QString& chemin);
+    //void load(const QString& chemin);
     void save(const QString& directory);
 };
 

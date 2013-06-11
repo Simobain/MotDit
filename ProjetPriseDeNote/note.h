@@ -39,7 +39,7 @@ public :
     void removeSubNote(QString i);
     Note* getSubNote(QString id);
     virtual void save(const QString& directory)=0;
-    virtual void load(const QString& path)=0;
+    //virtual void load(const QString& path)=0;
 
 
 

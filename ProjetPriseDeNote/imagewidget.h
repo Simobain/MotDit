@@ -29,8 +29,8 @@ signals:
     void imageTitreChanged(const QString&,const QString&, bool);
 
 public slots :
-    //void actuTitre();
-    //void actuDesc();
+    void actuTitre();
+    void actuDesc();
 };
 
 #endif // IMAGEWIDGET_H

@@ -13,8 +13,8 @@ ImageWidget::ImageWidget(Image *im,QWidget *parent) :
     ui->lineEdit->setFont(titreFont);
     ui->textEdit->setFont(texteFont);
     //pixmap=0;
-    //QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
-    //QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
+    QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
+    QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
 }
 
@@ -34,4 +34,24 @@ void ImageWidget::setDesc(const QString& desc){
 void ImageWidget::setChemin(const QString& chemin){
     //delete pixmap;
     ui->label->setPixmap(QPixmap(chemin));
+}
+
+
+void ImageWidget::actuDesc(){
+    actu_image->setDescription(ui->textEdit->toPlainText());
+    if (actu_image->isSaved()){
+    actu_image->setSaved(false);
+    emit imageDescChanged(actu_image->getTitre());
+        }
+}
+
+void ImageWidget::actuTitre(){
+    QString ancienTitre = actu_image->getTitre();
+    actu_image->setTitre(ui->lineEdit->text());
+    if (actu_image->isSaved()){
+        actu_image->setSaved(false);
+        emit imageTitreChanged(actu_image->getTitre(), ancienTitre, true );
+    }
+    else emit imageTitreChanged(actu_image->getTitre(), ancienTitre, false );
+
 }

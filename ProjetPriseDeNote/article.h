@@ -16,7 +16,7 @@ public:
     Article(const QString& id, const QString& titre, const QString& text="");
     QString getTexte() const {return texte;}
     void setTexte(const QString& t);
-    void load(const QString& chemin);
+    //void load(const QString& chemin);
     void save(const QString& directory);
     NoteType getType() const;
 

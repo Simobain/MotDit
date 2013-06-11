@@ -18,7 +18,7 @@ class NoteFactory
 {
 public:
     NoteFactory();
-    virtual Note* buildNote(const QString& id,const QString& title, const QString& contenu)=0;
+    virtual Note* buildNote(const QString& id,const QString& title, const QString& contenu, const QString& desc)=0;
     virtual Note* buildNewNote(const QString& title, const QString& path="")=0;
     virtual Note* chargerNote(const QString& id, const QString& chemin)=0;
     //virtual Note* buildNotecopy()=0;

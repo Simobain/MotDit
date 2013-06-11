@@ -9,12 +9,8 @@ QString ImageFactory::getNewId()
     return ajout+NoteFactory::getNewId();
 }
 
-
-
-
-Note* ImageFactory::buildNote(const QString& id, const QString& titre, const QString &path){
-    Image* im=new Image(id, titre, path);
-    qDebug()<<im->getChemin();
+Note* ImageFactory::buildNote(const QString& id, const QString& titre, const QString &path, const QString& desc){
+    Image* im=new Image(id, titre, path, desc);
     return im;
 }
 
@@ -26,22 +22,23 @@ Note* ImageFactory::buildNewNote(const QString& titre, const QString& path){
 
 
 Note* ImageFactory::chargerNote(const QString& id, const QString& chemin){
-/*
+
     QFile fichier(chemin+"/"+id+".txt");
-    QString contenu;
+    QString desc;
+
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
         QTextStream flux(&fichier);
         QString titre(flux.readLine());
-        while(!flux.atEnd()) contenu += flux.readLine()+"\n";
-        Note* n= buildNote(id, titre, contenu);
+        QString path(flux.readLine());
+        while(!flux.atEnd()) desc += flux.readLine()+"\n";
+        Note* n= buildNote(id, titre, path,desc);
         n->setInTheFile(true);
         return n;
     }
     else {
         qDebug()<<"note pas charger";
-        return 0;}*/
-    return 0;
+        return 0;}
 
 }

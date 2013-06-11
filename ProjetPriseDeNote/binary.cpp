@@ -28,24 +28,25 @@ void Binary::save(const QString &directory){
     if(!isInTheFile())saveInTheFile(getId(), directory);
 }
 
+/*
 void Binary::load(const QString& chemin){
 
     QFile fichier (chemin);
     QString desc;
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-
         QTextStream flux(&fichier);
         setTitre(flux.readLine());
-        flux.readLine();
+        qDebug()<<"titre : "<<getTitre();
         setChemin(flux.readLine());
-        flux.readLine();
+        qDebug()<<"chemin"<<getChemin();
         while(!flux.atEnd())
                 desc += flux.readLine();
+        qDebug()<<desc;
         setDescription(desc);
         fichier.close();
     }
 
     else qDebug()<<"Impossible d'ouvrir le fichier !"<<"\n";
 
-}
+}*/

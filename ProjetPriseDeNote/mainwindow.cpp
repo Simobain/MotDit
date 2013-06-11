@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sauver->setEnabled(false);
 
     // On ajoute les notes a la liste pour pouvoir les afficher dans la listview
+
     NotesManager* nm=NotesManager::getInstance();
     const QSet<Note*>& listeNotes = nm->getEnsnote();
     QSet<Note*>::const_iterator it=listeNotes.begin();
@@ -77,7 +78,6 @@ void MainWindow::creerArticle(){
 void MainWindow::creerImage(){
 
     QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("Images (*.jpg, *.png)"));
-    qDebug()<<"le chemin de départ"<<path;
     creerNote("image", path);
 
 }
@@ -114,9 +114,7 @@ void MainWindow::afficherArticle(Article* article){
 
 void MainWindow::afficherImage(Image* im){
     bool sauver=im->isSaved();
-    qDebug()<<"1";
     ImageWidget* imWidget= new ImageWidget(im);
-    qDebug()<<"2";
     if (last_widget!=0) {
         ui->onglet_edit->layout()->removeWidget(last_widget) ;
         delete last_widget;
