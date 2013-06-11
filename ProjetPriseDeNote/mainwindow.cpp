@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
+    QObject :: connect(ui->actionImage, SIGNAL(triggered()), this, SLOT(creerImage()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
     QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
     QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
@@ -73,15 +74,23 @@ void MainWindow::creerArticle(){
     creerNote("article");
 }
 
+void MainWindow::creerImage(){
+    creerNote("image");
+    qDebug()<<"coucou";
+    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("Images (*.jpg, *.png)"));
+    qDebug()<<path;
 
+
+}
 void MainWindow::creerNote(const QString& type){
     bool ok;
     QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
     if (ok){
+        qDebug()<<"type : "<<type;
         NotesManager* n = NotesManager::getInstance();
         n->creerNote(type, titre);
+        qDebug()<<"on est sorti";
         liste.append(titre);
-
         model->setStringList(liste);
     }
 

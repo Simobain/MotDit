@@ -7,6 +7,7 @@
 #include <sstream>
 #include "notesmanager.h"
 #include <QSettings>
+#include <QFileDialog>
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
     //QSettings descrip("BinomeLO21","ProjetPriseDeNote");
 
     //std::cout<<cheminAcces.toStdString()<<descrip.value("ok","non").toString().toStdString();
+
 
 
 

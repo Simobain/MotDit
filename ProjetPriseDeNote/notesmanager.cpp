@@ -6,6 +6,7 @@ NotesManager* NotesManager::instance=0;
 NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A modifier plus tard mais suffit pour le moment
 {
     factories["article"]=new ArticleFactory;
+    factories["image"]= new ImageFactory;
    /* factories["document"]= new DocumentFactory;
     factories["image"]= new ImageFactory;
     factories["video"]=new VideoFactory;
@@ -47,6 +48,7 @@ void NotesManager::creerNote(const QString& type_note, const QString& titre){
     NoteFactory* factory;
     factory=factories[type_note];
     Note* newNote=factory->buildNewNote(titre);
+    qDebug()<<"la note est crée";
     ensnotes<<newNote;
 
 }

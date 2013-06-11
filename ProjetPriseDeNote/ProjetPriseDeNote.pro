@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     textexport.cpp \
     latexexport.cpp \
     articlewidget.cpp \
-    documentwidget.cpp
+    documentwidget.cpp \
+    imagewidget.cpp
 
 HEADERS  += mainwindow.h \
     notesmanager.h \
@@ -60,8 +61,10 @@ HEADERS  += mainwindow.h \
     textexport.h \
     latexexport.h \
     articlewidget.h \
-    documentwidget.h
+    documentwidget.h \
+    imagewidget.h
 
 FORMS    += mainwindow.ui \
     articlewidget.ui \
-    documentwidget.ui
+    documentwidget.ui \
+    imagewidget.ui

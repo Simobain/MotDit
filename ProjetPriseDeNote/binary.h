@@ -12,7 +12,7 @@ class Binary : public Note //classe abstraite
 
 public:
     Binary();
-    Binary(const QString& i, const QString& t, const QString& c, const QString& d="");
+    Binary(const QString& i, const QString& t, const QString& c="", const QString& d="");
     QString getDescription() const {return description;}
     QString getChemin() const {return chemin;}
     void setDescription(const QString& d);

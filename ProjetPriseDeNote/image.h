@@ -9,6 +9,7 @@ class Image : public Binary
 
 public:
     Image();
+    Image(const QString& id, const QString& titre);
     NoteType getType() const;
 
 };

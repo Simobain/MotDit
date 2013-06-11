@@ -37,6 +37,7 @@ private:
 public slots :
 
     void creerArticle();
+    void creerImage();
     void itemClicked(const QModelIndex & index);
     void noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved);
     void noteChanged(const QString &titre);    
