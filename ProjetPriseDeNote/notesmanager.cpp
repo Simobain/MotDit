@@ -7,9 +7,9 @@ NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A mo
 {
     factories["article"]=new ArticleFactory;
     factories["image"]= new ImageFactory;
-   /* factories["document"]= new DocumentFactory;
-    factories["image"]= new ImageFactory;
     factories["video"]=new VideoFactory;
+   /* factories["document"]= new DocumentFactory;
+
     factories["audio"]=new AudioFactory;*/
     strategies["html"]=new HTMLexport;
     strategies["latex"]=new LaTexExport;

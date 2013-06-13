@@ -8,6 +8,7 @@ class Video : public Binary
     Video& operator=(const Video& v);
 public:
     Video();
+    Video(const QString& id, const QString& titre, const QString& path="", const QString& desc="");
     NoteType getType() const;
 };
 

@@ -6,7 +6,6 @@
 
 QT       += core gui
 CONFIG += console
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ProjetPriseDeNote
@@ -37,7 +36,8 @@ SOURCES += main.cpp\
     latexexport.cpp \
     articlewidget.cpp \
     documentwidget.cpp \
-    imagewidget.cpp
+    imagewidget.cpp \
+    videowidget.cpp
 
 HEADERS  += mainwindow.h \
     notesmanager.h \
@@ -62,9 +62,11 @@ HEADERS  += mainwindow.h \
     latexexport.h \
     articlewidget.h \
     documentwidget.h \
-    imagewidget.h
+    imagewidget.h \
+    videowidget.h
 
 FORMS    += mainwindow.ui \
     articlewidget.ui \
     documentwidget.ui \
-    imagewidget.ui
+    imagewidget.ui \
+    videowidget.ui

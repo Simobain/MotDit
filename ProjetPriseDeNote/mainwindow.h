@@ -6,6 +6,7 @@
 #include "notesmanager.h"
 #include "articlewidget.h"
 #include "imagewidget.h"
+#include "videowidget.h"
 #include <QStringListModel>
 
 
@@ -24,6 +25,7 @@ public:
     void creerNote(const QString& type, const QString &path="");
     void afficherArticle(Article* article);
     void afficherImage(Image* im);
+    void afficherVideo(Video* v);
 
 private:
     QWidget* last_widget;
@@ -47,6 +49,7 @@ public slots :
     void supprClicked();
     void ongletChange(int index);
     void changerEspaceTravail();
+    void creerVideo();
 
 };
 

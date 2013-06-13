@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     QObject :: connect(ui->actionImage, SIGNAL(triggered()), this, SLOT(creerImage()));
+    QObject :: connect(ui->actionVid_o, SIGNAL(triggered()), this, SLOT(creerVideo()));
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
     QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
     QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
@@ -77,19 +78,28 @@ void MainWindow::creerArticle(){
 
 void MainWindow::creerImage(){
 
-    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("Images (*.jpg, *.png)"));
+    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("*.jpg, *.png"));// j'ai enlevé le debut des filtres et maintenant ça remarche.
     creerNote("image", path);
+
+}
+
+void MainWindow::creerVideo(){
+
+    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("*.mp4, *.avi, *.mov"));
+    creerNote("video", path);
 
 }
 
 void MainWindow::creerNote(const QString& type, const QString& path){
     bool ok;
+    if(path!="" || type=="article" ){
     QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
     if (ok){
         NotesManager* n = NotesManager::getInstance();
         n->creerNote(type, titre, path);
         liste.append(titre);
         model->setStringList(liste);
+    }
     }
 
 }
@@ -130,6 +140,23 @@ void MainWindow::afficherImage(Image* im){
 
 }
 
+void MainWindow::afficherVideo(Video* v){
+    bool sauver=v->isSaved();
+    videowidget* vWidget= new videowidget(v);
+    if (last_widget!=0) {
+        ui->onglet_edit->layout()->removeWidget(last_widget) ;
+        delete last_widget;
+        last_widget=0;}
+    vWidget->setTitre(v->getTitre());
+    vWidget->setDesc(v->getDescription());
+    vWidget->setChemin(v->getChemin());
+    last_widget=vWidget;
+    ui->onglet_edit->layout()->addWidget(vWidget);
+    QObject::connect(vWidget, SIGNAL(videoDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
+    QObject::connect(vWidget, SIGNAL(videoTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
+    v->setSaved(sauver);
+
+}
 
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
     QStringList::Iterator it=liste.begin();
@@ -178,6 +205,9 @@ void MainWindow::itemClicked(const QModelIndex & index){
         break;
     case Note::IMAGE :
         afficherImage((Image*) note);
+        break;
+    case Note::VIDEO :
+        afficherVideo((Video*) note);
         break;
     default :
         QMessageBox::critical(this,"Erreur","ERREUR !!");
