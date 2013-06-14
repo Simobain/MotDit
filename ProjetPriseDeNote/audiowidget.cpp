@@ -15,7 +15,6 @@ audiowidget::audiowidget(Audio *a, QWidget *parent) :
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
     player = new QMediaPlayer;
-    //connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(playPause()));
 }
 
@@ -35,8 +34,6 @@ void audiowidget::setDesc(const QString& desc){
 void audiowidget::setMusique(const QString& chemin){
     player->setMedia(QUrl::fromLocalFile(chemin));
     player->setVolume(50);
-
-
 }
 
 void audiowidget::actuDesc(){

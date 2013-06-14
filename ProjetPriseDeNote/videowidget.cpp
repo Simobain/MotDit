@@ -2,15 +2,26 @@
 #include "ui_videowidget.h"
 
 videowidget::videowidget(Video* v, QWidget *parent) :
-    actu_video(v),
     QWidget(parent),
+    actu_video(v),
+    //enCoursdeLecture(false),
     ui(new Ui::videowidget)
 {
+
     QFont titreFont("Times", 14, QFont::Bold);
     QFont texteFont("Times", 10);
     ui->setupUi(this);
     ui->lineEdit->setFont(titreFont);
     ui->textEdit->setFont(texteFont);
+
+    //player = new QMediaPlayer;
+    //playlist = new QMediaPlaylist(player);
+    //film = new QVideoWidget(this);
+    //player->setVideoOutput(film);
+    //film->show();
+
+
+
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
@@ -29,8 +40,10 @@ void videowidget::setDesc(const QString& desc){
     ui->textEdit->setText(desc);
 }
 
-void videowidget::setChemin(const QString& chemin){
-    //trouver fonction pour afficher video sous Qt
+void videowidget::setVideo(const QString& chemin){
+    //playlist->addMedia(QUrl(chemin));
+    //playlist->setCurrentIndex(1);
+    //player->play();
     ui->label->setText(chemin);
 
 }

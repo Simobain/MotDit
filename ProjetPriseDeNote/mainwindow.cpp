@@ -157,7 +157,7 @@ void MainWindow::afficherVideo(Video* v){
         last_widget=0;}
     vWidget->setTitre(v->getTitre());
     vWidget->setDesc(v->getDescription());
-    vWidget->setChemin(v->getChemin());
+    vWidget->setVideo(v->getChemin());
     last_widget=vWidget;
     ui->onglet_edit->layout()->addWidget(vWidget);
     QObject::connect(vWidget, SIGNAL(videoDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;

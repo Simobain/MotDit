@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
-    <height>429</height>
+    <width>685</width>
+    <height>502</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QTabWidget" name="onglets">
     <property name="geometry">
      <rect>
-      <x>161</x>
-      <y>30</y>
-      <width>421</width>
-      <height>271</height>
+      <x>160</x>
+      <y>10</y>
+      <width>501</width>
+      <height>331</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -66,8 +66,8 @@
    <widget class="QPushButton" name="sauver">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>310</y>
+      <x>570</x>
+      <y>350</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -79,8 +79,8 @@
    <widget class="QPushButton" name="suppr">
     <property name="geometry">
      <rect>
-      <x>374</x>
-      <y>310</y>
+      <x>460</x>
+      <y>350</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -105,7 +105,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>603</width>
+     <width>685</width>
      <height>22</height>
     </rect>
    </property>

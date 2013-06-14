@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include "video.h"
-
+#include <QMediaPlayer>
+#include <QVideoWidget>
+#include <QMediaPlaylist>
 namespace Ui {
 class videowidget;
 }
@@ -17,10 +19,15 @@ public:
     ~videowidget();
     void setTitre(const QString& titre);
     void setDesc(const QString& desc);
-    void setChemin(const QString& chemin);
+    void setVideo(const QString& chemin);
 private:
     Ui::videowidget *ui;
     Video* actu_video;
+    //QMediaPlayer* player;
+    //QVideoWidget* film;
+    //QMediaPlaylist* playlist;
+    //bool enCoursdeLecture;
+
 
 
 signals:
