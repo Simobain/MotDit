@@ -12,7 +12,7 @@
 #include <QStringList>
 #include <QSettings>
 #include <QMessageBox>
-
+#include <QListView>
 
 
 
@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setMovement(QListView::Static);
     ui->listView->setFlow(QListView::TopToBottom);
     ui->listView->setViewMode(QListView::ListMode);
-    ui->listView->setSelectionMode(QListView::ExtendedSelection);
     model=new QStringListModel();
 
     ui->sauver->setEnabled(false);
@@ -68,6 +67,8 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     model->setStringList(liste);
     ui->listView->setModel(model);
+
+
 }
 
 
@@ -93,6 +94,7 @@ void MainWindow::creerVideo(){
     creerNote("video", path);
 
 }
+
 void MainWindow::creerAudio(){
 
     QString path=QFileDialog::getOpenFileName(this,tr("Choix de la source"), qApp->applicationDirPath());
@@ -268,7 +270,6 @@ void MainWindow::itemClicked(const QModelIndex & index){
     default :
         QMessageBox::critical(this,"Erreur","ERREUR PB DANS ITEM CLICKED");
     }
-
 }
 
 void MainWindow::sauverClicked(){
@@ -402,4 +403,38 @@ void MainWindow::changerEspaceTravail(){
 
 void MainWindow::ajoutSousNotes(){
 
+    listeAjout= new QListView();
+    listeAjout->setMovement(QListView::Static);
+    listeAjout->setFlow(QListView::TopToBottom);
+    listeAjout->setViewMode(QListView::ListMode);
+    listeTemp=liste;
+    listeTemp.removeOne(last_clicked.data().toString());
+    modelAjout= new QStringListModel;
+    modelAjout->setStringList(listeTemp);
+
+    listeAjout->setModel(modelAjout);
+
+    QObject::connect(listeAjout,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesSeleted(const QModelIndex&))) ;
+    listeAjout->show();
+
+}
+
+void MainWindow::sousNotesSeleted(const QModelIndex& index){
+
+    NotesManager* gestnote=NotesManager::getInstance();
+    QString titreDoc=last_clicked.data().toString();
+    if (titreDoc.endsWith("*")) titreDoc.remove("*");
+    Note* noteD=gestnote->getNoteFromTitre(titreDoc);
+
+    QString titreNote=index.data().toString();
+    if (titreNote.endsWith("*")) titreNote.remove("*");
+    Note* note=gestnote->getNoteFromTitre(titreNote);
+    Document* doc=(Document*) noteD;
+    doc->addSubNote(note);
+    listeAjout->close();
+    listeTemp.clear();
+    delete listeAjout;
+    delete modelAjout;
+    // dans le futur il faudra actualiser l'affichage du doc
+    //afficherDocument(doc);
 }

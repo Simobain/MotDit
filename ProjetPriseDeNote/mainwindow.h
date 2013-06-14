@@ -9,6 +9,7 @@
 #include "videowidget.h"
 #include "audiowidget.h"
 #include "documentwidget.h"
+#include "document.h"
 #include <QStringListModel>
 
 
@@ -36,7 +37,11 @@ private:
     QModelIndex last_clicked;
     Ui::MainWindow *ui;
     QStringList liste;
+    QStringList listeTemp;
     QStringListModel* model;
+    QStringListModel* modelAjout;
+    QListView* listeAjout;
+
     void replaceInListe(const QString& oldName,const QString& newName);
     void ongletTexteClicked();
     void ongletHtmlClicked();
@@ -57,6 +62,7 @@ public slots :
     void ongletChange(int index);
     void changerEspaceTravail();
     void ajoutSousNotes();
+    void sousNotesSeleted(const QModelIndex &index);
 
 
 };
