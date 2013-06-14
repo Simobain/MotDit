@@ -1,8 +1,9 @@
 #include "documentwidget.h"
 #include "ui_documentwidget.h"
 
-DocumentWidget::DocumentWidget(QWidget *parent) :
+DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     QWidget(parent),
+    actu_document(d),
     ui(new Ui::DocumentWidget)
 {
     ui->setupUi(this);
@@ -12,6 +13,7 @@ DocumentWidget::DocumentWidget(QWidget *parent) :
     QVBoxLayout* layout = new QVBoxLayout();
     ui->frame->setLayout(layout);
     QObject :: connect(ui->deleteNote, SIGNAL(clicked()), this, SLOT(choisirNote()));
+    QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 }
 
 DocumentWidget::~DocumentWidget()
@@ -23,3 +25,19 @@ void DocumentWidget::choisirNote()
 {
     listeSupp->show();
 }
+
+void DocumentWidget::setTitre(const QString& titre){
+    ui->lineEdit->setText(titre);
+}
+
+void DocumentWidget::actuTitre(){
+    QString ancienTitre = actu_document->getTitre();
+    actu_document->setTitre(ui->lineEdit->text());
+    if (actu_document->isSaved()){
+        actu_document->setSaved(false);
+        emit documentTitreChanged(actu_document->getTitre(), ancienTitre, true );
+    }
+    else emit documentTitreChanged(actu_document->getTitre(), ancienTitre, false );
+
+}
+

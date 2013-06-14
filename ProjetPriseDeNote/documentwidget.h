@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QListWidget>
+#include "document.h"
 
 namespace Ui {
 class DocumentWidget;
@@ -13,15 +14,21 @@ class DocumentWidget : public QWidget
     Q_OBJECT
     
 public:
-    explicit DocumentWidget(QWidget *parent = 0);
+    explicit DocumentWidget(Document* d ,QWidget *parent = 0);
     ~DocumentWidget();
+    void setTitre(const QString& titre);
     
 private:
     Ui::DocumentWidget *ui;
     QListWidget* listeSupp;
-    QFrame* frame;
+    Document* actu_document;
 public slots:
     void choisirNote();
+    void actuTitre();
+
+
+signals:
+    void documentTitreChanged(const QString&,const QString&, bool);
 
 };
 
