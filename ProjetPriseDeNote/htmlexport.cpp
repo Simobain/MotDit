@@ -39,6 +39,14 @@ QString HTMLexport::exportNote(Article* a , unsigned int titreLvl)
     return texte;
 
 }
-QString HTMLexport::exportNote(Video* v , unsigned int titreLvl){return"";}
-QString HTMLexport::exportNote(Audio* a , unsigned int titreLvl){return"";}
+QString HTMLexport::exportNote(Video* v , unsigned int titreLvl)
+{
+   // QString s= "<video width=\"400\" height=\"222\" controls=\"controls\"><source src="+v->getChemin()+" type=\"video/mp4\" /><source src="+v->getChemin()+" type=\"video/mov\" />Ici</video>";
+            return "";
+}
+QString HTMLexport::exportNote(Audio* a , unsigned int titreLvl)
+{
+    QString texte="<h"+QString::number(titreLvl)+">"+a->getTitre()+"</h"+QString::number(titreLvl)+">\n<audio controls><source src="+a->getChemin()+"></source><source src="+a->getChemin()+"></source></audio><p>"+a->getDescription()+"</p>";
+    return texte;
+}
 QString HTMLexport::exportNote(Image* i , unsigned int titreLvl){return"";}

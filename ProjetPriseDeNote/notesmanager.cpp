@@ -129,6 +129,12 @@ QString NotesManager::exportNote(Note* n, QString typeExport){
     switch(n->getType()){
     case Note::ARTICLE :
         texte+=strategy->exportNote((Article*) n,1);
+    case Note::VIDEO :
+        texte+=strategy->exportNote((Video*) n,1);
+    case Note::IMAGE :
+        texte+=strategy->exportNote((Image*) n,1);
+    case Note::AUDIO :
+        texte+=strategy->exportNote((Audio*) n,1);
 
         break;
     default :

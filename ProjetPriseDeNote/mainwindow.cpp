@@ -80,20 +80,20 @@ void MainWindow::creerArticle(){
 
 void MainWindow::creerImage(){
 
-    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("*.jpg, *.png"));// j'ai enlevé le debut des filtres et maintenant ça remarche.
+    QString path=QFileDialog::getOpenFileName(this,tr("Choix de l'image"), qApp->applicationDirPath(), tr("*.jpg, *.png"));// j'ai enlevé le debut des filtres et maintenant ça remarche.
     creerNote("image", path);
 
 }
 
 void MainWindow::creerVideo(){
 
-    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("*.mp4, *.avi, *.mov"));
+    QString path=QFileDialog::getOpenFileName(this,tr("Choix de la video"), qApp->applicationDirPath(), tr("*.mp4, *.avi, *.mov"));
     creerNote("video", path);
 
 }
 void MainWindow::creerAudio(){
 
-    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath());
+    QString path=QFileDialog::getOpenFileName(this,tr("Choix de la source"), qApp->applicationDirPath());
     creerNote("audio", path);
 
 }
