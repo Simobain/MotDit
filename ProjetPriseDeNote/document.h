@@ -16,13 +16,11 @@ public:
     //QString ExportAsPart(ExportStrategy *es, unsigned int titlelevel);
     void addSubNote(Note *n);
     void addSubNote(Note *n, QString id);
-    void removeSubNote(QString id);
-
-    Note* getSubNote(QString id);
+    void removeSubNote(Note *n);
+    QSet<Note *> getSousNotes() const;
+    //Note* getSubNote(QString id);
     NoteType getType() const;
-    QSet<Note*> getSousNotes()const {return sousNotes;}
-
-
+    void save(const QString &directory);
 
 };
 

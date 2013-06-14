@@ -35,9 +35,6 @@ public :
     virtual NoteType getType()const=0;
     bool isSaved(){return saved;}
     void setSaved(bool ok){saved=ok;}
-    void addSubNote(Note* n);
-    void removeSubNote(QString i);
-    Note* getSubNote(QString id);
     virtual void save(const QString& directory)=0;
     //virtual void load(const QString& path)=0;
 
