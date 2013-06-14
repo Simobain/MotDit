@@ -10,8 +10,6 @@ QString VideoFactory::getNewId()
 }
 
 
-
-
 Note* VideoFactory::buildNote(const QString& id, const QString& titre, const QString &path, const QString &desc){
     Video* v=new Video(id, titre,path, desc);
     return v;
@@ -30,7 +28,6 @@ Note* VideoFactory::chargerNote(const QString& id, const QString& chemin){
     QString desc;
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-
         QTextStream flux(&fichier);
         QString titre(flux.readLine());
         QString path(flux.readLine());
@@ -43,6 +40,5 @@ Note* VideoFactory::chargerNote(const QString& id, const QString& chemin){
     else {
         qDebug()<<"note pas charger";
         return 0;}
-    return 0;
 
 }

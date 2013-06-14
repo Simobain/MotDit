@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     articlewidget.cpp \
     documentwidget.cpp \
     imagewidget.cpp \
-    videowidget.cpp
+    videowidget.cpp \
+    audiowidget.cpp
 
 HEADERS  += mainwindow.h \
     notesmanager.h \
@@ -63,10 +64,12 @@ HEADERS  += mainwindow.h \
     articlewidget.h \
     documentwidget.h \
     imagewidget.h \
-    videowidget.h
+    videowidget.h \
+    audiowidget.h
 
 FORMS    += mainwindow.ui \
     articlewidget.ui \
     documentwidget.ui \
     imagewidget.ui \
-    videowidget.ui
+    videowidget.ui \
+    audiowidget.ui

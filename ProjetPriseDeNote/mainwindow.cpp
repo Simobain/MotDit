@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     QObject :: connect(ui->actionImage, SIGNAL(triggered()), this, SLOT(creerImage()));
     QObject :: connect(ui->actionVid_o, SIGNAL(triggered()), this, SLOT(creerVideo()));
+    QObject :: connect(ui->actionAudio, SIGNAL(triggered()), this, SLOT(creerAudio()));
+
     //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
     QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
     QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
@@ -89,17 +91,23 @@ void MainWindow::creerVideo(){
     creerNote("video", path);
 
 }
+void MainWindow::creerAudio(){
+
+    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("*.mp3, *.wav"));
+    creerNote("audio", path);
+
+}
 
 void MainWindow::creerNote(const QString& type, const QString& path){
     bool ok;
     if(path!="" || type=="article" ){
-    QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
-    if (ok){
-        NotesManager* n = NotesManager::getInstance();
-        n->creerNote(type, titre, path);
-        liste.append(titre);
-        model->setStringList(liste);
-    }
+        QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
+        if (ok){
+            NotesManager* n = NotesManager::getInstance();
+            n->creerNote(type, titre, path);
+            liste.append(titre);
+            model->setStringList(liste);
+        }
     }
 
 }
@@ -158,6 +166,24 @@ void MainWindow::afficherVideo(Video* v){
 
 }
 
+void MainWindow::afficherAudio(Audio* a){
+    bool sauver=a->isSaved();
+    audiowidget* aWidget= new audiowidget(a);
+    if (last_widget!=0) {
+        ui->onglet_edit->layout()->removeWidget(last_widget) ;
+        delete last_widget;
+        last_widget=0;}
+    aWidget->setTitre(a->getTitre());
+    aWidget->setDesc(a->getDescription());
+    aWidget->setChemin(a->getChemin());
+    last_widget=aWidget;
+    ui->onglet_edit->layout()->addWidget(aWidget);
+    QObject::connect(aWidget, SIGNAL(audioDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
+    QObject::connect(aWidget, SIGNAL(audioTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
+    a->setSaved(sauver);
+
+}
+
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
     QStringList::Iterator it=liste.begin();
 
@@ -208,6 +234,8 @@ void MainWindow::itemClicked(const QModelIndex & index){
         break;
     case Note::VIDEO :
         afficherVideo((Video*) note);
+    case Note::AUDIO :
+        afficherAudio((Audio*) note);
         break;
     default :
         QMessageBox::critical(this,"Erreur","ERREUR !!");

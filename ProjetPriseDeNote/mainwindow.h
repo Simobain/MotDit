@@ -7,6 +7,7 @@
 #include "articlewidget.h"
 #include "imagewidget.h"
 #include "videowidget.h"
+#include "audiowidget.h"
 #include <QStringListModel>
 
 
@@ -26,6 +27,7 @@ public:
     void afficherArticle(Article* article);
     void afficherImage(Image* im);
     void afficherVideo(Video* v);
+    void afficherAudio(Audio* a);
 
 private:
     QWidget* last_widget;
@@ -42,6 +44,8 @@ public slots :
 
     void creerArticle();
     void creerImage();
+    void creerVideo();
+    void creerAudio();
     void itemClicked(const QModelIndex & index);
     void noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved);
     void noteChanged(const QString &titre);    
@@ -49,7 +53,7 @@ public slots :
     void supprClicked();
     void ongletChange(int index);
     void changerEspaceTravail();
-    void creerVideo();
+
 
 };
 
