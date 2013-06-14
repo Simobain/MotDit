@@ -12,7 +12,7 @@ class Document : public Note
     void load();
 
 public:
-    Document();
+    Document(const QString& id,const QString& titre);
     //QString ExportAsPart(ExportStrategy *es, unsigned int titlelevel);
     void addSubNote(Note *n);
     void addSubNote(Note *n, QString id);
@@ -21,7 +21,6 @@ public:
     //Note* getSubNote(QString id);
     NoteType getType() const;
     void save(const QString &directory);
-
 };
 
 #endif // DOCUMENT_H

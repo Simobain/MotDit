@@ -27,8 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->actionImage, SIGNAL(triggered()), this, SLOT(creerImage()));
     QObject :: connect(ui->actionVid_o, SIGNAL(triggered()), this, SLOT(creerVideo()));
     QObject :: connect(ui->actionAudio, SIGNAL(triggered()), this, SLOT(creerAudio()));
+    QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
 
-    //QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
     QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
     QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
     //To Do trouver solution pour que quand on clique sur bouton et pas de changement.
@@ -95,12 +95,15 @@ void MainWindow::creerAudio(){
 
     QString path=QFileDialog::getOpenFileName(this,tr("Choix de la source"), qApp->applicationDirPath());
     creerNote("audio", path);
+}
 
+void MainWindow::creerDocument(){
+    creerNote("document");
 }
 
 void MainWindow::creerNote(const QString& type, const QString& path){
     bool ok;
-    if(path!="" || type=="article" ){
+    if(path!="" || type=="article" || type=="document"){
         QString titre = QInputDialog::getText(this, tr("Choix du titre"),tr("Saisissez le titre :"), QLineEdit::Normal,"", &ok);
         if (ok){
             NotesManager* n = NotesManager::getInstance();

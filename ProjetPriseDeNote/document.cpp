@@ -1,8 +1,10 @@
 #include "document.h"
 
-Document::Document() : Note()
+Document::Document(const QString& id,const QString& titre) : Note(id,titre)
 {
+
 }
+
 
 Note::NoteType Document::getType()const {
     return DOCUMENT;

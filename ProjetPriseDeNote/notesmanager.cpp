@@ -160,3 +160,13 @@ QString NotesManager::exportNoteAsPart(Note* n, QString typeExport){
 
     return texte;
 }
+
+Note * NotesManager::getNoteFromId(const QString& id){
+    QSet<Note*>::iterator it= ensnotes.begin();
+    while ((*it)->getId() !=id && it!=ensnotes.end()){
+        it++;
+    }
+    if ((*it)->getId()==id)
+    return (*it);
+    else {qDebug()<<"l'article n'est pas dans la liste !"; return 0;};
+}

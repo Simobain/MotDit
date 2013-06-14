@@ -46,6 +46,7 @@ public slots :
     void creerImage();
     void creerVideo();
     void creerAudio();
+    void creerDocument();
     void itemClicked(const QModelIndex & index);
     void noteTitreChanged(const QString &newTitre, const QString& oldTitre, bool saved);
     void noteChanged(const QString &titre);    

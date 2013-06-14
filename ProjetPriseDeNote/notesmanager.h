@@ -47,6 +47,7 @@ public:
     const QSet<Note *>& getEnsnote()const;
     QString exportNote(Note* n, QString typeExport);
     QString exportNoteAsPart(Note* n, QString typeExport);
+    Note * getNoteFromId(const QString& id);
 
 };
 
