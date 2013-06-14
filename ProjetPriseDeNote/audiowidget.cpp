@@ -4,6 +4,7 @@
 audiowidget::audiowidget(Audio *a, QWidget *parent) :
     actu_audio(a),
     QWidget(parent),
+    enCoursdeLecture(false),
     ui(new Ui::audiowidget)
 {
     QFont titreFont("Times", 14, QFont::Bold);
@@ -13,8 +14,9 @@ audiowidget::audiowidget(Audio *a, QWidget *parent) :
     ui->textEdit->setFont(texteFont);
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
-
-
+    player = new QMediaPlayer;
+    //connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
+    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(playPause()));
 }
 
 audiowidget::~audiowidget()
@@ -30,9 +32,10 @@ void audiowidget::setDesc(const QString& desc){
     ui->textEdit->setText(desc);
 }
 
-void audiowidget::setChemin(const QString& chemin){
-    //trouver fonction pour afficher son sous Qt
-    ui->label->setText(chemin);
+void audiowidget::setMusique(const QString& chemin){
+    player->setMedia(QUrl::fromLocalFile(chemin));
+    player->setVolume(50);
+
 
 }
 
@@ -53,4 +56,14 @@ void audiowidget::actuTitre(){
     }
     else emit audioTitreChanged(actu_audio->getTitre(), ancienTitre, false );
 
+}
+
+void audiowidget::playPause()
+{
+    if(enCoursdeLecture) {
+        player->pause();
+        enCoursdeLecture=false;}
+    else {
+        player->play();
+        enCoursdeLecture=true;}
 }

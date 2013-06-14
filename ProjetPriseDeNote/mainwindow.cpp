@@ -93,7 +93,7 @@ void MainWindow::creerVideo(){
 }
 void MainWindow::creerAudio(){
 
-    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath(), tr("*.mp3, *.wav"));
+    QString path=QFileDialog::getOpenFileName(this,tr("choix de la source"), qApp->applicationDirPath());
     creerNote("audio", path);
 
 }
@@ -175,7 +175,7 @@ void MainWindow::afficherAudio(Audio* a){
         last_widget=0;}
     aWidget->setTitre(a->getTitre());
     aWidget->setDesc(a->getDescription());
-    aWidget->setChemin(a->getChemin());
+    aWidget->setMusique(a->getChemin());
     last_widget=aWidget;
     ui->onglet_edit->layout()->addWidget(aWidget);
     QObject::connect(aWidget, SIGNAL(audioDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;

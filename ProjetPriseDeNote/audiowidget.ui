@@ -27,9 +27,9 @@
      <widget class="QLineEdit" name="lineEdit"/>
     </item>
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QPushButton" name="pushButton">
       <property name="text">
-       <string>TextLabel</string>
+       <string>Play/Pause</string>
       </property>
      </widget>
     </item>
