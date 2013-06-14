@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->onglets, SIGNAL(currentChanged(int)), this, SLOT(ongletChange(int)));
     QObject :: connect(ui->actionDefinir_un_nouvel_espace_de_travail, SIGNAL(triggered()), this, SLOT(changerEspaceTravail()));
 
+    QObject :: connect(ui->ajout, SIGNAL(clicked()), this, SLOT(ajoutSousNotes()));
 
     ui->onglets->setTabText(0, "Edit");
     ui->onglets->setTabText(1, "HTML");
@@ -53,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
     model=new QStringListModel();
 
     ui->sauver->setEnabled(false);
+    ui->ajout->setHidden(true);
 
     // On ajoute les notes a la liste pour pouvoir les afficher dans la listview
 
@@ -187,6 +189,21 @@ void MainWindow::afficherAudio(Audio* a){
 
 }
 
+void MainWindow::afficherDocument(Document* d){
+    bool sauver=d->isSaved();
+    DocumentWidget* docWidget= new DocumentWidget(d);
+    if (last_widget!=0) {
+        ui->onglet_edit->layout()->removeWidget(last_widget) ;
+        delete last_widget;
+        last_widget=0;}
+    docWidget->setTitre(d->getTitre());
+    last_widget=docWidget;
+    ui->onglet_edit->layout()->addWidget(docWidget);
+    QObject::connect(docWidget, SIGNAL(documentTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
+    d->setSaved(sauver);
+
+}
+
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
     QStringList::Iterator it=liste.begin();
 
@@ -230,18 +247,26 @@ void MainWindow::itemClicked(const QModelIndex & index){
 
     switch(note->getType()){
     case Note::ARTICLE :
+        ui->ajout->setHidden(true);
         afficherArticle((Article*) note);
         break;
     case Note::IMAGE :
+        ui->ajout->setHidden(true);
         afficherImage((Image*) note);
         break;
     case Note::VIDEO :
+        ui->ajout->setHidden(true);
         afficherVideo((Video*) note);
     case Note::AUDIO :
+            ui->ajout->setHidden(true);
         afficherAudio((Audio*) note);
         break;
+    case Note::DOCUMENT :
+        afficherDocument((Document*) note);
+        ui->ajout->setHidden(false);
+        break;
     default :
-        QMessageBox::critical(this,"Erreur","ERREUR !!");
+        QMessageBox::critical(this,"Erreur","ERREUR PB DANS ITEM CLICKED");
     }
 
 }
@@ -311,7 +336,7 @@ void MainWindow::ongletChange(int index){
         ongletTexteClicked();
         break;
     default:
-        qDebug()<<"pb !!!";
+        QMessageBox::critical(this,"Erreur","Aucune onglet selectionée");
         break;
     }
 }
@@ -356,7 +381,6 @@ void MainWindow::ongletTexClicked(){
 
 void MainWindow::changerEspaceTravail(){
     QString espace  = QFileDialog::getExistingDirectory(this, tr("Open Directory"),qApp->applicationDirPath(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks); // Renvoie une erreur mais espace possède la bonne valeur
-    //qDebug()<<espace;
     NotesManager* gestnote=NotesManager::getInstance();
      gestnote->setEspaceDeTravail(espace);
 
@@ -374,4 +398,8 @@ void MainWindow::changerEspaceTravail(){
      ui->onglet_edit->layout()->removeWidget(last_widget);
      delete last_widget;
      last_widget=0;
+}
+
+void MainWindow::ajoutSousNotes(){
+
 }

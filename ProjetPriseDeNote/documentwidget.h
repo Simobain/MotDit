@@ -2,8 +2,15 @@
 #define DOCUMENTWIDGET_H
 
 #include <QWidget>
+#include <QStringList>
 #include <QListWidget>
 #include "document.h"
+#include "articlewidget.h"
+#include "imagewidget.h"
+#include "videowidget.h"
+#include "audiowidget.h"
+#include "documentwidget.h"
+#include <QMessageBox>
 
 namespace Ui {
 class DocumentWidget;
@@ -20,8 +27,10 @@ public:
     
 private:
     Ui::DocumentWidget *ui;
+    QStringList listeNote;
     QListWidget* listeSupp;
     Document* actu_document;
+    void afficherSousNotes();
 public slots:
     void choisirNote();
     void actuTitre();

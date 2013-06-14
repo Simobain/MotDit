@@ -8,6 +8,7 @@
 #include "imagewidget.h"
 #include "videowidget.h"
 #include "audiowidget.h"
+#include "documentwidget.h"
 #include <QStringListModel>
 
 
@@ -28,6 +29,7 @@ public:
     void afficherImage(Image* im);
     void afficherVideo(Video* v);
     void afficherAudio(Audio* a);
+    void afficherDocument(Document* d);
 
 private:
     QWidget* last_widget;
@@ -54,6 +56,7 @@ public slots :
     void supprClicked();
     void ongletChange(int index);
     void changerEspaceTravail();
+    void ajoutSousNotes();
 
 
 };

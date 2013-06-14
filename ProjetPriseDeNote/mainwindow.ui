@@ -99,6 +99,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="ajout">
+    <property name="geometry">
+     <rect>
+      <x>294</x>
+      <y>350</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ajouter une sous notes</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -106,7 +119,7 @@
      <x>0</x>
      <y>0</y>
      <width>685</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
