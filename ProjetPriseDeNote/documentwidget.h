@@ -2,6 +2,7 @@
 #define DOCUMENTWIDGET_H
 
 #include <QWidget>
+#include <QListWidget>
 
 namespace Ui {
 class DocumentWidget;
@@ -17,6 +18,11 @@ public:
     
 private:
     Ui::DocumentWidget *ui;
+    QListWidget* listeSupp;
+    QFrame* frame;
+public slots:
+    void choisirNote();
+
 };
 
 #endif // DOCUMENTWIDGET_H
