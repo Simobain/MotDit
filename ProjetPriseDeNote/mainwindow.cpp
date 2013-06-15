@@ -13,6 +13,7 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QListView>
+#include <QIcon>
 
 
 
@@ -56,6 +57,12 @@ MainWindow::MainWindow(QWidget *parent) :
     model=new QStringListModel();
 
     ui->sauver->setEnabled(false);
+    ui->sauver->setIcon(QIcon("disquette.png"));
+    ui->sauver->setIconSize(QSize(15,15));
+    ui->suppr->setIcon(QIcon("poubelle.png"));
+    ui->suppr->setIconSize(QSize(20,20));
+
+
     ui->ajout->setHidden(true);
 
     // On ajoute les notes a la liste pour pouvoir les afficher dans la listview
@@ -329,7 +336,7 @@ void MainWindow::supprClicked(){
 void MainWindow::ongletChange(int index){
     switch (index) {
     case 0:
-
+        itemClicked(last_clicked);
         break;
     case 1:
         ongletHtmlClicked();
@@ -359,20 +366,14 @@ void MainWindow::ongletTexteClicked(){
 }
 
 void MainWindow::ongletHtmlClicked(){
-    qDebug()<<"entrer dans onglethtml";
     NotesManager* gestnote=NotesManager::getInstance();
 
     if (last_clicked.data().toString()!=""){
-        qDebug()<<"entrer dans le if";
         QString titre=last_clicked.data().toString();
-        qDebug()<<"note : "<<last_clicked.data().toString();
         if (titre.endsWith("*")) titre.remove("*");
         Note* note=gestnote->getNoteFromTitre(titre);
-        qDebug()<<"avant exportNote";
         QString texte=gestnote->exportNote(note, "html");
-        qDebug()<<"apres exportNote";
         ui->textEdit_2->setText(texte);
-        qDebug()<<ui->textEdit_2->toPlainText(); // il faut empecher le text edit d'intrepreter l'html
     }
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 
@@ -446,10 +447,15 @@ void MainWindow::saveExportHtml(){
 
     QString path=QFileDialog::getExistingDirectory(this, tr("Enregistrer vers "),qApp->applicationDirPath(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
     QFile fichier (path+"/"+last_clicked.data().toString()+".html");
+    QString titre=last_clicked.data().toString();
+    if (titre.endsWith("*")) titre.chop(1);
+    NotesManager* gestnote=NotesManager::getInstance();
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note,"html");
     if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
     {
         QTextStream flux(&fichier);
-        flux<<ui->textEdit_2->toPlainText();
+        flux<<texte;
         fichier.close();
     }
     else QMessageBox::critical(this,"Erreur","Le chemin choisis est inaccessible ");
