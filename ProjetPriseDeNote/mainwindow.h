@@ -42,7 +42,7 @@ private:
     QStringListModel* modelAjout;
     QListView* listeAjout;
 
-    void replaceInListe(const QString& oldName,const QString& newName);
+    void replaceInListe(const QString& oldName,const QString &newName);
     void ongletTexteClicked();
     void ongletHtmlClicked();
     void ongletTexClicked();
