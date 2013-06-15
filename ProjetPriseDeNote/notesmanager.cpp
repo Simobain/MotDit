@@ -15,8 +15,6 @@ NotesManager::NotesManager() : EspaceDeTravail(qApp->applicationDirPath())//A mo
     strategies["latex"]=new LaTexExport;
     strategies["texte"]=new TextExport;
     chargerNotes();
-
-
 }
 
 
@@ -69,6 +67,7 @@ void NotesManager::setEspaceDeTravail(const QString& e)
 }
 
 void NotesManager::chargerNotes(){
+
     QString cheminEntier=EspaceDeTravail+"/"+"fileDescript.txt";
     QFile fichier (cheminEntier);
     if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -81,7 +80,8 @@ void NotesManager::chargerNotes(){
         while(!flux.atEnd()){
             texte = flux.readLine();
             QStringList typID= texte.split(delimiter);
-            factory=factories[typID[0]];
+            QString type= typID[0];
+            factory=factories[type];
             Note* newNote=factory->chargerNote(texte, EspaceDeTravail);
             ensnotes<<newNote;
         }

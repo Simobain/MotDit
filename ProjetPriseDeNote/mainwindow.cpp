@@ -276,13 +276,15 @@ void MainWindow::sauverClicked(){
         if (titre.endsWith("*")) titre.remove("*");// si la note est modifié et non enregistrée elle possède une étoile dans la liste
         Note* note=gestnote->getNoteFromTitre(titre);
         note->save(gestnote->getEspaceDeTravail());
+        qDebug()<<"sauverClecked après save";
         replaceInListe(titre+"*", titre); // On enlève l'étoile pour indiquer que la note est sauvée
+        qDebug()<<"1";
         ui->sauver->setEnabled(false);
         QMessageBox::information(this,"Sauvegarde","Sauvegarde effectuée");
-
     }
     else  QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 
+    qDebug()<<"sortie de sauverClecked";
  }
 
 void MainWindow::supprClicked(){
@@ -403,8 +405,6 @@ void MainWindow::ajoutSousNotes(){
     modelAjout->setStringList(listeTemp);   
     listeAjout->show();
 
-    ui->sauver->setEnabled(true);
-
 }
 
 void MainWindow::sousNotesSeleted(const QModelIndex& index){
@@ -423,5 +423,6 @@ void MainWindow::sousNotesSeleted(const QModelIndex& index){
     listeAjout->close();
     listeTemp.clear();
 
+    noteChanged(doc->getTitre());
     afficherDocument(doc);
 }
