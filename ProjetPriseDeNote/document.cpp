@@ -1,6 +1,6 @@
 #include "document.h"
 
-Document::Document(const QString& id,const QString& titre) : Note(id,titre)
+Document::Document(const QString& id,const QString& titre) : Note(id,titre), loaded(false)
 {
 
 }

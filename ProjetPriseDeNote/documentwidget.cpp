@@ -17,7 +17,7 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
     setTitre(d->getTitre());
-    chargerSousNotes();
+    if(!d->getLoaded()) chargerSousNotes();
     afficherSousNotes();
 
 }
@@ -60,6 +60,7 @@ void DocumentWidget::chargerSousNotes(){
      else {
          qDebug()<<"note pas de sous notes";
          }
+    actu_document->setLoaded(true);
 }
 
 void DocumentWidget::afficherSousNotes(){

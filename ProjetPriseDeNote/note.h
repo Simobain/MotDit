@@ -14,7 +14,6 @@ class Note { //classe abstraite
 protected :
     QString titre;            
     bool modified;
-    bool loaded;
     bool saved;
     bool inTheFile;
 

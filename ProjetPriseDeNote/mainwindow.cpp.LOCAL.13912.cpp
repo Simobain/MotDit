@@ -13,7 +13,6 @@
 #include <QSettings>
 #include <QMessageBox>
 #include <QListView>
-#include <QIcon>
 
 
 
@@ -38,9 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
     QObject :: connect(ui->suppr, SIGNAL(clicked()), this, SLOT(supprClicked()));
     QObject :: connect(ui->onglets, SIGNAL(currentChanged(int)), this, SLOT(ongletChange(int)));
-    QObject :: connect(ui->exphtml, SIGNAL(clicked()), this, SLOT(saveExportHtml()));
-    QObject :: connect(ui->explatex, SIGNAL(clicked()), this, SLOT(saveExportLatex()));
-    QObject :: connect(ui->exptxt, SIGNAL(clicked()), this, SLOT(saveExportText()));
 
 
     QObject :: connect(ui->ajout, SIGNAL(clicked()), this, SLOT(ajoutSousNotes()));
@@ -58,12 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
     model=new QStringListModel();
 
     ui->sauver->setEnabled(false);
-    ui->sauver->setIcon(QIcon("disquette.png"));
-    ui->sauver->setIconSize(QSize(15,15));
-    ui->suppr->setIcon(QIcon("poubelle.png"));
-    ui->suppr->setIconSize(QSize(20,20));
-
-
     ui->ajout->setHidden(true);
     ui->suppSous->setHidden(true);
 
@@ -351,7 +341,7 @@ void MainWindow::supprClicked(){
 void MainWindow::ongletChange(int index){
     switch (index) {
     case 0:
-        itemClicked(last_clicked);
+
         break;
     case 1:
         ongletHtmlClicked();
@@ -372,23 +362,24 @@ void MainWindow::ongletTexteClicked(){
 
     NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
-        QString titre=last_clicked.data().toString();
-        while (titre.endsWith("*")) titre.chop(1);
-        Note* note=gestnote->getNoteFromTitre(titre);
-        QString texte=gestnote->exportNote(note, "texte");
-        ui->textEdit->setText(texte);}
+    QString titre=last_clicked.data().toString();
+    while (titre.endsWith("*")) titre.chop(1);
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note, "texte");
+    ui->textEdit->setText(texte);}
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 }
 
 void MainWindow::ongletHtmlClicked(){
-    NotesManager* gestnote=NotesManager::getInstance();
 
+    NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
-        QString titre=last_clicked.data().toString();
-        while (titre.endsWith("*")) titre.chop(1);
-        Note* note=gestnote->getNoteFromTitre(titre);
-        QString texte=gestnote->exportNote(note, "html");
-        ui->textEdit_2->setText(texte);
+    QString titre=last_clicked.data().toString();
+    while (titre.endsWith("*")) titre.chop(1);
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note, "html");
+    ui->textEdit_2->setText(texte);
+    qDebug()<<ui->textEdit_2->toPlainText(); // il faut empecher le text edit d'intrepreter l'html
     }
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 }
@@ -396,11 +387,11 @@ void MainWindow::ongletHtmlClicked(){
 void MainWindow::ongletTexClicked(){
     NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
-        QString titre=last_clicked.data().toString();
-        while (titre.endsWith("*")) titre.chop(1);
-        Note* note=gestnote->getNoteFromTitre(titre);
-        QString texte=gestnote->exportNote(note, "latex");
-        ui->textEdit_3->setText(texte);
+    QString titre=last_clicked.data().toString();
+    while (titre.endsWith("*")) titre.chop(1);
+    Note* note=gestnote->getNoteFromTitre(titre);
+    QString texte=gestnote->exportNote(note, "latex");
+    ui->textEdit_3->setText(texte);
     }
     else QMessageBox::critical(this,"Erreur","Aucune note selectionée");
 }
@@ -478,69 +469,19 @@ void MainWindow::suppSousNotes()
 
 void MainWindow::sousNotesASuppSelected(const QModelIndex& index)
 {
-    qDebug()<<"entrée dans le sousNotesASuppSelected";
     NotesManager* gestnote=NotesManager::getInstance();
     QString titreDoc=last_clicked.data().toString();
     while (titreDoc.endsWith("*")) titreDoc.chop(1);
     Note* noteD=gestnote->getNoteFromTitre(titreDoc);
 
     QString titreNote=index.data().toString();
-    qDebug()<<titreNote;
     while (titreNote.endsWith("*")) titreNote.chop(1);
     Note* note=gestnote->getNoteFromTitre(titreNote);
-    qDebug()<<note->getTitre();
-    qDebug()<<listeDesSousNotes.last();
 
     Document* doc=(Document*) noteD;
     doc->removeSubNote(note);
     listeSupp->close();
     afficherDocument(doc);
 
-}
 
-void MainWindow::saveExportHtml(){
-
-    QString path=QFileDialog::getExistingDirectory(this, tr("Enregistrer vers "),qApp->applicationDirPath(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
-    QFile fichier (path+"/"+last_clicked.data().toString()+".html");
-    QString titre=last_clicked.data().toString();
-    if (titre.endsWith("*")) titre.chop(1);
-    NotesManager* gestnote=NotesManager::getInstance();
-    Note* note=gestnote->getNoteFromTitre(titre);
-    QString texte=gestnote->exportNote(note,"html");
-    if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
-    {
-        QTextStream flux(&fichier);
-        flux<<texte;
-        fichier.close();
-    }
-    else QMessageBox::critical(this,"Erreur","Le chemin choisis est inaccessible ");
-}
-
-void MainWindow::saveExportLatex(){
-
-    QString path=QFileDialog::getExistingDirectory(this, tr("Enregistrer vers "),qApp->applicationDirPath(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
-    QFile fichier (path+"/"+last_clicked.data().toString()+".tex");
-    if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
-    {
-        QTextStream flux(&fichier);
-        flux<<ui->textEdit_3->toPlainText();
-        fichier.close();
-        QMessageBox::information(this,"Export","La note a été exportée en .TeX !");
-    }
-    else QMessageBox::critical(this,"Erreur","Le chemin choisis est inaccessible ");
-
-}
-
-void MainWindow::saveExportText(){
-
-    QString path=QFileDialog::getExistingDirectory(this, tr("Enregistrer vers "),qApp->applicationDirPath(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
-    QFile fichier (path+"/"+last_clicked.data().toString()+".txt");
-    if(fichier.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
-    {
-        QTextStream flux(&fichier);
-        flux<<ui->textEdit->toPlainText();
-        fichier.close();
-        QMessageBox::information(this,"Export","La note a été exportée en .txt !");
-    }
-    else QMessageBox::critical(this,"Erreur","Le chemin choisis est inaccessible ");
 }
