@@ -8,6 +8,11 @@
 
 class ExportStrategy;
 
+/*!
+ * \file note.h
+ * \brief Classe de base permettant de définir toutes les notes
+ * \author Pauline Cuche/Simon Robain
+ */
 
 class Note { //classe abstraite
     QString id;

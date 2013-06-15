@@ -17,7 +17,11 @@
 #include "htmlexport.h"
 #include "latexexport.h"
 #include "textexport.h"
-
+/*!
+ * \file notesmanager.h
+ * \brief Classe permettant de gérer l'ensemble des notes du logiciel MotDit
+ * \author Pauline Cuche/Simon Robain
+ */
 class NotesManager {
 
     std::map < QString,NoteFactory* > factories;

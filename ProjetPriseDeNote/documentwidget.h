@@ -19,6 +19,11 @@ namespace Ui {
 class DocumentWidget;
 }
 
+/*!
+ * \file documentwidget.h
+ * \brief Classe DocumentWidget permettant d'afficher une note de type Document
+ * \author Pauline Cuche/Simon Robain
+ */
 class DocumentWidget : public QWidget
 {
     Q_OBJECT

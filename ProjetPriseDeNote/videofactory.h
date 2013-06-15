@@ -5,6 +5,11 @@
 
 class NotesManager;
 
+/*!
+ * \file videofactory.h
+ * \brief Classe VideoFactory permettant de construire une note de type vidéo
+ * \author Pauline Cuche/Simon Robain
+ */
 class VideoFactory : public NoteFactory
 {
 public:

@@ -2,7 +2,11 @@
 #define HTMLEXPORT_H
 
 #include "exportstrategy.h"
-
+/*!
+ * \file htmlmexport.h
+ * \brief Classe HTMLexport : permet d'exporter les notes en HTML.
+ * \author Pauline Cuche/Simon Robain
+ */
 class HTMLexport : public ExportStrategy
 {
 public:

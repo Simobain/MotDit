@@ -1,7 +1,11 @@
 #ifndef TEXTEXPORT_H
 #define TEXTEXPORT_H
 #include "exportstrategy.h"
-
+/*!
+ * \file textexport.h
+ * \brief Classe TextExport : permet d'exporter les notes en .txt
+ * \author Pauline Cuche/Simon Robain
+ */
 class TextExport : public ExportStrategy
 {
 public:

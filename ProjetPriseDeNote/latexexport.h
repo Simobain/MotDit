@@ -3,7 +3,11 @@
 
 #include "exportstrategy.h"
 
-
+/*!
+ * \file latexexport.h
+ * \brief Classe LaTexExport : permet d'exporter les notes en .Tex.
+ * \author Pauline Cuche/Simon Robain
+ */
 class LaTexExport : public ExportStrategy
 {
 public:

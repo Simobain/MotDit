@@ -5,6 +5,12 @@
 
 class NotesManager;
 
+/*!
+ * \file imagefactory.h
+ * \brief Classe ImageFactory permettant de construire une note de type Image
+ * \author Pauline Cuche/Simon Robain
+ */
+
 class ImageFactory : public NoteFactory
 {
 public:

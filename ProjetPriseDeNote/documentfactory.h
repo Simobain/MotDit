@@ -5,6 +5,11 @@
 #include "notesmanager.h"
 //class NotesManager;
 
+/*!
+ * \file documentfactory.h
+ * \brief Classe ArticleFactory permettant de construire une note de type Document
+ * \author Pauline Cuche/Simon Robain
+ */
 class DocumentFactory : public NoteFactory
 {
 public:

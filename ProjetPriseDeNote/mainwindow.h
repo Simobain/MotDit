@@ -13,7 +13,11 @@
 #include <QStringListModel>
 
 
-
+/*!
+ * \file mainwindow.h
+ * \brief Classe mainwidow : elle gère la fenêtre principale du logiciel MotDit.
+ * \author Pauline Cuche/Simon Robain
+ */
 namespace Ui {
 class MainWindow;
 }

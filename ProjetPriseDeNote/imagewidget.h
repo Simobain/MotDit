@@ -7,7 +7,11 @@
 namespace Ui {
 class ImageWidget ;
 }
-
+/*!
+ * \file imagewidget.h
+ * \brief Classe ImageWidget permettant d'afficher une note de type Image
+ * \author Pauline Cuche/Simon Robain
+ */
 class ImageWidget : public QWidget
 {
     Q_OBJECT

@@ -12,7 +12,11 @@
 #include "time.h"
 #include "note.h"
 
-
+/*!
+ * \file notesfactory.h
+ * \brief Classe NoteFactory permettant de construire tout les types de notes
+ * \author Pauline Cuche/Simon Robain
+ */
 
 class NoteFactory
 {

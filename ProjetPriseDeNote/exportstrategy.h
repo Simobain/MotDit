@@ -9,7 +9,11 @@
 
 #include <QMap>
 
-
+/*!
+ * \file exportstrategy.h
+ * \brief Classe ExportStrategy : permet d'exporter les notes dans type d'exports.
+ * \author Pauline Cuche/Simon Robain
+ */
 class ExportStrategy
 {
 public:

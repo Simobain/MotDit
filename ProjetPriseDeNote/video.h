@@ -2,6 +2,12 @@
 #define VIDEO_H
 #include "binary.h"
 
+/*!
+ * \file video.h
+ * \brief Classe de base permettant de définir des notes de type video.
+ * \author Pauline Cuche/Simon Robain
+ */
+
 class Video : public Binary
 {
     Video(const Video& v);

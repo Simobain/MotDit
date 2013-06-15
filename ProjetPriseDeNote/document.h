@@ -3,6 +3,11 @@
 #include "note.h"
 #include <QSet>
 
+/*!
+ * \file document.h
+ * \brief Classe de base permettant de définir des notes de type Document
+ * \author Pauline Cuche/Simon Robain
+ */
 
 class Document : public Note
 {

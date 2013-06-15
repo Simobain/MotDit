@@ -9,7 +9,11 @@
 namespace Ui {
 class videowidget;
 }
-
+/*!
+ * \file videowidget.h
+ * \brief Classe VideoWidget permettant d'afficher une note de type video
+ * \author Pauline Cuche/Simon Robain
+ */
 class videowidget : public QWidget
 {
     Q_OBJECT
