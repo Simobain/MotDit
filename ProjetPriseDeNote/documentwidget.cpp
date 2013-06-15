@@ -12,10 +12,8 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     QFont titreFont("Times", 14, QFont::Bold);
     ui->lineEdit->setFont(titreFont);
 
-    listeSupp= new QListWidget;
     //ui->frame->setLineWidth(4);
 
-    QObject ::connect(ui->deleteNote, SIGNAL(clicked()), this, SLOT(choisirNote()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
     setTitre(d->getTitre());
@@ -29,10 +27,6 @@ DocumentWidget::~DocumentWidget()
     delete ui;
 }
 
-void DocumentWidget::choisirNote()
-{
-    listeSupp->show();
-}
 
 void DocumentWidget::setTitre(const QString& titre){
     ui->lineEdit->setText(titre);

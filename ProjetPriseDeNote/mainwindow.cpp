@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     QObject :: connect(ui->ajout, SIGNAL(clicked()), this, SLOT(ajoutSousNotes()));
+    QObject :: connect(ui->suppSous, SIGNAL(clicked()), this, SLOT(suppSousNotes()));
 
     ui->onglets->setTabText(0, "Edit");
     ui->onglets->setTabText(1, "HTML");
@@ -54,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->sauver->setEnabled(false);
     ui->ajout->setHidden(true);
+    ui->suppSous->setHidden(true);
 
     // On ajoute les notes a la liste pour pouvoir les afficher dans la listview
 
@@ -75,6 +77,14 @@ MainWindow::MainWindow(QWidget *parent) :
     modelAjout= new QStringListModel;
     listeAjout->setModel(modelAjout);
     QObject::connect(listeAjout,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesSeleted(const QModelIndex&))) ;
+
+    listeSupp= new QListView;
+    listeSupp->setMovement(QListView::Static);
+    listeSupp->setFlow(QListView::TopToBottom);
+    listeSupp->setViewMode(QListView::ListMode);
+    modelSupp= new QStringListModel;
+    listeSupp->setModel(modelSupp);
+    QObject::connect(listeSupp,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesASuppSelected(const QModelIndex&))) ;
 
 
 }
@@ -248,23 +258,28 @@ void MainWindow::itemClicked(const QModelIndex & index){
     switch(note->getType()){
     case Note::ARTICLE :
         ui->ajout->setHidden(true);
+        ui->suppSous->setHidden(true);
         afficherArticle((Article*) note);
         break;
     case Note::IMAGE :
         ui->ajout->setHidden(true);
+        ui->suppSous->setHidden(true);
         afficherImage((Image*) note);
         break;
     case Note::VIDEO :
         ui->ajout->setHidden(true);
+        ui->suppSous->setHidden(true);
         afficherVideo((Video*) note);
         break;
     case Note::AUDIO :
         ui->ajout->setHidden(true);
+        ui->suppSous->setHidden(true);
         afficherAudio((Audio*) note);
         break;
     case Note::DOCUMENT :
         afficherDocument((Document*) note);
         ui->ajout->setHidden(false);
+        ui->suppSous->setHidden(false);
         break;
     default :
         QMessageBox::critical(this,"Erreur","ERREUR PB DANS ITEM CLICKED");
@@ -348,7 +363,7 @@ void MainWindow::ongletTexteClicked(){
     NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
     QString titre=last_clicked.data().toString();
-    if (titre.endsWith("*")) titre.remove("*");
+    while (titre.endsWith("*")) titre.chop(1);
     Note* note=gestnote->getNoteFromTitre(titre);
     QString texte=gestnote->exportNote(note, "texte");
     ui->textEdit->setText(texte);}
@@ -360,7 +375,7 @@ void MainWindow::ongletHtmlClicked(){
     NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
     QString titre=last_clicked.data().toString();
-    if (titre.endsWith("*")) titre.remove("*");
+    while (titre.endsWith("*")) titre.chop(1);
     Note* note=gestnote->getNoteFromTitre(titre);
     QString texte=gestnote->exportNote(note, "html");
     ui->textEdit_2->setText(texte);
@@ -373,7 +388,7 @@ void MainWindow::ongletTexClicked(){
     NotesManager* gestnote=NotesManager::getInstance();
     if (last_clicked.data().toString()!=""){
     QString titre=last_clicked.data().toString();
-    if (titre.endsWith("*")) titre.remove("*");
+    while (titre.endsWith("*")) titre.chop(1);
     Note* note=gestnote->getNoteFromTitre(titre);
     QString texte=gestnote->exportNote(note, "latex");
     ui->textEdit_3->setText(texte);
@@ -415,11 +430,11 @@ void MainWindow::sousNotesSeleted(const QModelIndex& index){
 
     NotesManager* gestnote=NotesManager::getInstance();
     QString titreDoc=last_clicked.data().toString();
-    if (titreDoc.endsWith("*")) titreDoc.remove("*");
+    while (titreDoc.endsWith("*")) titreDoc.chop(1);
     Note* noteD=gestnote->getNoteFromTitre(titreDoc);
 
     QString titreNote=index.data().toString();
-    if (titreNote.endsWith("*")) titreNote.remove("*");
+    while (titreNote.endsWith("*")) titreNote.chop(1);
     Note* note=gestnote->getNoteFromTitre(titreNote);
 
     Document* doc=(Document*) noteD;
@@ -429,4 +444,44 @@ void MainWindow::sousNotesSeleted(const QModelIndex& index){
 
     noteChanged(doc->getTitre());
     afficherDocument(doc);
+}
+
+void MainWindow::suppSousNotes()
+{
+
+    listeDesSousNotes.clear();
+    NotesManager* gestnote=NotesManager::getInstance();
+    QString titreDoc=last_clicked.data().toString();
+    while (titreDoc.endsWith("*")) titreDoc.chop(1);
+    Note* noteD=gestnote->getNoteFromTitre(titreDoc);
+    Document* d=(Document*) noteD;
+    qDebug()<<d->getTitre();
+
+
+    for(QSet<Note*>::const_iterator it=d->getSousNotes().cbegin(); it!=d->getSousNotes().cend(); it++)
+    {
+        listeDesSousNotes.append((*it)->getTitre());
+    }
+
+    modelSupp->setStringList(listeDesSousNotes);
+    listeSupp->show();
+}
+
+void MainWindow::sousNotesASuppSelected(const QModelIndex& index)
+{
+    NotesManager* gestnote=NotesManager::getInstance();
+    QString titreDoc=last_clicked.data().toString();
+    while (titreDoc.endsWith("*")) titreDoc.chop(1);
+    Note* noteD=gestnote->getNoteFromTitre(titreDoc);
+
+    QString titreNote=index.data().toString();
+    while (titreNote.endsWith("*")) titreNote.chop(1);
+    Note* note=gestnote->getNoteFromTitre(titreNote);
+
+    Document* doc=(Document*) noteD;
+    doc->removeSubNote(note);
+    listeSupp->close();
+    afficherDocument(doc);
+
+
 }

@@ -41,6 +41,9 @@ private:
     QStringListModel* model;
     QStringListModel* modelAjout;
     QListView* listeAjout;
+    QListView* listeSupp;
+    QStringList listeDesSousNotes;
+    QStringListModel* modelSupp;
 
     void replaceInListe(const QString& oldName,const QString &newName);
     void ongletTexteClicked();
@@ -63,6 +66,8 @@ public slots :
     void changerEspaceTravail();
     void ajoutSousNotes();
     void sousNotesSeleted(const QModelIndex &index);
+    void suppSousNotes();
+    void sousNotesASuppSelected(const QModelIndex& index);
 
 
 
