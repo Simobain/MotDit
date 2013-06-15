@@ -28,17 +28,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->actionVid_o, SIGNAL(triggered()), this, SLOT(creerVideo()));
     QObject :: connect(ui->actionAudio, SIGNAL(triggered()), this, SLOT(creerAudio()));
     QObject :: connect(ui->actionDocument, SIGNAL(triggered()), this, SLOT(creerDocument()));
+    QObject :: connect(ui->actionDefinir_un_nouvel_espace_de_travail, SIGNAL(triggered()), this, SLOT(changerEspaceTravail()));
 
     QObject :: connect(ui->actionFermer, SIGNAL(triggered()), this, SLOT(close()));
     QObject :: connect(ui->actionSauvegarder,SIGNAL(triggered()),this,SLOT(sauverClicked()));
-    //To Do trouver solution pour que quand on clique sur bouton et pas de changement.
-    //NB : je pense qu'il vaut mieux que le bouton soit toujours activé et qu'on lance un QmessageBox si il n'y a rien"Rien à sauver"
 
     QObject :: connect(ui->listView,SIGNAL(clicked(const QModelIndex&)),this,SLOT(itemClicked(const QModelIndex&)));
     QObject :: connect(ui->sauver,SIGNAL(clicked()),this,SLOT(sauverClicked()));
     QObject :: connect(ui->suppr, SIGNAL(clicked()), this, SLOT(supprClicked()));
     QObject :: connect(ui->onglets, SIGNAL(currentChanged(int)), this, SLOT(ongletChange(int)));
-    QObject :: connect(ui->actionDefinir_un_nouvel_espace_de_travail, SIGNAL(triggered()), this, SLOT(changerEspaceTravail()));
+
 
     QObject :: connect(ui->ajout, SIGNAL(clicked()), this, SLOT(ajoutSousNotes()));
 
@@ -67,6 +66,14 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     model->setStringList(liste);
     ui->listView->setModel(model);
+
+    listeAjout= new QListView;
+    listeAjout->setMovement(QListView::Static);
+    listeAjout->setFlow(QListView::TopToBottom);
+    listeAjout->setViewMode(QListView::ListMode);
+    modelAjout= new QStringListModel;
+    listeAjout->setModel(modelAjout);
+    QObject::connect(listeAjout,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesSeleted(const QModelIndex&))) ;
 
 
 }
@@ -126,8 +133,6 @@ void MainWindow::afficherArticle(Article* article){
         ui->onglet_edit->layout()->removeWidget(last_widget) ;
         delete last_widget;
         last_widget=0;}
-    artWidget->setTitre(article->getTitre());
-    artWidget->setTexte(article->getTexte());
     last_widget=artWidget;
     ui->onglet_edit->layout()->addWidget(artWidget);
     QObject::connect(artWidget, SIGNAL(articleTexteChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
@@ -144,9 +149,6 @@ void MainWindow::afficherImage(Image* im){
         ui->onglet_edit->layout()->removeWidget(last_widget) ;
         delete last_widget;
         last_widget=0;}
-    imWidget->setTitre(im->getTitre());
-    imWidget->setDesc(im->getDescription());
-    imWidget->setChemin(im->getChemin());
     last_widget=imWidget;
     ui->onglet_edit->layout()->addWidget(imWidget);
     QObject::connect(imWidget, SIGNAL(imageDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
@@ -162,9 +164,6 @@ void MainWindow::afficherVideo(Video* v){
         ui->onglet_edit->layout()->removeWidget(last_widget) ;
         delete last_widget;
         last_widget=0;}
-    vWidget->setTitre(v->getTitre());
-    vWidget->setDesc(v->getDescription());
-    vWidget->setVideo(v->getChemin());
     last_widget=vWidget;
     ui->onglet_edit->layout()->addWidget(vWidget);
     QObject::connect(vWidget, SIGNAL(videoDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
@@ -180,9 +179,6 @@ void MainWindow::afficherAudio(Audio* a){
         ui->onglet_edit->layout()->removeWidget(last_widget) ;
         delete last_widget;
         last_widget=0;}
-    aWidget->setTitre(a->getTitre());
-    aWidget->setDesc(a->getDescription());
-    aWidget->setMusique(a->getChemin());
     last_widget=aWidget;
     ui->onglet_edit->layout()->addWidget(aWidget);
     QObject::connect(aWidget, SIGNAL(audioDescChanged(const QString&)), this, SLOT(noteChanged(const QString&))) ;
@@ -198,12 +194,10 @@ void MainWindow::afficherDocument(Document* d){
         ui->onglet_edit->layout()->removeWidget(last_widget) ;
         delete last_widget;
         last_widget=0;}
-    docWidget->setTitre(d->getTitre());
     last_widget=docWidget;
     ui->onglet_edit->layout()->addWidget(docWidget);
     QObject::connect(docWidget, SIGNAL(documentTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
     d->setSaved(sauver);
-
 }
 
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
@@ -403,19 +397,12 @@ void MainWindow::changerEspaceTravail(){
 
 void MainWindow::ajoutSousNotes(){
 
-    listeAjout= new QListView();
-    listeAjout->setMovement(QListView::Static);
-    listeAjout->setFlow(QListView::TopToBottom);
-    listeAjout->setViewMode(QListView::ListMode);
     listeTemp=liste;
     listeTemp.removeOne(last_clicked.data().toString());
-    modelAjout= new QStringListModel;
-    modelAjout->setStringList(listeTemp);
-
-    listeAjout->setModel(modelAjout);
-
-    QObject::connect(listeAjout,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesSeleted(const QModelIndex&))) ;
+    modelAjout->setStringList(listeTemp);   
     listeAjout->show();
+
+    ui->sauver->setEnabled(true);
 
 }
 
@@ -429,12 +416,11 @@ void MainWindow::sousNotesSeleted(const QModelIndex& index){
     QString titreNote=index.data().toString();
     if (titreNote.endsWith("*")) titreNote.remove("*");
     Note* note=gestnote->getNoteFromTitre(titreNote);
+
     Document* doc=(Document*) noteD;
     doc->addSubNote(note);
     listeAjout->close();
     listeTemp.clear();
-    delete listeAjout;
-    delete modelAjout;
-    // dans le futur il faudra actualiser l'affichage du doc
-    //afficherDocument(doc);
+
+    afficherDocument(doc);
 }

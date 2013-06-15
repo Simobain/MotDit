@@ -16,6 +16,9 @@ ImageWidget::ImageWidget(Image *im,QWidget *parent) :
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
+    setTitre(im->getTitre());
+    setDesc(im->getDescription());
+    setChemin(im->getChemin());
 }
 
 ImageWidget::~ImageWidget()

@@ -31,11 +31,13 @@ Note* DocumentFactory::chargerNote(const QString& id, const QString& chemin){
         QTextStream flux(&fichier);
         QString titre(flux.readLine());
         Note* n= buildNote(id, titre);
+        Document* doc=(Document*)n;
         while(!flux.atEnd()){
             NotesManager* nm=NotesManager::getInstance();;
-            Note* n=nm->getNoteFromId(flux.readLine());
+            Note* ssNote=nm->getNoteFromId(flux.readLine());
+            doc->addSubNote(ssNote);
         }
-        Document* doc=(Document*)n;
+
         doc->setInTheFile(true);
         return n;
     }

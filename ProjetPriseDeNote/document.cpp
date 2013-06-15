@@ -11,6 +11,7 @@ Note::NoteType Document::getType()const {
 }
 
 void Document::addSubNote(Note *n){
+
     sousNotes<<n;
 }
 
@@ -18,7 +19,7 @@ void Document::removeSubNote(Note *n){
     sousNotes.remove(n);
 }
 
-QSet<Note*> Document::getSousNotes() const{
+QSet<Note*> Document::getSousNotes(){
     return sousNotes;
 }
 
@@ -34,6 +35,7 @@ void Document::save(const QString &directory){
         QSet<Note*>::const_iterator it = sousNotes.begin();
         while (it!=sousNotes.end()){
             flux<<(*it)->getId()<<"\n";
+            it++;
         }
         fichier.close();
     }

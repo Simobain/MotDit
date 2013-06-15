@@ -7,16 +7,18 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     ui(new Ui::DocumentWidget)
 {
     ui->setupUi(this);
-    listeSupp= new QListWidget;
-    ui->frame->setLineWidth(4);
 
-    //QVBoxLayout* layout = new QVBoxLayout();
-    //ui->frame->setLayout(layout);
+    QFont titreFont("Times", 14, QFont::Bold);
+    ui->lineEdit->setFont(titreFont);
+
+    listeSupp= new QListWidget;
+    //ui->frame->setLineWidth(4);
+
     QObject ::connect(ui->deleteNote, SIGNAL(clicked()), this, SLOT(choisirNote()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
-    void afficherSousNotes();
-
+    setTitre(d->getTitre());
+    afficherSousNotes();
 
 }
 
@@ -46,25 +48,34 @@ void DocumentWidget::actuTitre(){
 }
 
 void DocumentWidget::afficherSousNotes(){
-    QSet<Note*>::iterator it= actu_document->getSousNotes().begin();
-    while(it!=actu_document->getSousNotes().end()){
+    QSet<Note*> ensSousNotes=actu_document->getSousNotes();
+    QSet<Note*>::iterator it=ensSousNotes.begin();
+    it= ensSousNotes.begin();
+    while(it!=ensSousNotes.end() && !ensSousNotes.isEmpty()){
         switch((*it)->getType()){
         case Note::ARTICLE :
-            ui->verticalLayout_3->addWidget(new ArticleWidget((Article*)*it));
+            qDebug()<<"ajouter article";
+            ui->verticalLayout_2->addWidget(new ArticleWidget((Article*)*it));
             break;
         case Note::IMAGE :
-            ui->verticalLayout_3->addWidget(new ImageWidget((Image*)*it));
+            qDebug()<<"ajouter image";
+            ui->verticalLayout_2->addWidget(new ImageWidget((Image*)*it));
             break;
         case Note::VIDEO :
-            ui->verticalLayout_3->addWidget(new videowidget((Video*)*it));
+            qDebug()<<"ajouter video";
+            ui->verticalLayout_2->addWidget(new videowidget((Video*)*it));
+            break;
         case Note::AUDIO :
-            ui->verticalLayout_3->addWidget(new audiowidget((Audio*)*it));
+            qDebug()<<"ajouter audio";
+            ui->verticalLayout_2->addWidget(new audiowidget((Audio*)*it));
             break;
         case Note::DOCUMENT :
-            ui->verticalLayout_3->addWidget(new DocumentWidget((Document*)*it));
+            qDebug()<<"ajouter document";
+            ui->verticalLayout_2->addWidget(new DocumentWidget((Document*)*it));
+            break;
         default :
             QMessageBox::critical(this,"Erreur","ERREUR PB DS AFFICHER SOUS NOTES");
         }
+        it++;
     }
-
 }

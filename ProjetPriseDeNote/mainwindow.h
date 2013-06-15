@@ -65,6 +65,7 @@ public slots :
     void sousNotesSeleted(const QModelIndex &index);
 
 
+
 };
 
 #endif // MAINWINDOW_H

@@ -25,6 +25,9 @@ videowidget::videowidget(Video* v, QWidget *parent) :
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuDesc()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
+    setTitre(v->getTitre());
+    setDesc(v->getDescription());
+    setVideo(v->getChemin());
 }
 
 videowidget::~videowidget()

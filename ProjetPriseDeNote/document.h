@@ -15,9 +15,9 @@ public:
     Document(const QString& id,const QString& titre);
     //QString ExportAsPart(ExportStrategy *es, unsigned int titlelevel);
     void addSubNote(Note *n);
-    void addSubNote(Note *n, QString id);
+    //void addSubNote(Note *n, QString id);
     void removeSubNote(Note *n);
-    QSet<Note *> getSousNotes() const;
+    QSet<Note*> getSousNotes();
     //Note* getSubNote(QString id);
     NoteType getType() const;
     void save(const QString &directory);

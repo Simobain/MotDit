@@ -16,6 +16,8 @@ ArticleWidget::ArticleWidget(Article *a, QWidget *parent) :
     QObject ::connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(actuTexte()));
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
+    setTitre(a->getTitre());
+    setTexte(a->getTexte());
 }
 
 ArticleWidget::~ArticleWidget()

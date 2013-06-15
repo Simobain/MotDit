@@ -16,6 +16,10 @@ audiowidget::audiowidget(Audio *a, QWidget *parent) :
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
     player = new QMediaPlayer;
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(playPause()));
+
+    setTitre(a->getTitre());
+    setDesc(a->getDescription());
+    setMusique(a->getChemin());
 }
 
 audiowidget::~audiowidget()

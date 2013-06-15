@@ -7,8 +7,8 @@
 #include <sstream>
 #include "notesmanager.h"
 #include <QSettings>
-
-
+#include "document.h"
+#include "article.h"
 
 
 int main(int argc, char *argv[])
