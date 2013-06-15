@@ -36,7 +36,6 @@ private:
     void afficherSousNotes();
     void chargerSousNotes();
 public slots:
-    void choisirNote();
     void actuTitre();
 
 
