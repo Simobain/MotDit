@@ -70,6 +70,9 @@ public slots :
     void sousNotesASuppSelected(const QModelIndex& index);
 
 
+    void saveExportHtml();
+    void saveExportLatex();
+    void saveExportText();
 
 };
 
