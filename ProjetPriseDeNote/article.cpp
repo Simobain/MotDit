@@ -16,25 +16,6 @@ Note::NoteType Article::getType() const{
 void Article::setTexte(const QString& t){
     texte=t;
 }
-/*
-void Article::load(const QString &chemin){
-    qDebug()<<"je suis utile";
-    QFile fichier (chemin);
-    QString contenu;
-    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-
-        QTextStream flux(&fichier);
-        setTitre(flux.readLine());
-        while(!flux.atEnd())
-                contenu += flux.readLine();
-        setTexte(contenu);
-        fichier.close();
-    }
-
-    else std::cout<<"Impossible d'ouvrir le fichier !"<<"\n";
-
-}*/
 
 void Article::save(const QString &directory){
     setSaved(true);

@@ -40,6 +40,13 @@
       <item>
        <widget class="QTextEdit" name="textEdit_2"/>
       </item>
+      <item>
+       <widget class="QPushButton" name="exphtml">
+        <property name="text">
+         <string>Exporter en .html</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
     <widget class="QWidget" name="onglet_tex">
@@ -50,6 +57,13 @@
       <item>
        <widget class="QTextEdit" name="textEdit_3"/>
       </item>
+      <item>
+       <widget class="QPushButton" name="explatex">
+        <property name="text">
+         <string>Exporter en .tex</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
     <widget class="QWidget" name="onglet_text">
@@ -59,6 +73,13 @@
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
        <widget class="QTextEdit" name="textEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exptxt">
+        <property name="text">
+         <string>Exporter en .txt</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

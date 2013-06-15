@@ -123,25 +123,29 @@ void NotesManager::supprNote (Note* n){
 
 QString NotesManager::exportNote(Note* n, QString typeExport){
 
+    qDebug()<<"entrer exportNote Notemanager";
     ExportStrategy* strategy;
     strategy=strategies[typeExport];
     QString texte=strategy->header(n);
     switch(n->getType()){
     case Note::ARTICLE :
         texte+=strategy->exportNote((Article*) n,1);
+        break;
     case Note::VIDEO :
         texte+=strategy->exportNote((Video*) n,1);
+        break;
     case Note::IMAGE :
         texte+=strategy->exportNote((Image*) n,1);
+        break;
     case Note::AUDIO :
         texte+=strategy->exportNote((Audio*) n,1);
-
         break;
     default :
         qDebug()<<"pb fonction NoteManager::exportNote je suis le default du switch \n ";
     }
 
     texte+=strategy->footer(n);
+    qDebug()<<"sortie exportNote Notemanager";
     return texte;
 }
 

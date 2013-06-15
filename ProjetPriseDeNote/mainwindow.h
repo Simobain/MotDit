@@ -63,8 +63,9 @@ public slots :
     void changerEspaceTravail();
     void ajoutSousNotes();
     void sousNotesSeleted(const QModelIndex &index);
-
-
+    void saveExportHtml();
+    void saveExportLatex();
+    void saveExportText();
 
 };
 
