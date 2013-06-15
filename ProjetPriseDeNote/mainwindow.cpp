@@ -253,8 +253,9 @@ void MainWindow::itemClicked(const QModelIndex & index){
     case Note::VIDEO :
         ui->ajout->setHidden(true);
         afficherVideo((Video*) note);
+        break;
     case Note::AUDIO :
-            ui->ajout->setHidden(true);
+        ui->ajout->setHidden(true);
         afficherAudio((Audio*) note);
         break;
     case Note::DOCUMENT :
