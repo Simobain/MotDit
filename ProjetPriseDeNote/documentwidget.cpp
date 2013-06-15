@@ -1,5 +1,6 @@
 #include "documentwidget.h"
 #include "ui_documentwidget.h"
+#include "notesmanager.h"
 
 DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     QWidget(parent),
@@ -18,6 +19,7 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     QObject ::connect(ui->lineEdit, SIGNAL(textChanged(QString)), this, SLOT(actuTitre()));
 
     setTitre(d->getTitre());
+    chargerSousNotes();
     afficherSousNotes();
 
 }
@@ -45,6 +47,25 @@ void DocumentWidget::actuTitre(){
     }
     else emit documentTitreChanged(actu_document->getTitre(), ancienTitre, false );
 
+}
+
+void DocumentWidget::chargerSousNotes(){
+    NotesManager* nm=NotesManager::getInstance();
+    QString chemin= nm->getEspaceDeTravail()+"/"+actu_document->getId()+".txt";
+    QFile fichier(chemin);
+    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+         QTextStream flux(&fichier);
+         flux.readLine(); // on passe la ligne de titre
+         while(!flux.atEnd()){
+             QString sousNotesid=flux.readLine();
+             Note* ssNote=nm->getNoteFromId(sousNotesid);
+             actu_document->addSubNote(ssNote);
+         }
+    }
+     else {
+         qDebug()<<"note pas de sous notes";
+         }
 }
 
 void DocumentWidget::afficherSousNotes(){

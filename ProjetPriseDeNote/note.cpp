@@ -13,6 +13,7 @@ void Note::setTitre(const QString& t){
 }
 
 void Note::saveInTheFile(const QString& id, const QString& chemin){
+    qDebug()<<"entrer save in the file";
     QFile fileDesc(chemin+"/"+"fileDescript.txt");
     if(fileDesc.open(QIODevice::WriteOnly |QIODevice::Append| QIODevice::Text))
     {
@@ -22,4 +23,5 @@ void Note::saveInTheFile(const QString& id, const QString& chemin){
         fileDesc.close();
     }
     else qDebug()<<"pb d'enregistrement";//std::cout<<"Impossible d'ecrire' !"<<"\n";
+    qDebug()<<"sortie save in the file";
 }

@@ -10,7 +10,10 @@
 #include "videowidget.h"
 #include "audiowidget.h"
 #include "documentwidget.h"
+
 #include <QMessageBox>
+
+class NotesManager;
 
 namespace Ui {
 class DocumentWidget;
@@ -31,6 +34,7 @@ private:
     QListWidget* listeSupp;
     Document* actu_document;
     void afficherSousNotes();
+    void chargerSousNotes();
 public slots:
     void choisirNote();
     void actuTitre();
