@@ -45,7 +45,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     notesmanager.h \
     article.h \
-    notesexception.h \
     image.h \
     binary.h \
     video.h \

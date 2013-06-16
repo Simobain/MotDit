@@ -3,7 +3,7 @@
 
 #include "exportstrategy.h"
 /*!
- * \file htmlmexport.h
+ * \file htmlexport.h
  * \brief Classe HTMLexport : permet d'exporter les notes en HTML5.
  * \author Pauline Cuche/Simon Robain
  */

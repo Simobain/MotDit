@@ -17,11 +17,11 @@
 *
 *<h2> Note et ses heritages </h2>
 *<p>
-*Nous avons décidé de divisé tous les types de notes.
+*Nous avons décidé de diviser tous les types de notes.
 *La classe mère Note est une classe abstraite, elle est héritée par Article et Binary.
-*La classe Binary est une classe abstraite, elle a été créé suite a de nombreux points commun entre les notes de types Audio, Video et Image.
+*La classe Binary est une classe abstraite, elle a été créé suite à de nombreux points communs entre les notes de types Audio, Video et Image.
 *
-*La classe Note possède une fonction getType virtuel pure.
+*La classe Note possède une fonction getType virtuelle pure.
 *Cette fonction est surchargé dans chacune des classes filles et retourne le type la Note.
 *Cela permet de connaitre a tout instant le type d'un pointeur sur Note.
 *
@@ -29,24 +29,24 @@
 *</p>
 *<h2>L'unique NotesManager </h2>
 *<p>
-*NoteManagers est la classe qui gère les les Note.
+*NotesManager est la classe qui gère les Note.
 *Cette classe ne devant être instanciée qu'une seule fois nous avons utilisé le design pattern singleton.
-*Ses fonctions permettent de creer ou suprrimer des notes.
+*Ses fonctions permettent de créer ou supprimer des notes.
 *La création se fait à l'aide des classes filles de NoteFactory.
-*Pour appeler la classe factory adaptée nous utilisons un std::map.
-*Ce type de template permet de retrouver partir d'une clé une valeur.
+*Pour appeler la classe factory adaptée nous utilisons une std::map.
+*Ce type de container permet de retrouver à partir d'une clé une valeur.
 *Dans notre cas les clés étaient le type de Note, et les valeurs un objet de la classe factory adaptée.
-*Grâce à cette méthode lors de future mises à jour de notre logiciel, nous pourrons ajouter d'autre type de Note
+*Grâce à cette méthode lors de futures mises à jour de notre logiciel, nous pourrons ajouter d'autres types de Note
 *sans avoir à modifier grandement notre architecture.
 *</p>
 *<p>
 *Le NotesManager gèrent aussi l'espace de travail dans lequel l'utilisateur souhaite travailler.
 *Pour stocker les notes nous avons choisi d'utiliser un QSet de Note.
-*Cette QClasse nous a permis de parcourir facilement nos Note notamment grace à des iterateur fournis par Qt.
+*Cette QClasse nous a permis de parcourir facilement nos Note notamment grace à des iterateurs fournis par Qt.
 *De plus un QSet évite les doublons.
 *</p>
 *<p>
-*Le NoteManager permet également d'appeler les diverses fonction d'exportation de nos notes via un std::map.
+*Le NoteManager permet également d'appeler les diverses fonctions d'exportation de nos Note via une std::map.
 *</p>
 *<p>
 *Une fonction utile de notre manager consiste à retrouver une Note à partir de son id et/ou de son titre.
@@ -56,18 +56,18 @@
 *
 *<h2> Les factories méthodes </h2>
 *<p>
-*Nous avons décidé d'utiliser le design pattern factory method pour instancer tous les objects hérités de la classe Note.
+*Nous avons décidé d'utiliser le design pattern factory method pour instancier tous les objets hérités de la classe Note.
 *L'avantage de cette technique consiste à pouvoir utiliser la même méthode NotesManager::creerNote pour instancier different type de Note.
-*De plus, comme nous l'avons dit plus haut, la mise àjour (ajout de nouveau type de Note) est facilitée.
+*De plus, comme nous l'avons dit plus haut, la mise à jour (ajout de nouveau type de Note) est facilitée.
 *</p>
 *
 *<h2> La stratégie export </h2>
 *<p>
-*Pour gérer l'exportation nous avons creer une classe abstraite ExportStrategy et 3 classes filles correspondant au type d'export désiré
+*Pour gérer l'exportation nous avons créer une classe abstraite ExportStrategy et 3 classes filles correspondant au type d'export désiré
 *ici HTMLexport, LaTexExport et TextExport.
-*Dans chacune de ses fonctions nous avons définis un ExportStrategy::header et un ExportStrategy::footer correspondant à l'entete et le pied de page necessaire à chaque langage.
-*Puis nous avons définie une fonction ExportStrategy::exportNote surchargé pour chaque type de Note.
-*De cette façon, rajouter un type d'export est très simple. Il suffit simplement d'ajouter une classe fille a ExportStrategy.
+*Dans chacune de ses fonctions nous avons définis un ExportStrategy::header et un ExportStrategy::footer correspondant à l'entête et le pied de page nécessaire à chaque langage.
+*Puis nous avons défini une fonction ExportStrategy::exportNote surchargée pour chaque type de Note.
+*De cette façon, rajouter un type d'export est très simple. Il suffit simplement d'ajouter une nouvelle classe fille à ExportStrategy.
 *Ainsi comme précédement le code est facile à maintenir en cas d'évoltution.
 *</p>
 *
@@ -84,7 +84,7 @@
 *   </ul>
 *
 *
-*Nous avons creer un type de widget hérité de QWidget par type de Note.
+*Nous avons créé un type de widget hérité de QWidget par type de Note.
 *De cette façon lors d'un clic sur une note d'un certain type nous ajoutons au layout de l'onglet edit un Widget du type correspondant.
 *
 *</p>
@@ -100,43 +100,43 @@
 *Ensuite nous aurions créé une classe TagManager similaire à NotesManager.
 *Elle bénéficierait également d'un design pattern singleton, d'un QSet de Tag et de fonctions permettant de gérer les Tag.
 *Comme par exemple: creerTag, supprimerTag, chargerTag  et d'une fonction addTag(Note* n, QString nomTag) et suppTag(Note* n, QString nomTag) qui cherche le Tag correspondant dans son QSet
-*et qui ajoute la note dans le set du Tag a l'aide des méthodes de ce même Tag.
+*et qui ajoute la note dans le QSet du Tag a l'aide des méthodes de ce même Tag.
 *
-*Visuellement nous aurions ajouté à notre MainWindow un QList au dessus de notre QListView pour filtrer les Note à l'aide des Tag.
+*Visuellement nous aurions ajouté à notre MainWindow une QList de CheckBox au dessus de notre QListView pour filtrer les Note à l'aide des Tag.
 *Ainsi l'utilisateur aurait pu cocher les Tag correspondant à son choix et seules les Note tagguées auraient été affichées dans la QListView principale.
 *
 *</p>
 *
-*<h1>Evolution Possibles </h1>
+*<h1>Evolutions Possibles </h1>
 *<p>
-*Dans le futur nous pourrions ajoutées différentes fonctionnalités au logiciel MotDit :
+*Dans le futur nous pourrions ajouter différentes fonctionnalités au logiciel MotDit :
 *<ul>
 *<li>Ajouter d'autre type hérité de Note
 *<ul>
 *   <li>un type Tableau permettant de faire un tableau de String</li>
-*   <li>un type Todo permettant de creer une liste de tache</li>
+*   <li>un type Todo permettant de creer une liste de tâche</li>
 *   <li>un type Mail permettant de gerer des brouillons de mail</li>
 *</ul>
 *</li>
 *
 *<li>Ajouter d'autre type d'export et completer les exports
 *<ul>
-*   <li>un un fichier css pour l'export html</li>
+*   <li>un fichier css pour l'export html</li>
 *   <li>un export PDF, SQL, XML, JSon...</li>
 *</ul>
 *</li>
 *<li>Ajouter une corbeille afin d'eviter une suppression malencontreuse</li>
 *</ul>
-*<li>Ameliorer l'interface avec un par exemple un systeme de glissé/déposé</li>
+*<li>Ameliorer l'interface avec par exemple un systeme de glissé/déposé</li>
 *<li>Développer une application mobile liant via une base de données les notes contenus sur l'ordinateur et le smartphone </li>
 *</p>
 *
 *<h1>Conclusion</h1>
 *
 *Grâce à ce projet nous avons pu pratiquer des théories vues en cours.
-*De plus, nous avons appris à utiliser Qt et sa documentation (ou nous nous sommes perdu moulte fois :p)
-*Ce fut la première fois que nous avons eu à gérer un projet de cette ampleur. Nous sommes fier que notre projet compile.
-*Pour gérer les différentes version de notre projet nous avons du apprendre à utiliser un gestionnaire de version (GIT).
+*De plus, nous avons appris à utiliser Qt et sa documentation (où nous nous sommes perdus moulte fois :p)
+*Ce fut la première fois que nous avions eu à gérer un projet de cette ampleur. Nous sommes fier que notre projet compile.
+*Pour gérer les différentes versions de notre projet nous avons du apprendre à utiliser un gestionnaire de version (GIT).
 *
 *Bonne vidéo !
 *

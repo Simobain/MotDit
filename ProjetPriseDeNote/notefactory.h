@@ -13,7 +13,7 @@
 #include "note.h"
 
 /*!
- * \file notesfactory.h
+ * \file notefactory.h
  * \brief Classe NoteFactory permettant de construire tout les types de notes
  * \author Pauline Cuche/Simon Robain
  */

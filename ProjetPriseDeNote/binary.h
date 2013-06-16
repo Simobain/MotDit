@@ -3,7 +3,7 @@
 #include"note.h"
 
 /*!
- * \file article.h
+ * \file binary.h
  * \brief Classe de base permettant de définir des notes de type binaire (audio,video,image)
  * \author Pauline Cuche/Simon Robain
  */
