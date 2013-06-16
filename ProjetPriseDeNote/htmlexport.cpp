@@ -26,8 +26,7 @@ QString HTMLexport::exportNote(Document* d , unsigned int titreLvl)
     {
         if (titreLvl>5) titreLvl=5;
         NotesManager* nm=NotesManager::getInstance();
-        //texte+="<h"+QString::number(titreLvl)+">"+d->getTitre()+"</h"+QString::number(titreLvl)+">\n";
-        texte+=nm->exportNoteAsPart((*it),"html",titreLvl+1); //TODO : probleme exportNote n'existe pas pour une note*
+        texte+=nm->exportNoteAsPart((*it),"html",titreLvl+1);
     }
     return texte;
 
