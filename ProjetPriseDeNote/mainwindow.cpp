@@ -86,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) :
     listeAjout->setViewMode(QListView::ListMode);
     modelAjout= new QStringListModel;
     listeAjout->setModel(modelAjout);
-    QObject::connect(listeAjout,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesSeleted(const QModelIndex&))) ;
+    QObject::connect(listeAjout,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesSelected(const QModelIndex&))) ;
 
     listeSupp= new QListView;
     listeSupp->setMovement(QListView::Static);
@@ -435,7 +435,7 @@ void MainWindow::ajoutSousNotes(){
 
 }
 
-void MainWindow::sousNotesSeleted(const QModelIndex& index){
+void MainWindow::sousNotesSelected(const QModelIndex& index){
 
     NotesManager* gestnote=NotesManager::getInstance();
     QString titreDoc=last_clicked.data().toString();
