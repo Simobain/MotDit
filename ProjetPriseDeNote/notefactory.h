@@ -47,7 +47,7 @@ public:
          *Methode virtuelle pure redéfinie pour chaque type de Note
          *  Cette methode virtuelle pure créée un nouvel ID en appelant getNewId() et appelle buildNote()
          *  \param title : titre de la Note
-         *  \param path : chemin de l'espace de travail, vide par défaut
+         *  \param path : chemin source du contenu vide par défaut
          *  \return Note* : un pointeur sur notre Note créée
          *
          */
