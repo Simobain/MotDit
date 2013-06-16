@@ -141,7 +141,6 @@ QString NotesManager::exportNote(Note* n, QString typeExport){
         break;
     case Note::DOCUMENT :
         texte+=strategy->exportNote((Document*)n,1);
-        return texte;
         break;
     default :
         qDebug()<<"pb fonction NoteManager::exportNote je suis le default du switch \n ";

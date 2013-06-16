@@ -22,14 +22,15 @@ QString LaTexExport::footer(Note* n)
 }
 QString LaTexExport::exportNote(Document* d , unsigned int titreLvl)
 {
-
     QString level="";
-
     if (titreLvl<1) titreLvl=1;
     if (titreLvl==1) level="chapter";
     else {
-        titreLvl-=2;
-        while(titreLvl!=0) level+="sub";
+        unsigned int i=titreLvl-2;
+        while(i!=0){
+                level+="sub";
+                i--;
+        }
         level+="section";
     }
     QString texte="\\"+level+"{"+d->getTitre()+"}\n";
@@ -45,12 +46,14 @@ QString LaTexExport::exportNote(Document* d , unsigned int titreLvl)
 QString LaTexExport::exportNote(Article* a , unsigned int titreLvl)
 {
     QString level="";
-
     if (titreLvl<1) titreLvl=1;
     if (titreLvl==1) level="chapter";
     else {
-        titreLvl-=2;
-        while(titreLvl!=0) level+="sub";
+        unsigned int i=titreLvl-2;
+        while(i!=0){
+                level+="sub";
+                i--;
+        }
         level+="section";
     }
     QString texte="\\"+level+"{"+a->getTitre()+"}\n";
@@ -64,13 +67,16 @@ QString LaTexExport::exportNote(Video* v , unsigned int titreLvl){
     if (titreLvl<1) titreLvl=1;
     if (titreLvl==1) level="chapter";
     else {
-        titreLvl-=2;
-        while(titreLvl!=0) level+="sub";
+        unsigned int i=titreLvl-2;
+        while(i!=0){
+                level+="sub";
+                i--;
+        }
         level+="section";
     }
     QString texte="\\"+level+"{"+v->getTitre()+"}\n";
     texte+="Emplacement de la video : \\newline"+v->getChemin()+"\n";
-    texte+="\\newline \n \\newline \n"+v->getDescription()+"\n";
+    texte+="\\newline \n"+v->getDescription()+"\n";
     return texte;
 }
 QString LaTexExport::exportNote(Audio* a , unsigned int titreLvl){
@@ -79,13 +85,16 @@ QString LaTexExport::exportNote(Audio* a , unsigned int titreLvl){
     if (titreLvl<1) titreLvl=1;
     if (titreLvl==1) level="chapter";
     else {
-        titreLvl-=2;
-        while(titreLvl!=0) level+="sub";
+        unsigned int i=titreLvl-2;
+        while(i!=0){
+                level+="sub";
+                i--;
+        }
         level+="section";
     }
     QString texte="\\"+level+"{"+a->getTitre()+"}\n";
     texte+="Emplacement du fichier audio : \\newline"+a->getChemin()+"\n";
-    texte+="\\newline \n \\newline \n"+a->getDescription()+"\n";
+    texte+="\\newline \n"+a->getDescription()+"\n";
     return texte;}
 QString LaTexExport::exportNote(Image* i , unsigned int titreLvl){
 
@@ -94,13 +103,16 @@ QString LaTexExport::exportNote(Image* i , unsigned int titreLvl){
     if (titreLvl<1) titreLvl=1;
     if (titreLvl==1) level="chapter";
     else {
-        titreLvl-=2;
-        while(titreLvl!=0) level+="sub";
+        unsigned int i=titreLvl-2;
+        while(i!=0){
+                level+="sub";
+                i--;
+        }
         level+="section";
     }
     QString texte="\\"+level+"{"+i->getTitre()+"}\n";
     texte+="\\begin{center}\n \\includegraphics{"+i->getChemin()+"}\n";
     texte+="\\end{center}\n";
 
-    texte+="\\newline \n \\newline \n"+i->getDescription()+"\n";
+    texte+=i->getDescription()+"\n";
     return texte;}

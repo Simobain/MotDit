@@ -208,7 +208,6 @@ void MainWindow::afficherAudio(Audio* a){
 }
 
 void MainWindow::afficherDocument(Document* d){
-    qDebug()<<"entrer afficherDocument : "<<d->getTitre();
     bool sauver=d->isSaved();
     DocumentWidget* docWidget= new DocumentWidget(d);
     if (last_widget!=0) {
@@ -219,7 +218,6 @@ void MainWindow::afficherDocument(Document* d){
     ui->onglet_edit->layout()->addWidget(docWidget);
     QObject::connect(docWidget, SIGNAL(documentTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
     d->setSaved(sauver);
-    qDebug()<<"sortie afficherDocument : "<<d->getTitre();
 }
 
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){

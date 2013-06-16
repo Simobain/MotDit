@@ -10,7 +10,6 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     actu_document(d),
     ui(new Ui::DocumentWidget)
 {
-    qDebug()<<"entrer constructeur docwidsget";
     ui->setupUi(this);
 
     QFont titreFont("Times", 14, QFont::Bold);
@@ -23,8 +22,6 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     setTitre(d->getTitre());
     if(!d->getLoaded()) chargerSousNotes();
     afficherSousNotes();
-    qDebug()<<"sortie constructeur docwidsget";
-
 }
 
 DocumentWidget::~DocumentWidget()
@@ -70,7 +67,6 @@ void DocumentWidget::chargerSousNotes(){
 
 void DocumentWidget::afficherSousNotes(){
 
-    qDebug()<<"entrer afficher sous notes";
     QSet<Note*> ensSousNotes=actu_document->getSousNotes();
     QSet<Note*>::iterator it=ensSousNotes.begin();
     it= ensSousNotes.begin();
@@ -96,5 +92,4 @@ void DocumentWidget::afficherSousNotes(){
         }
         it++;
     }
-    qDebug()<<"sortie afficher sous notes";
 }
