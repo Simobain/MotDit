@@ -123,7 +123,6 @@ void NotesManager::supprNote (Note* n){
 
 QString NotesManager::exportNote(Note* n, QString typeExport){
 
-    qDebug()<<"entrer exportNote Notemanager";
     ExportStrategy* strategy;
     strategy=strategies[typeExport];
     QString texte=strategy->header(n);
@@ -140,23 +139,36 @@ QString NotesManager::exportNote(Note* n, QString typeExport){
     case Note::AUDIO :
         texte+=strategy->exportNote((Audio*) n,1);
         break;
+    case Note::DOCUMENT :
+        texte+=strategy->exportNote((Document*)n,1);
+        return texte;
+        break;
     default :
         qDebug()<<"pb fonction NoteManager::exportNote je suis le default du switch \n ";
     }
-
     texte+=strategy->footer(n);
-    qDebug()<<"sortie exportNote Notemanager";
     return texte;
 }
 
-QString NotesManager::exportNoteAsPart(Note* n, QString typeExport){
+QString NotesManager::exportNoteAsPart(Note* n, QString typeExport, unsigned int titreLvl){
     ExportStrategy* strategy;
     strategy=strategies[typeExport];
     QString texte="";
     switch(n->getType()){
     case Note::ARTICLE :
-        texte+=strategy->exportNote((Article*) n,1);
-
+        texte+=strategy->exportNote((Article*) n, titreLvl);
+        break;
+    case Note::AUDIO :
+        texte+=strategy->exportNote((Audio*) n, titreLvl);
+        break;
+    case Note::IMAGE :
+         texte+=strategy->exportNote((Image*) n, titreLvl);
+        break;
+    case Note::VIDEO :
+         texte+=strategy->exportNote((Video*) n, titreLvl);
+        break;
+    case Note::DOCUMENT :
+         texte+=strategy->exportNote((Document*) n, titreLvl);
         break;
     default :
         qDebug()<<"pb fonction NoteManager::exportNoteAsPart je suis le default du switch \n ";

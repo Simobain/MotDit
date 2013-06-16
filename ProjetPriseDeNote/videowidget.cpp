@@ -7,7 +7,7 @@ videowidget::videowidget(Video* v, QWidget *parent) :
     //enCoursdeLecture(false),
     ui(new Ui::videowidget)
 {
-
+    qDebug()<<"entre videowidget cstror";
     QFont titreFont("Times", 14, QFont::Bold);
     QFont texteFont("Times", 10);
     ui->setupUi(this);
@@ -28,6 +28,7 @@ videowidget::videowidget(Video* v, QWidget *parent) :
     setTitre(v->getTitre());
     setDesc(v->getDescription());
     setVideo(v->getChemin());
+    qDebug()<<"sortie videowidget cstror";
 }
 
 videowidget::~videowidget()

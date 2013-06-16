@@ -1,4 +1,3 @@
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -23,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow), last_widget(0)
 {
     ui->setupUi(this);
-
     QObject :: connect(ui->actionArticle, SIGNAL(triggered()), this, SLOT(creerArticle()));
     QObject :: connect(ui->actionImage, SIGNAL(triggered()), this, SLOT(creerImage()));
     QObject :: connect(ui->actionVid_o, SIGNAL(triggered()), this, SLOT(creerVideo()));
@@ -46,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject :: connect(ui->ajout, SIGNAL(clicked()), this, SLOT(ajoutSousNotes()));
     QObject :: connect(ui->suppSous, SIGNAL(clicked()), this, SLOT(suppSousNotes()));
 
+    qDebug()<<"1";
     ui->onglets->setTabText(0, "Edit");
     ui->onglets->setTabText(1, "HTML");
     ui->onglets->setTabText(2, "TeX");
@@ -62,7 +61,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->sauver->setIconSize(QSize(15,15));
     ui->suppr->setIcon(QIcon("poubelle.png"));
     ui->suppr->setIconSize(QSize(20,20));
-
 
     ui->ajout->setHidden(true);
     ui->suppSous->setHidden(true);
@@ -95,7 +93,6 @@ MainWindow::MainWindow(QWidget *parent) :
     modelSupp= new QStringListModel;
     listeSupp->setModel(modelSupp);
     QObject::connect(listeSupp,SIGNAL(clicked(const QModelIndex&)), this, SLOT(sousNotesASuppSelected(const QModelIndex&))) ;
-
 
 }
 
@@ -211,6 +208,7 @@ void MainWindow::afficherAudio(Audio* a){
 }
 
 void MainWindow::afficherDocument(Document* d){
+    qDebug()<<"entrer afficherDocument : "<<d->getTitre();
     bool sauver=d->isSaved();
     DocumentWidget* docWidget= new DocumentWidget(d);
     if (last_widget!=0) {
@@ -221,6 +219,7 @@ void MainWindow::afficherDocument(Document* d){
     ui->onglet_edit->layout()->addWidget(docWidget);
     QObject::connect(docWidget, SIGNAL(documentTitreChanged(const QString&,const QString&, bool)), SLOT(noteTitreChanged(const QString&, const QString&, bool)));
     d->setSaved(sauver);
+    qDebug()<<"sortie afficherDocument : "<<d->getTitre();
 }
 
 void MainWindow::replaceInListe(const QString& oldName,const QString& newName){
@@ -256,7 +255,7 @@ void MainWindow::noteTitreChanged(const QString &newTitre, const QString& oldTit
 }
 
 void MainWindow::itemClicked(const QModelIndex & index){
-
+    ui->onglets->setCurrentIndex(0);
     last_clicked=index;
     NotesManager* gestnote=NotesManager::getInstance();
     QString titre=index.data().toString();
@@ -445,14 +444,15 @@ void MainWindow::sousNotesSeleted(const QModelIndex& index){
     QString titreNote=index.data().toString();
     while (titreNote.endsWith("*")) titreNote.chop(1);
     Note* note=gestnote->getNoteFromTitre(titreNote);
+    qDebug()<<"sous notes a ajoutée"<<note->getTitre();
 
     Document* doc=(Document*) noteD;
     doc->addSubNote(note);
     listeAjout->close();
     listeTemp.clear();
-
-    noteChanged(doc->getTitre());
+    qDebug()<<"on appelle afficherDoc pour mettre à jour l'affichage";
     afficherDocument(doc);
+    noteChanged(doc->getTitre());
 }
 
 void MainWindow::suppSousNotes()
@@ -512,6 +512,7 @@ void MainWindow::saveExportHtml(){
         QTextStream flux(&fichier);
         flux<<texte;
         fichier.close();
+        QMessageBox::information(this,"Export","La note a été exportée en .html !");
     }
     else QMessageBox::critical(this,"Erreur","Le chemin choisis est inaccessible ");
 }

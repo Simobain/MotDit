@@ -1,4 +1,5 @@
 #include "htmlexport.h"
+#include "notesmanager.h"
 
 
 
@@ -19,19 +20,19 @@ QString HTMLexport::footer(Note*)
 }
 QString HTMLexport::exportNote(Document* d , unsigned int titreLvl)
 {
-    if (titreLvl>6) titreLvl;
-    QString s="<h"+QString::number(titreLvl)+">"+d->getTitre()+"</h"+QString::number(titreLvl)+">\n";
-    QSet<Note*>::iterator it= d->getSousNotes().begin();
-    for(it;it!=d->getSousNotes().end();it++)
+    QString texte="<h"+QString::number(titreLvl)+">"+d->getTitre()+"</h"+QString::number(titreLvl)+">\n";
+    QSet<Note*>::const_iterator it= d->getSousNotes().cbegin();
+    for(it;it!=d->getSousNotes().cend();it++)
     {
-        //Note* n=(typeid(*it).name) *it;
-        //s+=exportNote((*it),titreLvl-1); TODO : probleme exportNote n'existe pas pour une note*
+        if (titreLvl>5) titreLvl=5;
+        NotesManager* nm=NotesManager::getInstance();
+        //texte+="<h"+QString::number(titreLvl)+">"+d->getTitre()+"</h"+QString::number(titreLvl)+">\n";
+        texte+=nm->exportNoteAsPart((*it),"html",titreLvl+1); //TODO : probleme exportNote n'existe pas pour une note*
     }
+    return texte;
 
-    return s;
 
-    //else throw NotesException("Taille du titre trop élevée");*/
-    //return"";
+
 }
 QString HTMLexport::exportNote(Article* a , unsigned int titreLvl)
 {
@@ -41,12 +42,26 @@ QString HTMLexport::exportNote(Article* a , unsigned int titreLvl)
 }
 QString HTMLexport::exportNote(Video* v , unsigned int titreLvl)
 {
-   // QString s= "<video width=\"400\" height=\"222\" controls=\"controls\"><source src="+v->getChemin()+" type=\"video/mp4\" /><source src="+v->getChemin()+" type=\"video/mov\" />Ici</video>";
-            return "";
+    qDebug()<<"chemin=*********************"<<v->getChemin();
+   QString texte="<h"+QString::number(titreLvl)+">"+v->getTitre()+"</h"+QString::number(titreLvl)+">";
+   texte+="<p><video width=\"640\" height=\"480\" controls>\n";
+   texte+="<source src=\"file:///"+v->getChemin()+"\" type=\"video/mp4\">\n";
+   texte+="<source src=\"file:///"+v->getChemin()+"\" type=\"video/avi\">\n";
+   texte+="<source src=\"file:///"+v->getChemin()+"\" type=\"video/mov\">\n";
+   texte+="Le logiciel MotDit ne gere pas ce format, en revanche vous pouvez l'exporter pour que ça fonctionne.</video></p>\n";
+   return texte;
 }
 QString HTMLexport::exportNote(Audio* a , unsigned int titreLvl)
 {
-    QString texte="<h"+QString::number(titreLvl)+">"+a->getTitre()+"</h"+QString::number(titreLvl)+">\n<audio controls><source src="+a->getChemin()+"></source><source src="+a->getChemin()+"></source></audio><p>"+a->getDescription()+"</p>";
+    QString texte="<h"+QString::number(titreLvl)+">"+a->getTitre()+"</h"+QString::number(titreLvl)+">\n";
+    texte+="<audio controls><source src=\""+a->getChemin()+"\"></source>\n";
+    texte+="<p>Le logiciel MotDit ne gere pas ce format, en revanche vous pouvez l'exporter pour que ça fonctionne.</p>\n";
+    texte+="</audio><p>"+a->getDescription()+"</p>";
     return texte;
 }
-QString HTMLexport::exportNote(Image* i , unsigned int titreLvl){return"";}
+QString HTMLexport::exportNote(Image* i , unsigned int titreLvl){
+    QString texte="<h"+QString::number(titreLvl)+">"+i->getTitre()+"</h"+QString::number(titreLvl)+">\n"+"<p>\n";
+    texte+="<img src=\""+i->getChemin()+"\" border=\"0\" align=\"center\"></img>\n</p>";
+    texte+="<p>\n"+i->getDescription()+"\n</p>\n";
+
+    return texte;}
