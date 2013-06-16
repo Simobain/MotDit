@@ -11,7 +11,7 @@
 
 /**
  *\class ArticleFactory
- * \brief Classe permettant d'instancier des objets de types Article
+ * \brief Classe permettant d'instancier des objets de type Article
  *Elle hérite de NoteFactory
  */
 class ArticleFactory : public NoteFactory
@@ -44,7 +44,7 @@ public:
          *
          *  Cette methode créée un nouvel ID en appelant getNewId() et appelle buildNote()
          *  \param titre : titre de l'article
-         *  \param path : chemin d'accès à l'article, vide par défaut
+         *  \param path : vide par défaut
          *  \return Note* : un pointeur sur notre Article créé
          *
          */

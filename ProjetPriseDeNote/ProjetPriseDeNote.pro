@@ -60,7 +60,6 @@ HEADERS  += mainwindow.h \
     videofactory.h \
     imagefactory.h \
     htmlexport.h \
-    savetextexport.h \
     textexport.h \
     latexexport.h \
     articlewidget.h \

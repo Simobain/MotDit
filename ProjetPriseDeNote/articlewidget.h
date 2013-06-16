@@ -49,7 +49,7 @@ public:
     
 private:
     Ui::ArticleWidget *ui;
-    Article* actu_article;/*!< Pointeur vers l'article affiché*/
+    Article* actu_article;/*!< Pointeur vers l'Article affiché*/
 
 signals :
     /*!
@@ -61,7 +61,7 @@ signals :
          *  \brief Signal envoyant le nouveau titre rentré par l'utilisateur de l'ArticleWidget
          *  \param newTitre : nouveau titre que l'on souhaite donner à l'article
          *  \param oldTitre : ancien titre de l'article
-         *  \param saved : booléen permettant de savoir si l'article à déjà été sauvegardé
+         *  \param saved : booléen permettant de savoir si l'article a déjà été sauvegardé
          */
     void articleTitreChanged(const QString& newTitre, const QString& oldTitre, bool saved);
 

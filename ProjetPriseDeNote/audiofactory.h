@@ -11,7 +11,7 @@
 /**
  *\class AudioFactory
  * \brief Classe permettant d'instancier des objets de types Audio
- *Elle hérite de AudioFactory
+ *Elle hérite de NoteFactory
  */
 class NotesManager;
 
@@ -33,10 +33,10 @@ public:
     /*!
          *  \brief Fabrique un Audio
          *
-         *  \param id : id de l'audio
-         *  \param titre : titre de l'audio
-         *  \param path : chemin d'accès au fichier représentant l'audio note, vide par défaut
-         *  \param desc : descriptif de l'audio vide par défaut
+         *  \param id : id de l'Audio
+         *  \param titre : titre de l'Audio
+         *  \param path : chemin d'accès au fichier représentant l'Audio note, vide par défaut
+         *  \param desc : descriptif de l'Audio vide par défaut
          *  \return Note* : un pointeur sur notre Audio nouvellement créé
          */
     Note* buildNote(const QString& id,const QString& title, const QString& path="", const QString& desc="");
@@ -53,9 +53,9 @@ public:
     Note* buildNotecopy(const Note* n);
     /*!
          *  \brief Charge un Audio déjà existant
-         *  \param id : id de l'audio
-         *  \param chemin : chemin d'accès à l'audio
-         *  \return Note* : un pointeur sur notre audio venant d'être chargé
+         *  \param id : id de l'Audio
+         *  \param chemin : chemin d'accès à l'Audio
+         *  \return Note* : un pointeur sur notre Audio venant d'être chargé
          *
          */
     Note* chargerNote(const QString& id, const QString& chemin);

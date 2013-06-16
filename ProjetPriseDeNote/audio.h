@@ -4,12 +4,12 @@
 
 /*!
  * \file audio.h
- * \brief Classe de base permettant de définir une note de type audio
+ * \brief Classe de base permettant de définir une note de type Audio
  * \author Pauline Cuche/Simon Robain
  */
 /**
- *\class Article
- * \brief Classe représentant les Articles
+ *\class Audio
+ * \brief Classe représentant les Audio
  */
 class Audio : public Binary
 {
@@ -27,7 +27,7 @@ public:
          *  Constructeur de la classe Audio
          *\param id : ID de l'Audio
          *\param titre : titre de l'Audio
-         *\param path : chemin d'accès à la musique que l'on souhaite référencer
+         *\param path : chemin d'accès à la musique que l'on souhaite référencer (vide par défaut)
          *\param desc : description de l'Audio (vide par défaut)
          */
     Audio(const QString& id, const QString& titre, const QString& path="", const QString& desc="");
