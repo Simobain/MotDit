@@ -18,7 +18,6 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     notesmanager.cpp \
     article.cpp \
-    notesexception.cpp \
     image.cpp \
     binary.cpp \
     video.cpp \
