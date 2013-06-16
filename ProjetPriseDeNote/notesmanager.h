@@ -104,12 +104,14 @@ public:
          *\param typeExport : type de l'export souhaité
          */
     QString exportNote(Note* n, QString typeExport);
+
     /*!
          *  \brief Fonction pour exporter les sous notes d'un document
          *\param n : la sous-note à exporter
          *\param typeExport : type de l'export souhaité
+         *\param titreLvl : indique le niveau du titre pour l'affichage
          */
-    QString exportNoteAsPart(Note* n, QString typeExport);
+    QString exportNoteAsPart(Note* n, QString typeExport, unsigned int titreLvl);
     /*!
          *  \brief Retrouve une note à partir de son id
          *\param id : id de la note dont on veut retrouver le pointeur

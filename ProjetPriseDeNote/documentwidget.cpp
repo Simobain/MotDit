@@ -2,11 +2,15 @@
 #include "ui_documentwidget.h"
 #include "notesmanager.h"
 
+
+#include <QObjectList>
+
 DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     QWidget(parent),
     actu_document(d),
     ui(new Ui::DocumentWidget)
 {
+    qDebug()<<"entrer constructeur docwidsget";
     ui->setupUi(this);
 
     QFont titreFont("Times", 14, QFont::Bold);
@@ -19,6 +23,7 @@ DocumentWidget::DocumentWidget(Document *d, QWidget *parent) :
     setTitre(d->getTitre());
     if(!d->getLoaded()) chargerSousNotes();
     afficherSousNotes();
+    qDebug()<<"sortie constructeur docwidsget";
 
 }
 
@@ -64,29 +69,26 @@ void DocumentWidget::chargerSousNotes(){
 }
 
 void DocumentWidget::afficherSousNotes(){
+
+    qDebug()<<"entrer afficher sous notes";
     QSet<Note*> ensSousNotes=actu_document->getSousNotes();
     QSet<Note*>::iterator it=ensSousNotes.begin();
     it= ensSousNotes.begin();
     while(it!=ensSousNotes.end() && !ensSousNotes.isEmpty()){
         switch((*it)->getType()){
         case Note::ARTICLE :
-            qDebug()<<"ajouter article";
             ui->verticalLayout_2->addWidget(new ArticleWidget((Article*)*it));
             break;
         case Note::IMAGE :
-            qDebug()<<"ajouter image";
             ui->verticalLayout_2->addWidget(new ImageWidget((Image*)*it));
             break;
         case Note::VIDEO :
-            qDebug()<<"ajouter video";
             ui->verticalLayout_2->addWidget(new videowidget((Video*)*it));
             break;
         case Note::AUDIO :
-            qDebug()<<"ajouter audio";
             ui->verticalLayout_2->addWidget(new audiowidget((Audio*)*it));
             break;
         case Note::DOCUMENT :
-            qDebug()<<"ajouter document";
             ui->verticalLayout_2->addWidget(new DocumentWidget((Document*)*it));
             break;
         default :
@@ -94,4 +96,5 @@ void DocumentWidget::afficherSousNotes(){
         }
         it++;
     }
+    qDebug()<<"sortie afficher sous notes";
 }
