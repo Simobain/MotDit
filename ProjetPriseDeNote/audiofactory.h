@@ -8,7 +8,11 @@
  * \brief Classe AudioFactory permettant de construire une note de type Audio
  * \author Pauline Cuche/Simon Robain
  */
-
+/**
+ *\class AudioFactory
+ * \brief Classe permettant d'instancier des objets de types Audio
+ *Elle hérite de AudioFactory
+ */
 class NotesManager;
 
 class AudioFactory : public NoteFactory

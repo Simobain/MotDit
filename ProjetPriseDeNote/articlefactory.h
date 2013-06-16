@@ -12,6 +12,7 @@
 /**
  *\class ArticleFactory
  * \brief Classe permettant d'instancier des objets de types Article
+ *Elle hérite de NoteFactory
  */
 class ArticleFactory : public NoteFactory
 {
@@ -34,7 +35,7 @@ public:
          *  \param id : id de article
          *  \param titre : titre de l'article
          *  \param texte : texte de l'article, vide par défaut
-         *  \param desc : vide par défaut Ce champ n'est pas renseigné pour les Articles
+         *  \param desc : vide par défaut, ce champ n'est pas renseigné pour les Articles
          *  \return Note* : un pointeur sur notre Article nouvellement créé
          */
     Note* buildNote(const QString& id, const QString& titre, const QString &texte="", const QString& desc="");
