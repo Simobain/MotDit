@@ -26,16 +26,16 @@ public:
     /*!
          *  \brief Détermine un ID unique
          *
-         *  Renvoie un id unique précédé du type de Note ici Article
+         * \return id : Renvoie un id unique précédé du type de Note ici Article
          */
     QString getNewId();
     /*!
          *  \brief Fabrique un Article
          *
-         *  \param id : id de article
-         *  \param titre : titre de l'article
-         *  \param texte : texte de l'article, vide par défaut
-         *  \param desc : vide par défaut, ce champ n'est pas renseigné pour les Articles
+         *  \param id : id de Article
+         *  \param titre : titre de l'Article
+         *  \param texte : texte de l'Article, vide par défaut
+         *  \param desc : vide par défaut, ce champ n'est pas renseigné pour les Article
          *  \return Note* : un pointeur sur notre Article nouvellement créé
          */
     Note* buildNote(const QString& id, const QString& titre, const QString &texte="", const QString& desc="");
@@ -43,7 +43,7 @@ public:
          *  \brief Fabrique un nouvel Article
          *
          *  Cette methode créée un nouvel ID en appelant getNewId() et appelle buildNote()
-         *  \param titre : titre de l'article
+         *  \param titre : titre de l'Article
          *  \param path : vide par défaut
          *  \return Note* : un pointeur sur notre Article créé
          *
@@ -52,8 +52,8 @@ public:
     Note* buildNotecopy(const Note* n);
     /*!
          *  \brief Charge un Article déjà existant
-         *  \param id : id de l'article
-         *  \param chemin : chemin d'accès à l'article
+         *  \param id : id de l'Article
+         *  \param chemin : chemin d'accès à l'espace de travail
          *  \return Note* : un pointeur sur notre Article venant d'être chargé
          *
          */

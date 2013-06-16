@@ -30,25 +30,25 @@ public:
          *  \brief Constructeur
          *
          *  Constructeur de la classe Article
-         *\param id : ID de l'article
-         *\param titre : titre de l'article
-         *\param texte : texte de l'article (vide par défaut)
+         *\param id : ID de l'Article
+         *\param titre : titre de l'Article
+         *\param texte : texte de l'Article (vide par défaut)
          */
     Article(const QString& id, const QString& titre, const QString& text="");
     /*!
          *  \brief Accesseur de l'attribut texte
-         *\return texte : texte de l'article
+         *\return texte : texte de l'Article
          */
     QString getTexte() const {return texte;}
     /*!
          *  \brief Setteur de l'attribut texte
-         *\param texte : texte que l'on souhaite rentrer dans l'article
+         *\param texte : texte que l'on souhaite rentrer dans l'Article
          */
     void setTexte(const QString& t);
     /*!
-         *  \brief Sauvegarde d'un article
-         *Methode qui permet la sauvegarde d'un article
-         *\param directory : chemin d'accès du lieu ou l'on souhaite sauvegarder l'article
+         *  \brief Sauvegarde d'un Article
+         *Methode qui permet la sauvegarde d'un Article
+         *\param directory : chemin d'accès à l'espace de travail
          */
     void save(const QString& directory);
     /*!
